@@ -1,0 +1,16 @@
+{
+  "name": "dispatch",
+  "owner": {
+    "name": "Felipe Castro"
+  },
+  "metadata": {
+    "description": "CTF Dispatch: triage-first CTF solving plugin for Claude Code."
+  },
+  "plugins": [
+    {
+      "name": "ctf-dispatch",
+      "source": "./",
+      "description": "Triage-first CTF solving with a human checkpoint before any solver runs."
+    }
+  ]
+}

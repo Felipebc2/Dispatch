@@ -1,0 +1,12 @@
+# Generated Arsenal search index (rebuilt on demand)
+Arsenal/.index/
+*.db
+
+# Local agent/session state
+.remember/
+.serena/
+.claude/settings.local.json
+
+# OS / editor cruft
+.DS_Store
+*.swp

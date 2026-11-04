@@ -1,11 +1,24 @@
 <!--
 PRE-PUBLISH CHECKLIST (do before submitting to the marketplace):
-  [ ] Add a banner image at the top of this README.
-  [ ] Add .claude-plugin/icon.png (square PNG, 512-2048px, < 2MB) for the directory listing.
+  BRANDING (decided): primary banner = dark soft-3D hero; primary icon = retro
+  red-square head; secondary = monoline emblem (favicon/sticker) + isometric
+  blueprint (how-it-works figure). One art to be chosen later for a LinkedIn post.
+
+  Assets (done):
+  [x] assets/banner.png          <- dark hero banner (R2-S6-cel-wordmark)
+  [x] .claude-plugin/icon.png    <- retro red-square head (R2-S5-riso-icon, PNG8 < 2MB)
+  [x] assets/emblem.png          <- monoline emblem (favicon/sticker)
+  [x] assets/how-it-works.png    <- isometric blueprint diagram
+  [ ] (optional) assets/social-linkedin.png <- whichever art you pick for the LinkedIn post
+  Still to do:
   [ ] Set homepage/repository URLs in .claude-plugin/plugin.json to the real repo.
   [ ] Update the install line below with the real repo slug.
-  [ ] Then: publish to the marketplace.
+  [ ] Publish to the marketplace.
 -->
+
+<p align="center">
+  <img src="assets/banner.png" alt="CTF Dispatch" width="100%">
+</p>
 
 # CTF Dispatch
 
@@ -29,6 +42,12 @@ approval.
 - **Arsenal** — ~75 problem-pattern → method entries across the 12 categories, searched with a
   stdlib-only SQLite FTS5 index (`scripts/arsenal_search.py`).
 - **Manuals** — per-tool references (Ghidra, CyberChef, JWT, pwntools, Wireshark, sqlmap, …).
+
+## How it works
+
+<p align="center">
+  <img src="assets/how-it-works.png" alt="CTF Dispatch — triage, Arsenal lookup, human checkpoint, dispatch to a solver" width="90%">
+</p>
 
 ## Install
 

@@ -1,0 +1,25 @@
+{
+  "name": "ctf-dispatch",
+  "version": "0.1.0",
+  "description": "Triage-first CTF solving: classify a challenge, retrieve a method from a bundled Arsenal, and stop at a human checkpoint before any category solver runs.",
+  "author": {
+    "name": "Felipe Castro"
+  },
+  "homepage": "https://github.com/Felipebc2/Dispatch",
+  "repository": "https://github.com/Felipebc2/Dispatch",
+  "license": "MIT",
+  "keywords": ["ctf", "security", "pentest", "reversing", "crypto"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "CTF Dispatch",
+    "shortDescription": "Triage-first CTF solving with a human checkpoint",
+    "longDescription": "Dispatch classifies a CTF challenge, retrieves a documented method from a bundled Arsenal of problem-pattern to method notes, and stops at a human checkpoint before any category solver runs.",
+    "developerName": "Felipe Castro",
+    "category": "Developer Tools",
+    "capabilities": ["Instructions"],
+    "websiteURL": "https://github.com/Felipebc2/Dispatch",
+    "brandColor": "#E5484D",
+    "composerIcon": "./assets/emblem.png",
+    "logo": "./assets/logo.svg"
+  }
+}

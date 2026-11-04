@@ -1,6 +1,6 @@
 {
   "name": "ctf-dispatch",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Triage-first CTF solving: classify a challenge, retrieve a method from a bundled Arsenal, and stop at a human checkpoint before any category solver runs.",
   "author": {
     "name": "Felipe Castro"

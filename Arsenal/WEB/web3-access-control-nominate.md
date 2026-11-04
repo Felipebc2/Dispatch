@@ -4,7 +4,7 @@ category: WEB
 tags: [web3, evm, solidity, access-control, ownable, ownable2step, nominate, missing-modifier, privilege-escalation, storage-layout]
 tools: []
 manuals: []
-title: "Web3 — missing access control (nominate / 2-step owner) + storage reads"
+title: "Web3: missing access control (nominate / 2-step owner) + storage reads"
 difficulty: medium
 created: 2026-10-08
 updated: 2026-10-08
@@ -31,12 +31,12 @@ modifier** (e.g. `nominate(address)` without `onlyOwner`), letting anyone nomina
    acceptExecutive(nonce)    # 9f773348, msg.sender==pending && nonce==arg -> owner=player
    execute()                 # ac2f2c9b, onlyOwner -> sets solved=1
    ```
-4. Flag: `proof` is usually the player's address (the new owner) — see
+4. Flag: `proof` is usually the player's address (the new owner); see
    `web3-setup-issolved-flag-ceremony`.
 
 ## Gotchas
 
-- **Decoys:** `setOwner`/`transferOwnership` that **revert with "disabled"** — they lure you toward
+- **Decoys:** `setOwner`/`transferOwnership` that **revert with "disabled"**: they lure you toward
   the "obvious" owner change. The real escalation is in the function with no modifier.
 - Read the nonce AFTER `nominate` (it increments) before calling `accept`.
 - Decode the revert strings (shifted `PUSH<n>`) to understand each require ("not owner",

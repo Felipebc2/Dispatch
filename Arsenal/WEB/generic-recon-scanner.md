@@ -4,7 +4,7 @@ category: WEB
 tags: [recon, enumeracao, user-agent, paths-comuns, requests, flag-scan]
 tools: []
 manuals: []
-title: "Generic initial recon — common paths + User-Agent variation"
+title: "Generic initial recon: common paths + User-Agent variation"
 difficulty: easy
 created: 2026-09-03
 updated: 2026-09-03
@@ -13,15 +13,15 @@ related: []
 
 ## How to recognize this pattern
 
-- A web challenge with no obvious vector in the prompt — the flag might be at a predictable path
+- A web challenge with no obvious vector in the prompt: the flag might be at a predictable path
   (`/flag`, `/robots.txt`, `/.git/HEAD`), or the app's behavior changes with the `User-Agent`/header
   you send (e.g. a screen shows "your User-Agent is X" and the flag depends on sending a specific UA).
 - Worth running as the **first step of any new web challenge**, before investing in something more
-  specific (SQLi, JWT, etc.) — it's reconnaissance, not exploitation.
+  specific (SQLi, JWT, etc.); it's reconnaissance, not exploitation.
 
 ## Method
 
-**Prefer `gobuster`/`ffuf` for pure path enumeration** — they're faster and more battle-tested than an
+**Prefer `gobuster`/`ffuf` for pure path enumeration**: they're faster and more battle-tested than an
 ad-hoc Python script. This entry covers the complementary case: when the behavior changes by **header**
 (not just by path), which `gobuster` alone doesn't cover.
 
@@ -69,18 +69,18 @@ def extract_image_urls(base_url, html: str):
     urls = set(re.findall(r'src=["\']([^"\']+)["\']', html, re.I))
     return [u if u.startswith("http") else urljoin(base_url, u.lstrip("/")) for u in urls]
 
-# download each one and run FLAG_RE.search(content_bytes) — if it hits, great;
+# download each one and run FLAG_RE.search(content_bytes); if it hits, great;
 # if not, treat it as a candidate for Arsenal/CRYPTO/ (stego) instead of insisting here.
 ```
 
 ## Gotchas
 
-- Don't reinvent `gobuster`/`ffuf`/`dirsearch` for pure path enumeration — only use a custom script
+- Don't reinvent `gobuster`/`ffuf`/`dirsearch` for pure path enumeration; only use a custom script
   when the vector depends on a **header/conditional behavior**, not just a path.
-- Testing **one UA value "almost like" the expected one isn't enough** — if the challenge wants an
+- Testing **one UA value "almost like" the expected one isn't enough**: if the challenge wants an
   exact UA (seen in a screenshot, say), reproduce that string literally.
 - If nothing in the common paths or the UA variation turns anything up, don't spend more than 2-3
-  minutes on this recon — it's a sign the real vector is something else (SQLi, JWT, SSRF — see other
+  minutes on this recon; it's a sign the real vector is something else (SQLi, JWT, SSRF; see other
   Arsenal entries).
 
 ## Related / Cross-reference

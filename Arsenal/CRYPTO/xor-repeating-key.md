@@ -4,7 +4,7 @@ category: CRYPTO
 tags: [xor, single-byte, repeating-key, crib-drag, known-plaintext, vigenere-xor, brute-force, hamming]
 tools: [CyberChef]
 manuals: ["Manuals/CyberChef/3. Contexto para Claude.md"]
-title: "XOR — 1-byte or repeating key (brute force / known-plaintext)"
+title: "XOR: 1-byte or repeating key (brute force / known-plaintext)"
 difficulty: easy
 created: 2026-10-04
 updated: 2026-10-04
@@ -17,12 +17,12 @@ related: [base64-polyglot-expression]
   plaintext** (XOR doesn't change length).
 - The prompt mentions "XOR", a "homemade Vernam cipher", hands you a short "key", or the bytes have a
   strange but repetitive distribution.
-- You know part of the plaintext for free — validate the flag against the CTF's configured flag
+- You know part of the plaintext for free, so validate the flag against the CTF's configured flag
   format before declaring success; the known flag prefix is a free crib.
 
 ## Method
 
-### 1-byte key (0–255) — brute force
+### 1-byte key (0-255): brute force
 ```python
 from pwn import xor      # pwntools
 ct = bytes.fromhex("...")
@@ -51,19 +51,19 @@ print(xor(ct, key_frag))              # pwntools cycles the key automatically
 
 ## Gotchas
 
-- `pwntools.xor` already **cycles** the key over the whole text and accepts `bytes`/`int`/`str` —
-  don't reimplement the loop by hand.
+- `pwntools.xor` already **cycles** the key over the whole text and accepts `bytes`/`int`/`str`,
+  so don't reimplement the loop by hand.
 - If the output is partly readable and partly garbage, the key is **too short** (you found a divisor
-  of the real keysize) — double the length you're testing.
-- Confirm the input encoding (hex vs base64 vs raw) before XORing — XOR on the wrong string produces
+  of the real keysize), so double the length you're testing.
+- Confirm the input encoding (hex vs base64 vs raw) before XORing. XOR on the wrong string produces
   deterministic garbage that looks "almost right".
 
 ## Cross-reference
 
-- `Manuals/CyberChef/3. Contexto para Claude.md` — XOR, XOR Brute Force, From Hex.
-- The known-plaintext here depends on the flag prefix — validate the flag against the CTF's
+- `Manuals/CyberChef/3. Contexto para Claude.md`: XOR, XOR Brute Force, From Hex.
+- The known-plaintext here depends on the flag prefix, so validate the flag against the CTF's
   configured flag format before declaring success.
 - Malware writeup with a config in `base64 → XOR 1 byte (0x2a)`: danceparty-1, DamCTF 2021
-  (`ctftime.org/writeup/31239`) — CyberChef `Magic` found the key. Same scheme as the small
+  (`ctftime.org/writeup/31239`). CyberChef `Magic` found the key. Same scheme as the small
   config-magic blobs.
 - When the blob is a block cipher (not XOR), see `malware-config-derived-key-bruteforce`.

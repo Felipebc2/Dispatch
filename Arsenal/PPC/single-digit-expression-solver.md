@@ -24,7 +24,7 @@ related: [base64-polyglot-expression]
 ## Method
 
 Two independent parts: **generating the expression** (algorithm) and **speaking the server's protocol**
-(text parsing + timing). Neither depends on the old challenge's host/port — only the logic.
+(text parsing + timing). Neither depends on the old challenge's host/port, only the logic.
 
 ### 1. Expression generator via DP over exact fractions
 
@@ -136,17 +136,17 @@ def solve_loop(host, port, max_digits=8):
 
 ## Gotchas
 
-- A high `max_digits` makes the DP slow (it grows combinatorially) — start low (6-8) and only raise it if
+- A high `max_digits` makes the DP slow (it grows combinatorially). Start low (6-8) and only raise it if
   the server rejects for "no expression found".
-- The parsing regexes (`RE_CHALL`, `RE_DIGIT`, etc.) are specific to the prompt's text — **adjust them to
+- The parsing regexes (`RE_CHALL`, `RE_DIGIT`, etc.) are specific to the prompt's text. **Adjust them to
   the real wording of the current challenge**, don't copy the example literally.
-- `RE_FLAG` must match the current CTF's flag format — validate the flag against the CTF's configured
+- `RE_FLAG` must match the current CTF's flag format. Validate the flag against the CTF's configured
   flag format before declaring success.
-- The repeated-sum fallback only works if `digit` divides `target` exactly — it's not a general
+- The repeated-sum fallback only works if `digit` divides `target` exactly. It's not a general
   guarantee, just a last resort before giving up on that target.
 
 ## Related / Cross-reference
 
-`Arsenal/CRYPTO/base64-polyglot-expression.md` — same family of "generate an expression that evaluates to
+`Arsenal/CRYPTO/base64-polyglot-expression.md`: same family of "generate an expression that evaluates to
 the target", but there the goal is for the string itself to be a valid encoding, not to use a single
 digit.

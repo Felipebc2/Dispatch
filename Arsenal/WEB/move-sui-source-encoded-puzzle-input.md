@@ -4,7 +4,7 @@ category: WEB
 tags: [blockchain, sui, move, not-evm, puzzle, source-reading, nested-if, satisfy-input, win-getter, spellbook, decoy, easy, justctf, otter-scrolls, ottersec, solve-module]
 tools: [Sui]
 manuals: ["Manuals/Sui/3. Contexto para Claude.md"]
-title: "Move/Sui — the win is a puzzle encoded in the source: supply the input that satisfies it (not crypto)"
+title: "Move/Sui: the win is a puzzle encoded in the source; supply the input that satisfies it (not crypto)"
 difficulty: easy
 created: 2026-10-08
 updated: 2026-10-08
@@ -25,7 +25,7 @@ related: [move-sui-validated-index-vs-consumed-element, web3-unprotected-beacon-
 
 ## Method
 
-Reference case: justCTF 2024 — The Otter Scrolls (Sui/Move, Easy). `cast_spell(spell_sequence, book)`
+Reference case: justCTF 2024, The Otter Scrolls (Sui/Move, Easy). `cast_spell(spell_sequence, book)`
 removes 5 "spells" from the table (fire=0, wind=1, water=2, earth=3, power=4), and each
 `spell_sequence[i]` is the index of the word chosen for that spell. The nested ifs require the right
 combination; get it right and `book.casted = true` and `check_if_spell_casted` returns the flag.
@@ -43,7 +43,7 @@ Compile (`sui move build`) and submit via the client/launcher (`nc tos.nc.jctf.p
 
 ## Gotchas
 
-- Don't waste time "solving" it as if it were crypto/ZK — trace the `if`/`assert` chain and extract the
+- Don't waste time "solving" it as if it were crypto/ZK; trace the `if`/`assert` chain and extract the
   exact values/indices that make each branch pass.
 - In Move, objects like `Spellbook` are **shared objects** passed by the launcher into your `solve`;
   you only operate on them, you don't create them.
@@ -53,9 +53,9 @@ Compile (`sui move build`) and submit via the client/launcher (`nc tos.nc.jctf.p
 ## Transferable lesson
 
 When the win is a puzzle baked into the contract, the answer is in the contract. Read the logic, supply
-the satisfying input, done — don't design a crypto attack where it's just source reading.
+the satisfying input, done. Don't design a crypto attack where it's just source reading.
 
 ## Related / Cross-reference
 
 - `Arsenal/WEB/move-sui-state-machine-reclaim-reward.md` and
-  `move-sui-validated-index-vs-consumed-element.md` — others from the same Sui/Move set (justCTF 2024).
+  `move-sui-validated-index-vs-consumed-element.md`: others from the same Sui/Move set (justCTF 2024).

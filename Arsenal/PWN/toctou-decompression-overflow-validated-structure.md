@@ -4,14 +4,14 @@ category: PWN
 tags: [blockchain, bridge, toctou, time-of-check-time-of-use, decompression, packbits, rle, decompression-bomb, output-unbounded, overflow, bind-table, validator-consumer-gap, lcg, xor-keystream, wasm, ghidra, cap-mask, anti-slop, canopy-cache, not-evm]
 tools: [Ghidra]
 manuals: ["Manuals/Ghidra/3. Contexto para Claude.md"]
-title: "TOCTOU validator↔consumer — PackBits decompression (unbounded output) rewrites an already-validated structure"
+title: "TOCTOU validator↔consumer: PackBits decompression (unbounded output) rewrites an already-validated structure"
 difficulty: hard
 created: 2026-10-08
 updated: 2026-10-08
 related: [bridge-receipt-local-commitment-forge]
 ---
 
-> ⚠️ "Blockchain" here is NOT EVM/Solidity — it's a bridge service with a **custom binary**
+> ⚠️ "Blockchain" here is NOT EVM/Solidity: it's a bridge service with a **custom binary**
 > (`canopyd`) + a WASM-like module. Solve it with reversing (Ghidra) + protocol assembly, not
 > cast/Foundry. Routes to `solver-pwn`/`solver-rev`.
 
@@ -30,7 +30,7 @@ related: [bridge-receipt-local-commitment-forge]
 
 ## Method
 
-Reference case: **Anti-Slop CTF 2026 — Canopy Cache**. Artifacts: `canopyd`,
+Reference case: **Anti-Slop CTF 2026: Canopy Cache**. Artifacts: `canopyd`,
 `analysis/canopyd.decomp.c` (Ghidra decompile), `lane_helper.wasm`/`patched_helper.wasm`,
 `verify_patch.py`. Interface: `upload/inspect/warm/sync/quote/attest/bless/activate/invoke/flag`.
 
@@ -82,7 +82,7 @@ Flag `slopped{packbits_lookup_routes_rethread_the_owner_lane}`.
 
 - **Check-before-use order is everything:** the expand HAS to run between the validated bind and the
   route patcher. Validating the bind with the forbidden offset directly fails.
-- **Plumbing before the bug:** without the right LCG keystream, no encrypted command works — solve the
+- **Plumbing before the bug:** without the right LCG keystream, no encrypted command works, so solve the
   XOR first, then the PackBits.
 - **Alignment:** the overflow has to land exactly on the entry's `image_off` byte; count the arena
   offsets in the decompile (Ghidra) and pad.
@@ -91,7 +91,7 @@ Flag `slopped{packbits_lookup_routes_rethread_the_owner_lane}`.
 
 ## Transferable lesson
 
-Two patterns in one: (a) **TOCTOU validator↔consumer** — if two consumers read the same buffer at
+Two patterns in one: (a) **TOCTOU validator↔consumer**: if two consumers read the same buffer at
 different times with different rules, look for a primitive that changes the buffer between them; (b) a
 **decompressor with unbounded output** (RLE/PackBits/zip bomb) = a write outside the validated buffer.
 Same shape as `phar://` auto-deserialize and JWT alg confusion (one parser trusts the header, another
@@ -99,7 +99,7 @@ reinterprets it). Defense: a single shared canonicalization OR an immutable post
 
 ## Related / Cross-reference
 
-- `Arsenal/REV/bridge-receipt-local-commitment-forge.md` — the 1st from the same track
+- `Arsenal/REV/bridge-receipt-local-commitment-forge.md`: the 1st from the same track
   (self-consistency ≠ auth).
-- `Manuals/Ghidra/3. Contexto para Claude.md` — reversing `canopyd`, finding the two validators and
+- `Manuals/Ghidra/3. Contexto para Claude.md`: reversing `canopyd`, finding the two validators and
   the arena offsets.

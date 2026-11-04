@@ -4,7 +4,7 @@ category: REV
 tags: [packer, self-extracting, memfd-create, fexecve, carcarapack, anti-debug, hardware-breakpoint, hbreak, bwrap, ld-preload, ptrace, rdtsc, dynamic-unpack, reverse04, reverse05, reverse06, reverse07]
 tools: [Ghidra]
 manuals: ["Manuals/Ghidra/3. Contexto para Claude.md"]
-title: "CarcaraPack — dynamic fast-path (hook fexecve + hbreak before the anti-debug)"
+title: "CarcaraPack: dynamic fast-path (hook fexecve + hbreak before the anti-debug)"
 difficulty: medium
 created: 2026-10-08
 updated: 2026-10-08
@@ -32,7 +32,7 @@ bwrap --ro-bind /usr /usr --symlink usr/lib64 /lib64 --symlink usr/lib /lib \
   --setenv LD_PRELOAD /hook.so /out/s.bin     # dump matches orig_size from the CPKX footer
 ```
 
-### 2. Read the secret BEFORE the anti-debug — hardware breakpoint
+### 2. Read the secret BEFORE the anti-debug: hardware breakpoint
 The inner binary computes the 32B secret on the stack and THEN runs the anti-debug (TracerPid,
 PPid/comm, `LD_PRELOAD`, `.text` integrity via `dl_iterate_phdr`, `rdtsc`/`0xdeadbeef`). If it fires,
 it diverts to the **`CPK-POISON`** path and the secret turns FALSE.
@@ -64,11 +64,11 @@ after the `rdtsc`):
 
 ## Gotchas
 
-- **int3 poisons** — use only `hbreak`. (If the target has no hardware breakpoint, try `starti` +
+- **int3 poisons**: use only `hbreak`. (If the target has no hardware breakpoint, try `starti` +
   `hbreak`; some gdb/targets only enable hbreak after `starti`.)
 - ALWAYS run it isolated (`bwrap --unshare-all`, no network): memfd+fexecve executes arbitrary code.
-- Stage-1 constants vary per build — the dynamic fast-path ignores this (you don't need stage-1).
+- Stage-1 constants vary per build, but the dynamic fast-path ignores this (you don't need stage-1).
 
 ## Related
 
-- `Arsenal/REV/self-extracting-packer-memfd-unpack.md` — the full static method + footer/stages.
+- `Arsenal/REV/self-extracting-packer-memfd-unpack.md`: the full static method + footer/stages.

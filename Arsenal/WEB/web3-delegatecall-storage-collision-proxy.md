@@ -4,7 +4,7 @@ category: WEB
 tags: [web3, blockchain, evm, solidity, delegatecall, storage-collision, proxy, transparent-proxy, fallback, selector, unauthenticated-setter, access-control, storage-layout, slot, processor, sekaictf, pp-farming-2, foundry, cast, raw-calldata]
 tools: [Web3]
 manuals: ["Manuals/Web3/3. Contexto para Claude.md"]
-title: "Web3 — transparent proxy + delegatecall to a helper with an unauthenticated setter (storage collision → takeover)"
+title: "Web3: transparent proxy + delegatecall to a helper with an unauthenticated setter (storage collision → takeover)"
 difficulty: hard
 created: 2026-10-08
 updated: 2026-10-08
@@ -14,7 +14,7 @@ related: [web3-reentrancy-checks-effects-interactions, web3-receive-fallback-wea
 ## How to recognize this pattern
 
 - A contract with a `fallback()` that `delegatecall`s **to a helper/processor** on (almost) every
-  selector — a transparent proxy. If it does NOT refuse unknown selectors, any function of the helper
+  selector, a transparent proxy. If it does NOT refuse unknown selectors, any function of the helper
   is reachable and executes **in the proxy's storage**.
 - The helper has a **setter with no access control** (`setX(address)` without `onlyOwner`) and a
   **storage layout aligned** with the proxy's (a deliberately empty `_gap`/slot gives it away).
@@ -23,7 +23,7 @@ related: [web3-reentrancy-checks-effects-interactions, web3-receive-fallback-wea
 
 ## Method
 
-Reference case: SekaiCTF — PP Farming 2 (the "I fixed the reentrancy… I think" one). The ATM delegates
+Reference case: SekaiCTF, PP Farming 2 (the "I fixed the reentrancy… I think" one). The ATM delegates
 everything (except `processWithdrawal`, selector `0x8260910c`, blocked) to the `processor`.
 
 ### 1. Confirm the proxy and the blocked selector
@@ -50,7 +50,7 @@ The `_gap` exists only to align the helper's `atm`/`locked` with the ATM's `proc
 ### 3. Find the unauthenticated setter
 
 ```solidity
-function setATM(address _atm) external { atm = _atm; }   // no check — selector 0x9a2ba7a8
+function setATM(address _atm) external { atm = _atm; }   // no check, selector 0x9a2ba7a8
 ```
 Reachable via the ATM's fallback → writes to `slot1` → **overwrites `ATM.processor`**.
 
@@ -93,9 +93,9 @@ $CAST call $TARGET "isSolved()(bool)" --rpc-url $RPC
 
 ## Related / Cross-reference
 
-- Confirmed source: the SekaiCTF-2026 `blockchain/pp-farming-2/exploit/solve.sh` — confirms selector
+- Confirmed source: the SekaiCTF-2026 `blockchain/pp-farming-2/exploit/solve.sh`, which confirms selector
   `0x9a2ba7a8 = setATM(address)`, the fallback delegates everything but `processWithdrawal`, the SSTORE
   lands in slot 1 bytes 0..19 (the `processor` field), the final drain in the ATM's context. Flag
   `SEKAI{pr0xie5_4r3_h4rD_2_3t4k3}`.
-- `Arsenal/WEB/web3-reentrancy-checks-effects-interactions.md` — PP Farming 1 (the un-patched version).
-- `Manuals/Web3/3. Contexto para Claude.md` — `cast`/`heimdall`, calldata, storage.
+- `Arsenal/WEB/web3-reentrancy-checks-effects-interactions.md`: PP Farming 1 (the un-patched version).
+- `Manuals/Web3/3. Contexto para Claude.md`: `cast`/`heimdall`, calldata, storage.

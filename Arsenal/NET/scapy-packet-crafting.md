@@ -4,7 +4,7 @@ category: NET
 tags: [net, scapy, packet-crafting, sniff, arp, icmp, raw-socket, replay, protocolo-binario, sr1, send]
 tools: []
 manuals: []
-title: "NET — craft/replay packets with scapy"
+title: "NET: craft/replay packets with scapy"
 difficulty: medium
 created: 2026-10-04
 updated: 2026-10-04
@@ -52,13 +52,13 @@ sniff(filter="udp port 9999", prn=lambda p: p.summary(), count=10)
 
 - `send` (L3, uses the OS routing) vs `sendp` (L2, you build the Ether and pick `iface`). ARP/L2
   requires `sendp`.
-- Raw socket/`sniff`/`sendp` need **root** (`sudo`) or capabilities — run with privilege.
-- Checksums: let scapy recompute them (don't set `chksum` by hand) — setting it wrong makes the target
+- Raw socket/`sniff`/`sendp` need **root** (`sudo`) or capabilities. Run with privilege.
+- Checksums: let scapy recompute them (don't set `chksum` by hand). Setting it wrong makes the target
   drop the packet silently.
 - If the target is just "send bytes X and get the flag" over a text TCP, scapy is overkill → use
   `custom-tcp-service-scripting` (pwntools/nc), which is simpler.
 
 ## Cross-reference
 
-- `custom-tcp-service-scripting` — text/line service over TCP (pwntools remote), more common.
+- `custom-tcp-service-scripting`: text/line service over TCP (pwntools remote), more common.
 - Analyzing the pcap itself (extracting files/credentials) → `pcap-extract-credentials-files` (FOR).

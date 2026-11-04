@@ -4,7 +4,7 @@ category: WEB
 tags: [web3, blockchain, ton, tolk, jetton, cross-instance, instance-isolation, shared-world, launcher, uuid, economic-gate, token-economy, transfer-initiator, donor-target, logic-bug, sekaictf, open-world, instancer]
 tools: [TON]
 manuals: ["Manuals/TON/3. Contexto para Claude.md"]
-title: "Web3 — broken cross-instance isolation + economic-gate bypass (fund the target wallet from another instance)"
+title: "Web3: broken cross-instance isolation + economic-gate bypass (fund the target wallet from another instance)"
 difficulty: medium
 created: 2026-10-08
 updated: 2026-10-08
@@ -30,7 +30,7 @@ related: [web3-reentrancy-checks-effects-interactions]
 
 ## Method
 
-Reference case: SekaiCTF — Open World (TON). `Solve` requires 1 transfer of 100 jettons initiated by
+Reference case: SekaiCTF, Open World (TON). `Solve` requires 1 transfer of 100 jettons initiated by
 the player wallet. Economy (confirmed in `Challenge.tolk`):
 
 - `FLAG_PRICE = 100` jettons · `TOKEN_PRICE = 2 TON`/jetton · `BUY_MINT_TON_AMOUNT = 0.12 TON`.
@@ -102,5 +102,5 @@ flag `SEKAI{3Xp1or1ng-An-0pen-W0rld-15-FUN}`.
 
 ## Related / Cross-reference
 
-- `Arsenal/WEB/web3-reentrancy-checks-effects-interactions.md` — another SekaiCTF blockchain (EVM).
-- (pending) `Manuals/TON/` if TON enters scope — SDK, wallets, jettons, instancer.
+- `Arsenal/WEB/web3-reentrancy-checks-effects-interactions.md`: another SekaiCTF blockchain (EVM).
+- (pending) `Manuals/TON/` if TON enters scope: SDK, wallets, jettons, instancer.

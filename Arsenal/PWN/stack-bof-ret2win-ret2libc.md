@@ -15,7 +15,7 @@ related: []
 
 - An ELF binary that reads input with an unbounded function: `gets`, `scanf("%s")`, `read(0, buf, N)`
   with `N` larger than the buffer.
-- `checksec` shows no canary (`No canary found`) — the condition for overwriting the return address
+- `checksec` shows no canary (`No canary found`): the condition for overwriting the return address
   directly.
 - A `ret2win` signal: there's a function never called in the normal flow (a name like `win`,
   `secret`, `giveshell`, `flag`). A `ret2libc` signal: there's no ready-made function, but the binary
@@ -69,11 +69,11 @@ Without the target's libc: identify the version from the leak via https://libc.r
 - **Stack alignment (x86-64):** `system`/`do_system` uses `movaps`, which requires RSP aligned to 16
   bytes. If the shell "opens and closes", add a lone `ret` gadget before the call to fix the
   alignment (already done in stage 2 above).
-- **PIE on:** the binary's addresses are relative — you need a leak of the binary itself before using
+- **PIE on:** the binary's addresses are relative, so you need a leak of the binary itself before using
   `elf.sym`. `No PIE` simplifies things a lot.
 - **32-bit:** arguments go on the stack, not in registers (`pop rdi` doesn't apply); build
   `[func, ret_addr, arg1, arg2]`.
-- Test locally with the challenge's libc (`LD_PRELOAD` / `pwninit`), not the system's — the offsets
+- Test locally with the challenge's libc (`LD_PRELOAD` / `pwninit`), not the system's, since the offsets
   differ.
 
 ## Cross-reference

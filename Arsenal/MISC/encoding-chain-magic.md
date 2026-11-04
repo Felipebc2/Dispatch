@@ -4,7 +4,7 @@ category: MISC
 tags: [encoding, cadeia, multi-camada, base64, base32, base58, base85, hex, cyberchef, magic, morse, esoteric, decode]
 tools: [CyberChef]
 manuals: ["Manuals/CyberChef/3. Contexto para Claude.md"]
-title: "MISC — multi-layer encoding chain (CyberChef Magic)"
+title: "MISC: multi-layer encoding chain (CyberChef Magic)"
 difficulty: easy
 created: 2026-10-04
 updated: 2026-10-04
@@ -13,8 +13,8 @@ related: [base64-polyglot-expression]
 
 ## How to recognize this pattern
 
-- An "almost text" string that decodes into another encoded blob, which decodes into another... —
-  stacked layers (base64 → hex → base32 → rot13...). A MISC/warmup classic.
+- An "almost text" string that decodes into another encoded blob, which decodes into another... These
+  are stacked layers (base64 → hex → base32 → rot13...). A MISC/warmup classic.
 - The alphabet gives away the encoding: only `A-Za-z0-9+/=` (base64), `A-Z2-7=` (base32), `0-9a-f` (hex),
   `.-/ ` (Morse), punctuation-only (Brainfuck/esoteric).
 
@@ -46,15 +46,15 @@ for dec in (base64.b64decode, base64.b32decode, bytes.fromhex, base64.b85decode)
 
 ## Gotchas
 
-- **Stop at readable text** — the last layer is the flag; don't "keep decoding" text that already makes
+- **Stop at readable text**: the last layer is the flag; don't "keep decoding" text that already makes
   sense (it turns to garbage).
-- Magic misfires on custom layers/swapped alphabets — in that case identify by the alphabet and decode by
+- Magic misfires on custom layers/swapped alphabets. In that case identify by the alphabet and decode by
   hand.
-- Stray spaces/newlines break the decode — `tr -d ' \n'` first.
-- If the chain includes compression (gzip/zlib) in the middle, `xxd` shows the magic (`1f 8b`) —
-  decompress and continue.
+- Stray spaces/newlines break the decode. `tr -d ' \n'` first.
+- If the chain includes compression (gzip/zlib) in the middle, `xxd` shows the magic (`1f 8b`).
+  Decompress and continue.
 
 ## Cross-reference
 
-- `Manuals/CyberChef/3. Contexto para Claude.md` — Magic, From Base64/32/85, From Hex, From Charcode.
-- `base64-polyglot-expression` (CRYPTO) — when the base64 is part of a scheme, not just a layer.
+- `Manuals/CyberChef/3. Contexto para Claude.md`: Magic, From Base64/32/85, From Hex, From Charcode.
+- `base64-polyglot-expression` (CRYPTO): when the base64 is part of a scheme, not just a layer.

@@ -4,7 +4,7 @@ category: WEB
 tags: [ssrf, egress-policy, ip-leak, microservice, openapi, swagger, internal-api, m2m, credit-gate, self-referral, idor, response-preview]
 tools: []
 manuals: []
-title: "SSRF — enumerating an internal microservice via an IP leaked in an egress error (+ credit-gate bypass)"
+title: "SSRF: enumerating an internal microservice via an IP leaked in an egress error (+ credit-gate bypass)"
 difficulty: medium
 created: 2026-10-07
 updated: 2026-10-07
@@ -23,8 +23,8 @@ related: [ssrf-lfi-filter-bypass]
 
 ## Method
 
-Adapt the target/fields to the current challenge before running. Reference case: MyNotes / StickerBoard
-— `POST /notes` with `content` containing URLs; each URL becomes a scan.
+Adapt the target/fields to the current challenge before running. Reference case: MyNotes / StickerBoard,
+`POST /notes` with `content` containing URLs; each URL becomes a scan.
 
 ### 1. Take down the credit gate (self-redeem)
 
@@ -40,7 +40,7 @@ curl -s -X POST $B/referrals/redeem -H "Authorization: Bearer $TOK" -d "{\"code\
 
 ### 2. Confirm the SSRF and **harvest the leaked IP**
 
-The egress policy usually blocks by **hostname** and, on error, **leaks the resolved IP** — that's the
+The egress policy usually blocks by **hostname** and, on error, **leaks the resolved IP**; that's the
 bypass:
 
 ```
@@ -48,7 +48,7 @@ http://internal-swagger/      → "[EGRESS-POLICY] blocked: internal-swagger -> 
 http://10.0.27.11:8080/       → 200 {openapi...}   # the direct IP passes; mind the PORT
 ```
 
-Always vary the **port** (80/8080/5000) — the block may only be on the hostname, not on the IP:port.
+Always vary the **port** (80/8080/5000); the block may only be on the hostname, not on the IP:port.
 
 ### 3. Enumerate the internal API via OpenAPI and pivot
 
@@ -69,18 +69,18 @@ http://10.0.27.5:8080/get-token?api_key=<m2m-key>    # flag
 
 ## Gotchas
 
-- **Header vs query param:** via SSRF you only control the URL — if the service accepts auth by header
+- **Header vs query param:** via SSRF you only control the URL; if the service accepts auth by header
   OR query param, use the query param (`?api_key=`, `?token=`). Root/`/` may ignore the param and always
   return the hint; the real endpoint is another one (see the OpenAPI).
 - **A "hidden" namespace ≠ protected:** `/cache/keys` hiding `secret:*` from the listing doesn't prevent
   `GET /cache?key=secret:...`. Security by obscurity.
 - **Truncated response_preview:** the preview has a byte limit. Request specific paths (`/openapi.json`)
   instead of the root so you don't lose what matters at the cutoff.
-- It's not this vector if the fetch is **blind** (only returns "safe/suspicious" without a body) — then
+- It's not this vector if the fetch is **blind** (only returns "safe/suspicious" without a body); then
   it's blind SSRF (DNS/HTTP out-of-band, port-scan by timing). A different pattern.
 
 ## Related / Cross-reference
 
-- `Arsenal/WEB/ssrf-lfi-filter-bypass.md` — generating internal-address candidates
+- `Arsenal/WEB/ssrf-lfi-filter-bypass.md`: generating internal-address candidates
   (decimal/octal/hex/IPv6) when the filter is by IP string, not by hostname.
-- `Arsenal/WEB/generic-recon-scanner.md` — path enumeration when there's no OpenAPI to guide you.
+- `Arsenal/WEB/generic-recon-scanner.md`: path enumeration when there's no OpenAPI to guide you.

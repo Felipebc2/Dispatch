@@ -4,7 +4,7 @@ category: WEB
 tags: [web3, blockchain, evm, solidity, reentrancy, checks-effects-interactions, external-call, receive, fallback, withdraw, drain, state-after-call, attacker-contract, sekaictf, pp-farming, foundry, cast]
 tools: [Web3]
 manuals: ["Manuals/Web3/3. Contexto para Claude.md"]
-title: "Web3 — reentrancy (state updated AFTER the external call) drained by an attacker contract"
+title: "Web3: reentrancy (state updated AFTER the external call) drained by an attacker contract"
 difficulty: medium
 created: 2026-10-08
 updated: 2026-10-08
@@ -23,7 +23,7 @@ related: [web3-receive-fallback-weak-access-control, web3-weak-onchain-randomnes
 
 ## Method
 
-Reference case: SekaiCTF — PP Farming. A `PerformancePointATM` with 10 ETH,
+Reference case: SekaiCTF, PP Farming. A `PerformancePointATM` with 10 ETH,
 `isSolved()==balance==0`. `withdrawPP()` does `msg.sender.call{value: score}` and only then
 `scores[msg.sender]=0`.
 
@@ -69,9 +69,9 @@ balance zeroes.
 
 - You need to **seed state** first (here `donatePP` to get `score > 0`); without it the withdraw's
   `require` reverts on the 1st call.
-- The re-withdrawn value is always the old `score` (it wasn't zeroed) — that's why the drain multiplies
+- The re-withdrawn value is always the old `score` (it wasn't zeroed); that's why the drain multiplies
   the seed.
-- Without the balance guard, the last re-entry reverts and can take the whole tx down — guard against
+- Without the balance guard, the last re-entry reverts and can take the whole tx down; guard against
   `address(atm).balance >= chunk`.
 - Solidity ≥0.8 changes nothing here (it's not overflow); the real fix is CEI or `nonReentrant`. If the
   target "fixed" it with a guard/refactor, see `web3-delegatecall-storage-collision-proxy` (it may have
@@ -79,9 +79,9 @@ balance zeroes.
 
 ## Related / Cross-reference
 
-- Confirmed source: the SekaiCTF-2026 `blockchain/pp-farming/` — `handout/PerformancePointATM.sol`
+- Confirmed source: the SekaiCTF-2026 `blockchain/pp-farming/`: `handout/PerformancePointATM.sol`
   (vulnerable, `scores[msg.sender]=0` after the `call`; `isSolved()=balance==0`) +
   `exploit/PPFarmExploit.sol` + `exploit/solve.sh`.
-- `Arsenal/WEB/web3-delegatecall-storage-collision-proxy.md` — PP Farming's "fix" that reopens the drain
+- `Arsenal/WEB/web3-delegatecall-storage-collision-proxy.md`: PP Farming's "fix" that reopens the drain
   via another vector (PP Farming 2).
-- `Manuals/Web3/3. Contexto para Claude.md` — `forge`/`cast` and the `instance.json` flow.
+- `Manuals/Web3/3. Contexto para Claude.md`: `forge`/`cast` and the `instance.json` flow.

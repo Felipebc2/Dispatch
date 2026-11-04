@@ -4,7 +4,7 @@ category: NET
 tags: [net, socket, tcp, protocol, nc, pwntools, automation, banner, proof-of-work]
 tools: [pwntools]
 manuals: ["Manuals/pwntools/3. Contexto para Claude.md"]
-title: "Custom TCP service — enumerate the protocol and automate interaction"
+title: "Custom TCP service: enumerate the protocol and automate interaction"
 difficulty: easy
 created: 2026-10-04
 updated: 2026-10-04
@@ -16,7 +16,7 @@ related: [base64-polyglot-expression]
 - The challenge gives a `host:port` and expects interaction with a hand-made service (menu, prompt, a
   sequence of questions, a proof-of-work challenge before it unlocks).
 - Solving it "by hand" with `nc` is impractical when there are many rounds, a short timeout, or an
-  account/PoW to compute per message — you need to script it.
+  account/PoW to compute per message. You need to script it.
 
 ## Method
 
@@ -55,14 +55,14 @@ for n in itertools.count():
 
 ## Gotchas
 
-- **Bytes vs text:** pwntools works in bytes — `sendline` already adds `\n`; don't double it.
-- Sync with `recvuntil(prompt)` instead of a fixed `recv(n)` — a custom service rarely sends a
+- **Bytes vs text:** pwntools works in bytes. `sendline` already adds `\n`; don't double it.
+- Sync with `recvuntil(prompt)` instead of a fixed `recv(n)`. A custom service rarely sends a
   predictable size.
 - Short server timeout: build the loop to respond fast; only raise `io.timeout` for the final read of the
   flag.
 - If the service drops a shell (e.g. post-exploitation), use `io.interactive()`.
 - PoW: read the condition carefully (hex zeros vs binary zeros, hash of `challenge+suffix` vs
-  `suffix+challenge`) — getting the order wrong invalidates the whole search.
+  `suffix+challenge`). Getting the order wrong invalidates the whole search.
 
 ## Related / Cross-reference
 

@@ -14,7 +14,7 @@ related: []
 ## How to recognize this pattern
 
 - A route has a `try/catch` block (or equivalent) where the `catch` serves a sensitive file
-  (`flag.txt`, config, etc.) instead of a generic error response — probably meant as a "debug mode" and
+  (`flag.txt`, config, etc.) instead of a generic error response, probably meant as a "debug mode" and
   left in production/in the challenge.
 - Sign that it exists: the route works normally with "normal" input (a plain string), but the source
   code (if leaked/accessible) or the behavior suggests loose type validation.
@@ -27,7 +27,7 @@ exposed flag. Steps:
 
 1. **Read the route's source code**, if available (sometimes the challenge itself ships the `.js`/`.py`).
    Look for a `catch` that does `res.sendFile(...)`, `send_file(...)`, `open(...)` of something that
-   isn't a public file — that's the definitive sign.
+   isn't a public file; that's the definitive sign.
 2. **Identify the parameter's type assumption.** A real observed example:
    ```js
    app.get('/api', (req, res) => {
@@ -52,7 +52,7 @@ exposed flag. Steps:
    - `?username[]=a&username[]=b` → becomes an array
    - `?username[a]=1` → becomes an object (`{a: '1'}`)
    - An object with no custom `toString` still has a `toString` inherited from `Object.prototype`, so
-     this specific example might not blow up — the general point is: **test every type the stack's
+     this specific example might not blow up. The general point is: **test every type the stack's
      query parser accepts** (array, nested object, empty value, multiple values) until one hits an
      assumption the `if` doesn't cover.
    - Other general ways to force an exception: send a type that breaks the expected JSON parsing, send
@@ -68,10 +68,10 @@ curl "http://<target>/api?username[foo]=bar"
 
 ## Gotchas
 
-- This only works if the `catch` actually serves a sensitive file/data — many catches are harmless
+- This only works if the `catch` actually serves a sensitive file/data; many catches are harmless
   (`res.status(500).send('erro')`). Read the code before trying brute force blind.
 - Without access to the source, recognition is harder: look for 500 responses with a "rich" body
-  (unusual size/content for an error) when you send malformed inputs in any parameter of the app —
+  (unusual size/content for an error) when you send malformed inputs in any parameter of the app;
   that's the indirect sign of the pattern.
 - Different framework = different type assumption. In Express/Node, arrays/objects via the query string
   are the classic vector; in Flask/Python, the equivalent usually involves `request.args` with lists or
@@ -79,5 +79,5 @@ curl "http://<target>/api?username[foo]=bar"
 
 ## Related / Cross-reference
 
-No cross-reference with `Manuals/` yet — it's a code-analysis + query-string-manipulation technique, it
+No cross-reference with `Manuals/` yet; it's a code-analysis + query-string-manipulation technique, it
 doesn't depend on an external tool.

@@ -4,7 +4,7 @@ category: PWN
 tags: [shellcode, ret2shellcode, nx-disabled, executable-stack, rwx, jmp-rsp, jmp-esp, shellcraft, asm, ret2reg]
 tools: [pwntools]
 manuals: ["Manuals/pwntools/3. Contexto para Claude.md"]
-title: "ret2shellcode — inject shellcode with NX disabled"
+title: "ret2shellcode: inject shellcode with NX disabled"
 difficulty: medium
 created: 2026-10-04
 updated: 2026-10-04
@@ -47,14 +47,14 @@ p = process("./chall"); p.sendline(payload); p.interactive()
 - **Stack ASLR:** with no leak and PIE/ASLR on, the buffer address varies → you need a
   `jmp rsp`/`jmp esp` (a gadget at a fixed address) or a leak first. `No PIE` + ASLR still randomizes
   the stack, so a fixed buffer address only works if the leak confirms it.
-- **NOP sled** gives slack so the return address doesn't have to be exact — useful with weak ASLR.
+- **NOP sled** gives slack so the return address doesn't have to be exact (useful with weak ASLR).
 - **Bad chars:** if the input goes through `scanf("%s")`/`gets`, bytes `\x00 \x09 \x0a \x20`
   cut/terminate it; generate shellcode without them (encoded `shellcraft`) or change the read vector.
 - The shellcode has to match the **arch** (32 vs 64): `context.binary` keeps you from assembling x86
   for an x64 target.
-- If `checksec` shows NX **enabled**, stop — this vector doesn't apply, go to ROP/ret2libc.
+- If `checksec` shows NX **enabled**, stop: this vector doesn't apply, go to ROP/ret2libc.
 
 ## Cross-reference
 
-- `Manuals/pwntools/3. Contexto para Claude.md` — `asm`, `shellcraft`, `context`.
-- `stack-bof-ret2win-ret2libc` — same overflow, but when NX is on (ROP instead of shellcode).
+- `Manuals/pwntools/3. Contexto para Claude.md`: `asm`, `shellcraft`, `context`.
+- `stack-bof-ret2win-ret2libc`: same overflow, but when NX is on (ROP instead of shellcode).

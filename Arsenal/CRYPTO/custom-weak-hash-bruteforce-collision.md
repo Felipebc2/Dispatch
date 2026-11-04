@@ -4,7 +4,7 @@ category: CRYPTO
 tags: [hash, hash-collision, custom-hash, homemade-hash, non-cryptographic, weak-hash, brute-force, xor, modular-exponentiation, small-modulus, integrity-bypass, blockchain-fake, vcs, bcactf, git-better, rev]
 tools: []
 manuals: []
-title: "Weak homemade hash — forge a colliding input (same hash, different content) by brute force"
+title: "Weak homemade hash: forge a colliding input (same hash, different content) by brute force"
 difficulty: easy
 created: 2026-10-08
 updated: 2026-10-08
@@ -12,7 +12,7 @@ related: []
 ---
 
 > Note: the reference challenge sells itself as a "blockchain" (a proprietary block-based VCS), but
-> it's **neither EVM nor real crypto** — the "immutability" rests solely on a **hash function the
+> it's **neither EVM nor real crypto**: the "immutability" rests solely on a **hash function the
 > author made up**. Recognizing this early (the "blockchain" is a facade) saves hours. The original
 > was tagged `blockchain`/`rev`, but the core is a **hash collision** → CRYPTO.
 
@@ -30,9 +30,9 @@ related: []
 
 ## Method
 
-Reference case: **BCACTF 4.0 — Git Better**. "Blockchain VCS": the server receives a missing block,
+Reference case: **BCACTF 4.0: Git Better**. "Blockchain VCS": the server receives a missing block,
 reconstructs the repo with it as the 2nd block, runs it as a Deno script (the flag validator), and
-returns the output. The flag only appears if the validator **fails** the regex match — and you can
+returns the output. The flag only appears if the validator **fails** the regex match, and you can
 corrupt the regex because the block is yours. The guard: the block has to keep the **same hash** from
 the homemade function:
 
@@ -68,7 +68,7 @@ configured flag format before declaring success).
 - **Small output space = collision guaranteed fast.** Modulus `261557` → at most ~2^18 images;
   sweeping 2 bytes (`0x10000`) almost always hits. If you don't find one in the obvious field, widen
   the free field.
-- `XOR` is commutative/associative and `^=` cancels pairs — reordering/repeating bytes can preserve
+- `XOR` is commutative/associative and `^=` cancels pairs, so reordering/repeating bytes can preserve
   the hash without brute force. Analyze the structure before brute-forcing.
 - Confirm that the mutation **breaks what you want** (here the regex) AND keeps the hash; these are
   two simultaneous goals, test both.
@@ -80,13 +80,13 @@ configured flag format before declaring success).
 A homemade hash = fake integrity. If someone validates "immutability"/a signature with a function
 that isn't a real cryptographic hash (small modulus, no avalanche, commutative operations),
 **collision is brute force**, not heavy math. First reflex on seeing a custom "blockchain/VCS/
-anti-tamper": locate the hash function and check whether it's standard (SHA/Keccak) or invented — if
+anti-tamper": locate the hash function and check whether it's standard (SHA/Keccak) or invented. If
 invented, measure the image size and brute-force the free field. Applies to self-signed tokens,
 save-file checksums, "licenses", and any homemade anti-tamper.
 
 ## Related / Cross-reference
 
-- `Arsenal/REV/bridge-receipt-local-commitment-forge.md` — same lesson ("if you have the routine that
+- `Arsenal/REV/bridge-receipt-local-commitment-forge.md`: same lesson ("if you have the routine that
   recomputes the hash, it doesn't authenticate anything"), but there the hash is recomputed by a
   binary (reversing).
-- `Arsenal/CRYPTO/xor-repeating-key.md` — another case of XOR misused as if it were security.
+- `Arsenal/CRYPTO/xor-repeating-key.md`: another case of XOR misused as if it were security.

@@ -4,7 +4,7 @@ category: PWN
 tags: [format-string, fmt, printf, percent-p, percent-n, got-overwrite, leak, canary-leak, fmtstr-payload, pwntools]
 tools: [pwntools]
 manuals: ["Manuals/pwntools/3. Contexto para Claude.md"]
-title: "Format string — leak (%p) and arbitrary write (%n / GOT overwrite)"
+title: "Format string: leak (%p) and arbitrary write (%n / GOT overwrite)"
 difficulty: medium
 created: 2026-10-04
 updated: 2026-10-04
@@ -51,18 +51,18 @@ Manual (without FmtStr): `fmtstr_payload(OFFSET, {elf.got['exit']: elf.sym['win'
 
 ## Gotchas
 
-- **32 vs 64 bit:** in 64-bit the first 5–6 args come from registers, so your buffer appears at a
-  higher offset; and addresses have `00` bytes that cut the string short — put the targets **at the
+- **32 vs 64 bit:** in 64-bit the first 5-6 args come from registers, so your buffer appears at a
+  higher offset; and addresses have `00` bytes that cut the string short, so put the targets **at the
   end** of the payload (`fmtstr_payload` already handles this).
-- Prefer pwntools' `fmtstr_payload`/`FmtStr` over building `%n` by hand — the alignment of
+- Prefer pwntools' `fmtstr_payload`/`FmtStr` over building `%n` by hand: the alignment of
   `%hn`/`%hhn` and the order of the writes are easy to get wrong.
-- If you only need to **leak** (e.g. the flag is on the stack/bss), stop at step 2 — don't build a
+- If you only need to **leak** (e.g. the flag is on the stack/bss), stop at step 2 and don't build a
   write for nothing.
 - PIE/full RELRO: the GOT is read-only (RELRO) → target the return address/`__malloc_hook` instead of
   the GOT, or combine it with a leak to defeat PIE.
 
 ## Cross-reference
 
-- `Manuals/pwntools/3. Contexto para Claude.md` — `FmtStr`, `fmtstr_payload`, `ELF`.
-- `stack-bof-ret2win-ret2libc` — if there's an overflow besides the format string, the BOF is
+- `Manuals/pwntools/3. Contexto para Claude.md`: `FmtStr`, `fmtstr_payload`, `ELF`.
+- `stack-bof-ret2win-ret2libc`: if there's an overflow besides the format string, the BOF is
   sometimes the shorter path.

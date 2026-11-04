@@ -4,7 +4,7 @@ category: FOR
 tags: [forensics, pcap, pcapng, wireshark, tshark, http, ftp, export-objects, credentials, follow-stream]
 tools: [Wireshark]
 manuals: ["Manuals/Wireshark/3. Contexto para Claude.md"]
-title: "PCAP — extract credentials and files from captured traffic"
+title: "PCAP: extract credentials and files from captured traffic"
 difficulty: easy
 created: 2026-10-04
 updated: 2026-10-04
@@ -47,12 +47,12 @@ Then run `file`/`binwalk`/`strings` on the extracted files.
 ## Gotchas
 
 - **TLS/HTTPS:** without the private key or an `SSLKEYLOGFILE` included in the challenge, it won't
-  decrypt — look for the key among the attachments before giving up on that vector.
-- `Content-Encoding: gzip`/`deflate`: the HTTP payload arrives compressed — Wireshark decompresses it in
+  decrypt. Look for the key among the attachments before giving up on that vector.
+- `Content-Encoding: gzip`/`deflate`: the HTTP payload arrives compressed. Wireshark decompresses it in
   Export Objects; by hand, `gunzip`.
 - A flag **split** across several packets or hidden in unusual fields (ICMP data, DNS TXT, packet
-  comments) — if the obvious path yields nothing, sweep the less common protocols in `io,phs`.
-- `.pcapng` can carry embedded comment/decryption-secret blocks — `editcap`/Wireshark show them.
+  comments). If the obvious path yields nothing, sweep the less common protocols in `io,phs`.
+- `.pcapng` can carry embedded comment/decryption-secret blocks. `editcap`/Wireshark show them.
 
 ## Cross-reference
 

@@ -4,7 +4,7 @@ category: WEB
 tags: [blockchain, sui, move, not-evm, validated-index, index-confusion, check-vs-use, toctou, pop_back, wrong-element, vector, reward-farm, logic-bug, shared-object, justctf, dark-brotterhood, ottersec, solve-module]
 tools: [Sui]
 manuals: ["Manuals/Sui/3. Contexto para Claude.md"]
-title: "Move/Sui — validated index ≠ consumed element (check on quest_id, pop_back pays another)"
+title: "Move/Sui: validated index ≠ consumed element (check on quest_id, pop_back pays another)"
 difficulty: medium
 created: 2026-10-08
 updated: 2026-10-08
@@ -20,7 +20,7 @@ related: [toctou-decompression-overflow-validated-structure, web3-reentrancy-che
 
 - A function that takes a **user-supplied index/ID**, does the **validation** using that index
   (`borrow(vec, id)` → checks status/owner), but the **action** (pay, remove, transfer) operates on
-  **another element** — typically `pop_back`/`vec[fixed]`/the last item — not on the validated `id`.
+  **another element** (typically `pop_back`/`vec[fixed]`/the last item), not on the validated `id`.
 - Result: you satisfy the check on a "good" item and reap the effect on "bad" items repeatedly. It's a
   check-vs-use / index confusion (a cousin of TOCTOU).
 - Game/economy symptom: the goal requires accumulating X (buy the flag for 1337) but the legit means
@@ -28,7 +28,7 @@ related: [toctou-decompression-overflow-validated-structure, web3-reentrancy-che
 
 ## Method
 
-Reference case: justCTF 2024 — Dark BrOTTERhood (Sui/Move, OtterSec). `buy_flag` costs 1337, you start
+Reference case: justCTF 2024, Dark BrOTTERhood (Sui/Move, OtterSec). `buy_flag` costs 1337, you start
 with 137. `get_the_reward` validates the index but pays the `pop_back`:
 
 ```move
@@ -72,18 +72,18 @@ module solve::solve {
     }
 }
 ```
-Compile (`sui move build`) and submit to the launcher (`nc db.nc.jctf.pro 31337`) — it publishes/calls
+Compile (`sui move build`) and submit to the launcher (`nc db.nc.jctf.pro 31337`); it publishes/calls
 `solve` with the shared objects and returns the flag. Validate it against the CTF's flag format.
 
 ## Gotchas
 
 - **You can't forge the validated object:** the `QuestBoard` has to be the one created by the contract
   (a `has key, store` type with a `UID`), not yours. The attack vector is the index, not a fake board.
-- **Vector limit:** `find_a_monster` has a `QUEST_LIMIT` (25) — farm in batches (fill, drain, repeat).
+- **Vector limit:** `find_a_monster` has a `QUEST_LIMIT` (25); farm in batches (fill, drain, repeat).
 - **Shared objects in Sui:** `solve` receives `&mut Vault/Board/Player` + `&Random` from the launcher;
   you don't instantiate them, you only operate on them.
 - Transfers to EVM: a `claim(id)` that validates `items[id]` but deletes/pays `items.pop()`/`items[0]`
-  is the same bug — reward farm/double-spend.
+  is the same bug: reward farm/double-spend.
 
 ## Transferable lesson
 
@@ -95,6 +95,6 @@ SAME element that's consumed?".
 
 ## Related / Cross-reference
 
-- `Arsenal/PWN/toctou-decompression-overflow-validated-structure.md` — check-vs-use in a binary.
-- (pending) `Manuals/Sui/` if Sui/Move enters scope — Sui CLI, Move, shared objects, the solve module,
+- `Arsenal/PWN/toctou-decompression-overflow-validated-structure.md`: check-vs-use in a binary.
+- (pending) `Manuals/Sui/` if Sui/Move enters scope: Sui CLI, Move, shared objects, the solve module,
   the launcher.

@@ -4,7 +4,7 @@ category: FOR
 tags: [forensics, memory, memory-dump, volatility, volatility3, ram, pstree, cmdline, hashdump, filescan, dumpfiles, lime, raw]
 tools: []
 manuals: []
-title: "Memory forensics — RAM dump with Volatility 3"
+title: "Memory forensics: RAM dump with Volatility 3"
 difficulty: medium
 created: 2026-10-04
 updated: 2026-10-04
@@ -13,7 +13,7 @@ related: [pcap-extract-credentials-files]
 
 ## How to recognize this pattern
 
-- A large attachment (`.raw`, `.mem`, `.vmem`, `.lime`, `.dmp`) — a memory dump. `file` says "data";
+- A large attachment (`.raw`, `.mem`, `.vmem`, `.lime`, `.dmp`): a memory dump. `file` says "data";
   the size matches RAM (hundreds of MB to GB).
 - The prompt mentions "the process was running", "we captured the machine while it was on", "what the
   user typed/opened". The flag lives in a process, command, in-memory file, or a registry entry.
@@ -46,13 +46,13 @@ strings -n 6 dump.raw | grep -iE 'hik_|flag\{' ; strings -e l dump.raw | grep -i
 
 - **Volatility 3 ≠ 2** in syntax: v3 uses `windows.pstree` (a namespaced plugin), v2 used
   `--profile=... pstree`. Confirm which one is installed (`vol --version`).
-- Linux needs the exact kernel's **symbols (ISF)** — if `banners` yields a version with no ready-made
+- Linux needs the exact kernel's **symbols (ISF)**. If `banners` yields a version with no ready-made
   ISF, it's painful; in that case `strings`/`bulk_extractor` usually deliver the flag faster.
-- The flag may sit in a process that is **terminated but still in memory** — `filescan`/`strings` catch
+- The flag may sit in a process that is **terminated but still in memory**. `filescan`/`strings` catch
   what `pslist` won't show.
-- Don't confuse this with a **single-process dump** (minidump) — that's `gdb`/`strings`, not Volatility.
+- Don't confuse this with a **single-process dump** (minidump). That's `gdb`/`strings`, not Volatility.
 
 ## Cross-reference
 
-- `pcap-extract-credentials-files` — same FOR toolbox, but for network traffic.
+- `pcap-extract-credentials-files`: same FOR toolbox, but for network traffic.
 - An extracted file that is an image with stego → `lsb-image-steganography` (CRYPTO/STEGO).

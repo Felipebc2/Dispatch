@@ -53,15 +53,15 @@ zip -FF quebrado.zip --out consertado.zip
 
 ## Gotchas
 
-- PNG: beyond the magic, the **IHDR** carries width/height — if they were zeroed to "crop" the image,
+- PNG: beyond the magic, the **IHDR** carries width/height. If they were zeroed to "crop" the image,
   `pngcheck` flags it and you can restore the dimensions via hexedit (the flag hides in the "cropped" part).
 - Not every "file inside" is carving: if it's LSB in an intact image → `lsb-image-steganography`,
   not binwalk.
-- `binwalk -e` can fail on permissions/compression — `foremost`/manual `dd` (with binwalk's offset)
+- `binwalk -e` can fail on permissions/compression. `foremost`/manual `dd` (with binwalk's offset)
   is the plan B.
-- Polyglot (e.g. a file that is both a valid ZIP **and** a valid PNG) — change the extension and open it both ways.
+- Polyglot (e.g. a file that is both a valid ZIP **and** a valid PNG). Change the extension and open it both ways.
 
 ## Cross-reference
 
-- `lsb-image-steganography` — when the image is intact and the data lives in the bits, not the header.
-- `pcap-extract-credentials-files` — carving files transferred in a pcap (export objects).
+- `lsb-image-steganography`: when the image is intact and the data lives in the bits, not the header.
+- `pcap-extract-credentials-files`: carving files transferred in a pcap (export objects).

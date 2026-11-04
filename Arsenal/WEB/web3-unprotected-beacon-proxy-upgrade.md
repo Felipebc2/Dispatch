@@ -4,7 +4,7 @@ category: WEB
 tags: [web3, blockchain, evm, solidity, beacon, proxy, upgradeable, upgrade, implementation, access-control, fake-implementation, fake-oracle, fake-protocol, logic-swap, on-chain-secret, private-input-not-private, multi-contract, mpc-decoy, hitcon, no-exit-room, foundry, forge]
 tools: [Web3]
 manuals: ["Manuals/Web3/3. Contexto para Claude.md"]
-title: "Web3 — unauthenticated beacon/proxy upgrade → swap the implementation for a fake one that passes the checks"
+title: "Web3: unauthenticated beacon/proxy upgrade → swap the implementation for a fake one that passes the checks"
 difficulty: medium
 created: 2026-10-08
 updated: 2026-10-08
@@ -21,12 +21,12 @@ related: [web3-delegatecall-storage-collision-proxy, web3-constructor-typo-expos
 - A validation check delegates to that implementation (e.g. `require(protocol.eval(...) == ...)`) →
   with the fake implementation, you make the check return whatever you want.
 - Common decoy: the challenge dresses itself up as **MPC/"private input"/math** (polynomials,
-  secret-sharing). On-chain **nothing is private** — the "secrets" are in the storage/Setup. The math
+  secret-sharing). On-chain **nothing is private**: the "secrets" are in the storage/Setup. The math
   is a distraction.
 
 ## Method
 
-Reference case: HITCON CTF 2024 — No-Exit Room. `isSolved()` wants `puzzleSolved` +
+Reference case: HITCON CTF 2024, No-Exit Room. `isSolved()` wants `puzzleSolved` +
 `alice/bob/david.isSolved()` true and `isHacked()` false. Two chained bugs.
 
 ### 1. On-chain "secret" → read it and submit
@@ -92,7 +92,7 @@ imposes.
 
 ## Related / Cross-reference
 
-- `Arsenal/WEB/web3-delegatecall-storage-collision-proxy.md` — same goal (control the impl) via a
+- `Arsenal/WEB/web3-delegatecall-storage-collision-proxy.md`: same goal (control the impl) via a
   storage collision instead of an exposed setter.
-- `Arsenal/WEB/web3-constructor-typo-exposed-initializer.md` — another "setter/init with no auth".
-- `Manuals/Web3/3. Contexto para Claude.md` — `forge`/`cast`, the Exploit contract, the launcher.
+- `Arsenal/WEB/web3-constructor-typo-exposed-initializer.md`: another "setter/init with no auth".
+- `Manuals/Web3/3. Contexto para Claude.md`: `forge`/`cast`, the Exploit contract, the launcher.

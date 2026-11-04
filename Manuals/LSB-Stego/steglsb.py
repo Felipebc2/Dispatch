@@ -5,7 +5,7 @@
 # @version: 3.0.0
 #
 # Basic LSB Encoder / Decoder
-# Brought in from a prior CTF toolkit (generic tool, no challenge hardcoded) —
+# Brought in from a prior CTF toolkit (generic tool, no challenge hardcoded).
 # see Manuals/LSB-Stego/1. Fundamentos e Quando Usar.md
 
 import sys

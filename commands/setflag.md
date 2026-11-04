@@ -1,6 +1,6 @@
 ---
 description: Set (or show) the flag format that CTF Dispatch solvers validate against
-argument-hint: ["<flag format, e.g. HTB{...} or CTF{...}>" — omit to show the current value]
+argument-hint: ["<flag format, e.g. HTB{...} or CTF{...}>"; omit to show the current value]
 allowed-tools: Bash(mkdir:*), Bash(cat:*), Bash(printf:*), Bash(test:*)
 ---
 
@@ -11,7 +11,7 @@ Raw argument received: $ARGUMENTS
 
 Do exactly this:
 
-1. **If `$ARGUMENTS` is empty** — show the current value and stop:
+1. **If `$ARGUMENTS` is empty**, show the current value and stop:
 
    ```bash
    cat "${CLAUDE_PLUGIN_DATA}/flag_format.txt" 2>/dev/null \
@@ -22,7 +22,7 @@ Do exactly this:
    default `${user_config.flag_format}`) and that they can change it with
    `/ctf-dispatch:setflag "<format>"`.
 
-2. **If `$ARGUMENTS` is non-empty** — treat the entire argument as the flag format and persist it:
+2. **If `$ARGUMENTS` is non-empty**, treat the entire argument as the flag format and persist it:
 
    ```bash
    mkdir -p "${CLAUDE_PLUGIN_DATA}"
@@ -30,7 +30,7 @@ Do exactly this:
    cat "${CLAUDE_PLUGIN_DATA}/flag_format.txt"
    ```
 
-   Substitute the argument text verbatim (do not strip surrounding braces or wildcards — the user
+   Substitute the argument text verbatim (do not strip surrounding braces or wildcards, since the user
    may want a literal pattern like `HTB{...}` or a prefix like `HIK_`). Confirm to the user what was
    saved and that `/dispatch` will now inject this format into every solver.
 

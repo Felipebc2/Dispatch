@@ -14,12 +14,12 @@ related: []
 ## How to recognize this pattern
 
 - An OSINT challenge asks you to find information/a flag hidden in a post, comment, or profile on a
-  social network (Instagram, etc.) — usually in a specific post or scattered across the comments of
+  social network (Instagram, etc.), usually in a specific post or scattered across the comments of
   several posts on a profile.
 - Signal that automating is worth it: the profile has **many posts/comments** (searching by hand would
   take too long) and/or the flag is gated behind a keyword (`SEARCH_WORD`) that appears in only 1 of many
   comments.
-- Requires manual login (most social networks block unauthenticated comment scraping) — it's not 100%
+- Requires manual login (most social networks block unauthenticated comment scraping). It's not 100%
   automatable without human intervention at login.
 
 ## Method
@@ -32,7 +32,7 @@ General flow with Playwright (manual login + programmatic collection afterward):
    python -m playwright install chromium
    ```
 
-2. **Open a persistent session and pause for manual login** — avoids logging in every run:
+2. **Open a persistent session and pause for manual login** (avoids logging in every run):
    ```python
    from playwright.sync_api import sync_playwright
    from pathlib import Path
@@ -69,7 +69,7 @@ General flow with Playwright (manual login + programmatic collection afterward):
        return links[:want_max]
    ```
 
-4. **Expand each post's comments** — most networks hide comments behind "see more"/"load more"
+4. **Expand each post's comments**: most networks hide comments behind "see more"/"load more"
    buttons; click repeatedly until exhausted or a limit is hit:
    ```python
    import re
@@ -105,24 +105,24 @@ General flow with Playwright (manual login + programmatic collection afterward):
        return hits
    ```
 
-6. **Mark already-processed posts** in a simple file (`processed_urls.txt`) — avoids reprocessing
+6. **Mark already-processed posts** in a simple file (`processed_urls.txt`). This avoids reprocessing
    everything if the script is interrupted and restarted.
 
 ## Gotchas
 
-- `HEADLESS=False` is more stable to avoid bot detection / blocks — run with a visible interface, not in
+- `HEADLESS=False` is more stable to avoid bot detection / blocks. Run with a visible interface, not in
   the background headless.
-- Social networks change their UI/selectors often — the `get_by_role`/`get_by_text` regexes
+- Social networks change their UI/selectors often. The `get_by_role`/`get_by_text` regexes
   (`ver mais`, `load more`, `view all comments`, `mostrar mais`) need to be checked/adjusted against the
   current UI before you trust them.
-- Manual login is mandatory — don't try to automate credentials (avoids account blocks and is
+- Manual login is mandatory. Don't try to automate credentials (avoids account blocks and is
   unnecessary: `USER_DATA_DIR` persists the session across runs).
-- Aggressive scraping (many fast scrolls/clicks) can trigger rate limits/captcha — use generous delays
+- Aggressive scraping (many fast scrolls/clicks) can trigger rate limits/captcha. Use generous delays
   (`wait_for_timeout`), especially if the profile has many posts.
-- This is **data collection**, not the solution itself — once you find the flag/clue in the comments,
+- This is **data collection**, not the solution itself. Once you find the flag/clue in the comments,
   validate it against the current CTF's flag format before submitting.
 
 ## Related / Cross-reference
 
-No cross-reference with `Manuals/` — if the CTF's OSINT is based on a different network/platform, the UI
+No cross-reference with `Manuals/`. If the CTF's OSINT is based on a different network/platform, the UI
 selectors change but the flow (manual login → scroll → expand → keyword search) stays the same.

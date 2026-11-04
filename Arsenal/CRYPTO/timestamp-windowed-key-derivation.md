@@ -4,7 +4,7 @@ category: CRYPTO
 tags: [timestamp, derived-key, aes-cbc, clock-skew, windowed-brute-force, md5]
 tools: []
 manuals: []
-title: "Key derived from a discretized timestamp — window brute force"
+title: "Key derived from a discretized timestamp: window brute force"
 difficulty: medium
 created: 2026-09-03
 updated: 2026-09-03
@@ -14,18 +14,18 @@ related: []
 ## How to recognize this pattern
 
 - The application encrypts/signs data using a key derived from a **timestamp discretized into
-  blocks** (e.g. `block = timestamp_ms // WINDOW_MS`) instead of a fixed secret — usually visible
+  blocks** (e.g. `block = timestamp_ms // WINDOW_MS`) instead of a fixed secret, usually visible
   because the payload/request includes a `timestamp` field (or similar) alongside the encrypted
   data.
 - Strong signal: decrypting with the timestamp YOU observed at request time fails silently (padding
-  error, unreadable text) — this indicates your client's clock diverges from the server's clock by
+  error, unreadable text). This indicates your client's clock diverges from the server's clock by
   more than one window's width.
 - Common in challenges that try to "expire" tokens/payloads over time but use weak derivation
   (`md5`/`sha1` of a simple string) instead of a real HMAC/KDF.
 
 ## Method
 
-The core idea: **you don't need to hit the server's exact timestamp** — you just test a window of
+The core idea: **you don't need to hit the server's exact timestamp**: you just test a window of
 blocks around the local timestamp until one decrypts successfully (valid padding / plausible text).
 
 1. **Identify the derivation scheme.** Observe/infer: which field is the timestamp, the size of the
@@ -81,7 +81,7 @@ blocks around the local timestamp until one decrypts successfully (valid padding
    ```
 
 4. **Once you've found the right block (the server's real `tb`)**, you have the key, derivable at
-   any nearby moment — use it to **forge** payloads (e.g. a session cookie/token with elevated
+   any nearby moment, so use it to **forge** payloads (e.g. a session cookie/token with elevated
    claims), encrypting with the same formula and sending it to the server inside the validity window.
 
 5. If the exact `salt`/formula isn't known up front, first **enumerate valid actions** against the
@@ -91,19 +91,19 @@ blocks around the local timestamp until one decrypts successfully (valid padding
 
 ## Gotchas
 
-- Too small a `span` makes the brute force fail even with the right formula — if the local clock is
+- Too small a `span` makes the brute force fail even with the right formula. If the local clock is
   very wrong, widen the window before suspecting the derivation formula.
 - Confirm the **exact key size** the algorithm expects (AES-128 = 16 bytes = MD5 directly; AES-256
-  would need another hash or concatenation) — using the wrong hash produces a key-size error, not a
+  would need another hash or concatenation). Using the wrong hash produces a key-size error, not a
   padding failure.
-- A padding error isn't 100% reliable as "wrong block" — in ~1/256 cases a wrong block still produces
+- A padding error isn't 100% reliable as "wrong block": in ~1/256 cases a wrong block still produces
   valid padding by chance. Also validate that the decrypted text makes sense (parseable JSON,
   contains the expected fields) before accepting it as correct.
-- This pattern assumes CBC without authentication (no HMAC/GCM) — if the challenge uses AEAD, the
+- This pattern assumes CBC without authentication (no HMAC/GCM). If the challenge uses AEAD, the
   payload-forging attack doesn't apply the same way (but the window brute-force technique for finding
   the right timestamp still works for decryption).
 
 ## Related / Cross-reference
 
-Cross-references `Arsenal/WEB/` when the final target is forging a web-app session/cookie — the
+Cross-references `Arsenal/WEB/` when the final target is forging a web-app session/cookie: the
 derivation attack is cryptographic, but the goal is usually an authentication bypass.

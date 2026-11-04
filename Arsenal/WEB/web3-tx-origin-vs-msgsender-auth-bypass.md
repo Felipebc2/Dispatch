@@ -4,7 +4,7 @@ category: WEB
 tags: [web3, blockchain, evm, solidity, tx.origin, msg.sender, authentication, authorization, access-control, auth-bypass, phishing, intermediary-contract, attacker-contract, owner-takeover, changeowner, ethernaut, telephone, foundry, forge, cast]
 tools: [Web3]
 manuals: ["Manuals/Web3/3. Contexto para Claude.md"]
-title: "Web3 — tx.origin vs msg.sender check: calling via an intermediary contract breaks the condition (auth bypass)"
+title: "Web3: tx.origin vs msg.sender check; calling via an intermediary contract breaks the condition (auth bypass)"
 difficulty: easy
 created: 2026-10-08
 updated: 2026-10-08
@@ -14,10 +14,10 @@ related: [web3-receive-fallback-weak-access-control, web3-weak-onchain-randomnes
 ## How to recognize this pattern
 
 - Any use of **`tx.origin`** in a contract is a red flag. Two symptoms:
-  1. **A "only via contract" gate:** `if (tx.origin != msg.sender) { ...privileged action... }` — the
+  1. **A "only via contract" gate:** `if (tx.origin != msg.sender) { ...privileged action... }`: the
      action only runs when the call comes from **another contract** (a direct EOA call has
      `tx.origin == msg.sender`, the `if` is false and nothing happens).
-  2. **Auth by `tx.origin`:** `require(tx.origin == owner)` to authorize — vulnerable to **phishing**:
+  2. **Auth by `tx.origin`:** `require(tx.origin == owner)` to authorize, vulnerable to **phishing**:
      a malicious contract the owner is tricked into calling executes the authorized action, because
      `tx.origin` is still the legit owner even mid-chain.
 - Key difference: **`tx.origin`** = the EOA that initiated the tx (the origin of the whole chain,
@@ -26,7 +26,7 @@ related: [web3-receive-fallback-weak-access-control, web3-weak-onchain-randomnes
 
 ## Method
 
-Reference case: Ethernaut — Telephone.
+Reference case: Ethernaut, Telephone.
 ```solidity
 function changeOwner(address _owner) public {
     if (tx.origin != msg.sender) { owner = _owner; }   // only changes if called via a contract
@@ -82,5 +82,5 @@ origin, never for deciding permission.
 ## Related / Cross-reference
 
 - `Arsenal/WEB/web3-receive-fallback-weak-access-control.md`,
-  `web3-constructor-typo-exposed-initializer.md` — other owner takeovers via access control.
-- `Manuals/Web3/3. Contexto para Claude.md` — `forge`/`cast`, deploying the attacker contract.
+  `web3-constructor-typo-exposed-initializer.md`: other owner takeovers via access control.
+- `Manuals/Web3/3. Contexto para Claude.md`: `forge`/`cast`, deploying the attacker contract.

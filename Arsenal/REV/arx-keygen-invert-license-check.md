@@ -4,7 +4,7 @@ category: REV
 tags: [keygen, arx, cipher, invert, obfuscated-add, opaque-predicate, dead-code, ptrace-antidebug, fnv1a, murmur3, static-elf, license, nimbuslock]
 tools: [objdump]
 manuals: ["Manuals/Ghidra/3. Contexto para Claude.md"]
-title: "REV — keygen-me: invert the ARX cipher of a license-check validator"
+title: "REV: keygen-me (invert the ARX cipher of a license-check validator)"
 difficulty: hard
 created: 2026-10-07
 updated: 2026-10-07
@@ -15,7 +15,7 @@ related: [flag-check-reverse-transform, static-triage-strings-ltrace]
 
 - A **small static stripped ELF** (~8KB), used as `prog <ID> <SERIAL>` → `VALID`/`INVALID`, plus an
   nc server that sends N product ids and asks for a serial for each (a real keygen; patching doesn't
-  help — the server validates with its own copy).
+  help, since the server validates with its own copy).
 - A prompt like "most of the control flow never runs" = **opaque predicate** + dead code. E.g.
   `(~x)*x` is ALWAYS even → `test cl,1` always 0 → a branch never runs (decoy). Find the one that
   runs.
@@ -54,7 +54,7 @@ related: [flag-check-reverse-transform, static-triage-strings-ltrace]
 
 ## Gotchas
 
-- Self-consistency (`fwd∘inv==id`) does NOT prove K/the cipher are right — only that your inverse
+- Self-consistency (`fwd∘inv==id`) does NOT prove K/the cipher are right, only that your inverse
   matches your forward. The real proof is the **FNV anchor** (right bytes) + the **server oracle**.
   Validate offline as much as possible before connecting (keygen servers sometimes rate-limit / allow
   1 connection).
@@ -63,5 +63,5 @@ related: [flag-check-reverse-transform, static-triage-strings-ltrace]
 
 ## Related
 
-- `Arsenal/REV/self-extracting-packer-memfd-unpack.md` — another REV challenge (CPKX unpack).
-- `Arsenal/REV/flag-check-reverse-transform.md` — invert a validator's transform.
+- `Arsenal/REV/self-extracting-packer-memfd-unpack.md`: another REV challenge (CPKX unpack).
+- `Arsenal/REV/flag-check-reverse-transform.md`: invert a validator's transform.

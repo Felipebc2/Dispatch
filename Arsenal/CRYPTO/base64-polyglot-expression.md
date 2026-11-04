@@ -4,7 +4,7 @@ category: CRYPTO
 tags: [base64, eval, polyglot, expressao-matematica, encoding, notacao-cientifica]
 tools: []
 manuals: []
-title: "Base64-as-code — generate an expression whose encoding is also valid"
+title: "Base64-as-code: generate an expression whose encoding is also valid"
 difficulty: hard
 created: 2026-09-03
 updated: 2026-09-03
@@ -16,7 +16,7 @@ related: [single-digit-expression-solver]
 - A service (usually over `nc`/socket) reads an input line `L`, does something like
   `result = eval(base64.b64decode(L))` (or decodes first and then evaluates), and requires that
   `result` be an exact numeric value (e.g. `1337`, `3.14`, `pi`).
-- The catch: you're not free to send any Python expression — the **string `L` you send MUST itself
+- The catch: you're not free to send any Python expression: the **string `L` you send MUST itself
   be valid base64** (alphabet `A-Za-z0-9+/=`, length a multiple of 4). In other words, you're
   looking for a string that is simultaneously (a) syntactically valid base64 and (b) when decoded, an
   expression that evaluates to the right value.
@@ -27,7 +27,7 @@ related: [single-digit-expression-solver]
 
 The general technique has two parts: **generate the target expression** and **make sure its encoding
 is also a syntactically accepted base64/octal**. Rather than manually trying dozens of variant
-scripts (that's what happened the first time around — 12+ nearly identical files), consolidate into a
+scripts (that's what happened the first time around: 12+ nearly identical files), consolidate into a
 single parameterized flow:
 
 ### 1. Generate expression candidates that evaluate to the target value
@@ -104,22 +104,22 @@ def send_line(host, port, line: str, timeout=6):
 ```
 
 If the server decodes the input as **base64** (send `base64.b64decode(L)` as raw bytes, not `L` as
-text) — check which of the two protocols the challenge actually expects before blindly repeating
+text), check which of the two protocols the challenge actually expects before blindly repeating
 attempts.
 
 ## Gotchas
 
-- Watch the decode→eval vs eval→decode order — your script has to mirror exactly what the server
+- Watch the decode→eval vs eval→decode order: your script has to mirror exactly what the server
   does, otherwise the whole search is pointless.
-- A multiple of 4 is mandatory for base64 without padding to work without error — always check
+- A multiple of 4 is mandatory for base64 without padding to work without error, so always check
   `len(L) % 4 == 0` before considering a candidate valid.
-- The search space can get large (high `k_max`) — start with low `k_max`/`max_suffix_len` and ramp
+- The search space can get large (high `k_max`), so start with low `k_max`/`max_suffix_len` and ramp
   up gradually, rather than running the heaviest version right away.
-- **Don't reuse the original scripts 1:1** — they had the host/port/target hardcoded; the value is in
+- **Don't reuse the original scripts 1:1**. They had the host/port/target hardcoded; the value is in
   the generation+filter logic above, parameterized for the current challenge.
 
 ## Related / Cross-reference
 
 If the target asks for an integer expression instead of a fraction (e.g. using a single repeated
-digit), see `Arsenal/PPC/single-digit-expression-solver.md` — same "generate an expression that
+digit), see `Arsenal/PPC/single-digit-expression-solver.md`: same "generate an expression that
 evaluates to the target" family, a PPC problem rather than an encoding bypass.

@@ -4,7 +4,7 @@ category: WEB
 tags: [web3, blockchain, evm, solidity, per-block-reset, regeneration, self-healing, block-timestamp, batch, multicall, same-tx, same-block, attacker-contract, rate-limit-bypass, htb, cyber-apocalypse, eldorion, foundry, cast, web3py, solcx]
 tools: [Web3]
 manuals: ["Manuals/Web3/3. Contexto para Claude.md"]
-title: "Web3 — state that resets per block (regeneration) beaten by batching N actions into a single tx"
+title: "Web3: state that resets per block (regeneration) beaten by batching N actions into a single tx"
 difficulty: easy
 created: 2026-10-08
 updated: 2026-10-08
@@ -31,7 +31,7 @@ related: [web3-weak-onchain-randomness-blockhash, web3-reentrancy-checks-effects
 
 ## Method
 
-Reference case: HTB Cyber Apocalypse 2025 — Eldorion. 300 HP, `attack(100)` deals 100, heals every
+Reference case: HTB Cyber Apocalypse 2025, Eldorion. 300 HP, `attack(100)` deals 100, heals every
 block. Solution: a contract that calls `attack` **3x in a single tx** (same block) → 300-300=0.
 
 Toolchain: Foundry. See `Manuals/Web3/3. Contexto para Claude.md`.
@@ -62,7 +62,7 @@ $CAST send $SLAYER "slay()" --rpc-url $RPC --private-key $PK      # the 3 calls 
 $CAST call $SETUP "isSolved()(bool)" --rpc-url $RPC               # true
 ```
 
-Grab the flag: the HTB launcher has a TCP interface (menu) — connect and pick the flag option (in
+Grab the flag: the HTB launcher has a TCP interface (menu); connect and pick the flag option (in
 Eldorion it was `3`). Validate the flag against the CTF's configured flag format before declaring success.
 
 ### Alternative web3.py + solcx (no Foundry)
@@ -84,5 +84,5 @@ in a single Python script.
 
 ## Related / Cross-reference
 
-- `Arsenal/WEB/web3-weak-onchain-randomness-blockhash.md` — attacker contract for atomicity.
-- `Manuals/Web3/3. Contexto para Claude.md` — `forge`/`cast` and the `instance.json`/launcher flow.
+- `Arsenal/WEB/web3-weak-onchain-randomness-blockhash.md`: attacker contract for atomicity.
+- `Manuals/Web3/3. Contexto para Claude.md`: `forge`/`cast` and the `instance.json`/launcher flow.

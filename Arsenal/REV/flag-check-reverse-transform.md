@@ -4,7 +4,7 @@ category: REV
 tags: [reversing, flag-check, xor, decompile, ghidra, constante-hardcoded, strcmp, transform]
 tools: [Ghidra]
 manuals: ["Manuals/Ghidra/3. Contexto para Claude.md"]
-title: "Flag check by reversible transform — recover it from the constant"
+title: "Flag check by reversible transform: recover it from the constant"
 difficulty: medium
 created: 2026-10-04
 updated: 2026-10-04
@@ -35,7 +35,7 @@ objdump -s -j .rodata ./chall      # dump .rodata with offsets
 ### 3. Invert the transform
 ```python
 target = bytes.fromhex("....")          # extracted constant
-# XOR with a fixed key (involutive — invert = reapply):
+# XOR with a fixed key (involutive: invert = reapply):
 key = b"\x37"
 flag = bytes(b ^ key[0] for b in target)
 # index-based XOR / repeating key:
@@ -49,14 +49,14 @@ Validate: run the binary with the recovered flag and confirm the success message
 
 ## Gotchas
 
-- **Non-reversible transform** (hash, lossy modulo, partial comparison): can't be inverted — fall
+- **Non-reversible transform** (hash, lossy modulo, partial comparison): can't be inverted, so fall
   back to brute-forcing the input space or modeling it in `z3` (`from z3 import *`, declare the bytes
   as `BitVec`, impose the check's constraints, `solve`).
-- Comparison of only the **prefix** (`strncmp(in, const, n)`): recovers only the first `n` bytes —
-  the rest can be anything.
-- A key derived at runtime (from argv, time, PID) instead of a constant — map the key's origin before
+- Comparison of only the **prefix** (`strncmp(in, const, n)`): recovers only the first `n` bytes,
+  and the rest can be anything.
+- A key derived at runtime (from argv, time, PID) instead of a constant: map the key's origin before
   inverting.
-- Endianness when reading constants as integers — check in the decompiler whether it's LE/BE.
+- Endianness when reading constants as integers: check in the decompiler whether it's LE/BE.
 
 ## Cross-reference
 

@@ -4,7 +4,7 @@ category: CRYPTO
 tags: [aes, ecb, ecb-penguin, byte-at-a-time, oracle, block-cipher, repeated-blocks, cut-and-paste, ecb-detection]
 tools: []
 manuals: []
-title: "AES-ECB — detection + byte-at-a-time decrypt via oracle"
+title: "AES-ECB: detection + byte-at-a-time decrypt via oracle"
 difficulty: medium
 created: 2026-10-04
 updated: 2026-10-04
@@ -14,7 +14,7 @@ related: []
 ## How to recognize this pattern
 
 - A service/endpoint that **encrypts your input concatenated with a secret** (e.g. `encrypt(input +
-  FLAG)`) and returns the ciphertext — and you can call it repeatedly.
+  FLAG)`) and returns the ciphertext, and you can call it repeatedly.
 - Ciphertext with **two identical 16-byte blocks** when you send repeated input (e.g. 32 bytes of
   'A' → two identical blocks). ECB leaks block equality → that's the signature.
 - Classic "ECB penguin": an image encrypted under ECB still shows its outline.
@@ -52,9 +52,9 @@ print(known)
 ## Gotchas
 
 - **Confirm the block size** first: grow the input one byte at a time and watch when the ciphertext
-  "jumps" by 16 bytes — that gives you `bs` (16 = AES).
+  "jumps" by 16 bytes. That gives you `bs` (16 = AES).
 - Byte-at-a-time **only** works if the secret comes **after** your input in the same buffer. If it
-  comes before (`encrypt(SECRET + input)`), it's a different variant (prefix) — align it with extra
+  comes before (`encrypt(SECRET + input)`), it's a different variant (prefix): align it with extra
   padding.
 - If there's a fixed-size random prefix before your input, figure out its length (how many 'A' bytes
   until the first pair of repeated blocks shows up) and shift the indices accordingly.

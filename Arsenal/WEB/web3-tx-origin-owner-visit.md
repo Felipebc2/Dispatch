@@ -4,7 +4,7 @@ category: WEB
 tags: [web3, evm, solidity, tx-origin, phishing, owner-visit, access-control, estimategas, gas, attacker-contract, reentrancy-adjacent, drain]
 tools: []
 manuals: []
-title: "Web3 — tx.origin phishing via owner-visit (+ the estimateGas trick)"
+title: "Web3: tx.origin phishing via owner-visit (+ the estimateGas trick)"
 difficulty: hard
 created: 2026-10-08
 updated: 2026-10-08
@@ -15,7 +15,7 @@ related: [web3-setup-issolved-flag-ceremony, web3-access-control-nominate]
 
 The target contract does its authorization check with **`tx.origin == owner`** (not `msg.sender`),
 and the challenge exposes a way for the **owner (server-side) to start a tx that calls an address of
-yours** — e.g. a `POST /owner-visit {guest:X}` endpoint that does `owner → Setup.ownerVisit(X) →
+yours**, e.g. a `POST /owner-visit {guest:X}` endpoint that does `owner → Setup.ownerVisit(X) →
 X.someSelector()`. The prompt tends to talk about "owner visit", "only the sitting X", "opens for
 people it knows".
 

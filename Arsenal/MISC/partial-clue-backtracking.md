@@ -14,25 +14,25 @@ related: []
 ## How to recognize this pattern
 
 - The challenge gives N "positions" of a flag/message, but each position has **1+ candidate readings**
-  instead of a single trustworthy value — for example: two overlaid images where each suggests a
+  instead of a single trustworthy value. For example: two overlaid images where each suggests a
   different character for the same slot, ambiguous OCR, noisy audio decoded two ways, a cipher with
   multiple candidate keys per position.
 - Strong signal: you already know the flag format (a fixed prefix, allowed charset, presence of `}`/`_`
   at specific positions) but can't pin down each character with visual/auditory certainty.
-- Unlike a single-position puzzle — here there's structural ambiguity, not missing data.
+- Unlike a single-position puzzle, here there's structural ambiguity, not missing data.
 
 ## Method
 
 The technique is **DFS with pruning on the known valid prefix**, not blind brute force over the whole
 alphabet. Steps:
 
-1. **For each position `i` of the target string, build the set of candidates** `opts[i]` — the
+1. **For each position `i` of the target string, build the set of candidates** `opts[i]`: the
    characters that position could be, coming from the multiple sources/clues available. If a position has
    no reliable reading at all, use a placeholder (e.g. `_`) rather than leaving it empty.
 2. **Restrict the global charset** to what's plausible for the current CTF's flag format (uppercase
-   letters, digits, `_`, `{`, `}` — adjust to the real format, see `CLAUDE.md`).
+   letters, digits, `_`, `{`, `}`; adjust to the real format, see `CLAUDE.md`).
 3. **Fix the positions you're absolutely sure of** (usually the flag prefix, like the first 3-4
-   characters) — this drastically cuts the search space.
+   characters). This drastically cuts the search space.
 4. **Define a prefix-validation function** (`looks_valid_prefix`) that rejects early any branch that
    already doesn't match the expected format (doesn't start with the right prefix, contains a character
    outside the allowed charset). This is the pruning that makes the backtracking viable instead of
@@ -76,20 +76,20 @@ def solve(opts, fixed, PREFIX, ALLOWED, max_results=20):
     return results
 ```
 
-`opts`, `fixed`, `PREFIX` and `ALLOWED` are the only parameters specific to the current challenge — the
+`opts`, `fixed`, `PREFIX` and `ALLOWED` are the only parameters specific to the current challenge. The
 algorithm itself is generic.
 
 ## Gotchas
 
-- If `opts[i]` has many candidates across many positions, the space can still explode even with pruning —
-  in that case it's worth reducing ambiguity in the sources first (re-reading the image/audio more
+- If `opts[i]` has many candidates across many positions, the space can still explode even with pruning.
+  In that case it's worth reducing ambiguity in the sources first (re-reading the image/audio more
   carefully) rather than trusting the algorithm alone.
-- A wrong allowed charset (`ALLOWED`) is the most common cause of "no candidate found" — check that
+- A wrong allowed charset (`ALLOWED`) is the most common cause of "no candidate found". Check that
   symbols like `_`/`{`/`}` are included before concluding the vector is wrong.
 - Don't force a closing character (`}`) to appear only at the last position if the flag format allows
-  variable-length content — adjust `looks_valid_full` as needed.
+  variable-length content. Adjust `looks_valid_full` as needed.
 
 ## Related / Cross-reference
 
-No cross-reference with `Manuals/` — it's pure algorithm technique, useful whenever there's
+No cross-reference with `Manuals/`. It's pure algorithm technique, useful whenever there's
 position-by-position ambiguity instead of a single clear clue.

@@ -4,7 +4,7 @@ category: CRYPTO
 tags: [rsa, factorization, fermat, pollard-rho, factordb, small-n]
 tools: []
 manuals: []
-title: "RSA — small or factorable N (Fermat / Pollard rho / factordb)"
+title: "RSA: small or factorable N (Fermat / Pollard rho / factordb)"
 difficulty: easy
 created: 2026-09-03
 updated: 2026-09-03
@@ -20,7 +20,7 @@ related: []
 
 ## Method
 
-1. Try a direct lookup: paste `n` into https://factordb.com — if it's already factored, done, skip
+1. Try a direct lookup: paste `n` into https://factordb.com. If it's already factored, done, skip
    to step 4.
 2. If `p` and `q` are suspected to be close (Fermat): local Fermat factorization.
 3. Otherwise, Pollard rho (via `sympy.factorint`, which already covers both cases automatically).
@@ -45,14 +45,14 @@ print(long_to_bytes(m))
 
 ## Gotchas
 
-- `sympy.factorint` can hang on a large, genuinely non-weak `n` — if it takes more than ~30s, this
+- `sympy.factorint` can hang on a large, genuinely non-weak `n`. If it takes more than ~30s, this
   probably isn't the vector (n isn't actually weak), reconsider the hypothesis.
-- Confirm the challenge's `e` — it isn't always 65537.
+- Confirm the challenge's `e`: it isn't always 65537.
 - If `long_to_bytes(m)` doesn't come out readable, check whether the expected padding is PKCS#1 or
   whether the message needs additional decoding.
 
 ## Related
 
 - If the problem is a small `e` (`e=3`) with multiple encryptions of the same text, rather than a
-  small N → Håstad's attack (not yet documented in this Arsenal — create a new entry when it comes
+  small N → Håstad's attack (not yet documented in this Arsenal, so create a new entry when it comes
   up).

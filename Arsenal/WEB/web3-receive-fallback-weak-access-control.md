@@ -4,7 +4,7 @@ category: WEB
 tags: [web3, blockchain, evm, solidity, receive, fallback, access-control, owner-takeover, onlyowner, send-ether-outside-abi, raw-tx, msg-value, ethernaut, fallback-level, withdraw, drain, cast]
 tools: [Web3]
 manuals: ["Manuals/Web3/3. Contexto para Claude.md"]
-title: "Web3 — owner takeover via receive()/fallback() with weak access control (send ETH outside the ABI)"
+title: "Web3: owner takeover via receive()/fallback() with weak access control (send ETH outside the ABI)"
 difficulty: easy
 created: 2026-10-07
 updated: 2026-10-07
@@ -14,10 +14,10 @@ related: [web3-commit-secret-msgsender-gated]
 ## How to recognize this pattern
 
 - The contract has a `payable` `receive()` and/or `fallback()` that **changes critical state** (`owner`,
-  `authorized`, an access flag) with a weak `require` — typically just `msg.value > 0` and/or a trivial
+  `authorized`, an access flag) with a weak `require`, typically just `msg.value > 0` and/or a trivial
   condition, **without** comparing against the real state it should protect.
 - The "legit" owner change (e.g. `contribute()`) is infeasible on purpose (a tiny per-tx cap vs. an
-  owner starting with a huge balance) — it's a distraction; the real path is `receive()`.
+  owner starting with a huge balance). It's a distraction; the real path is `receive()`.
 - The challenge goal is usually to become `owner` and/or **drain the balance** (`withdraw()` gated by
   `onlyOwner`).
 - Mental tip: **always test what happens when you send ETH directly to the contract without calling a
@@ -25,7 +25,7 @@ related: [web3-commit-secret-msgsender-gated]
 
 ## Method
 
-Reference case: Ethernaut — Fallback. `receive()` does `owner = msg.sender` requiring only
+Reference case: Ethernaut, Fallback. `receive()` does `owner = msg.sender` requiring only
 `msg.value > 0 && contributions[msg.sender] > 0`. It never compares against the owner's contribution.
 
 The project toolchain is `cast` (Foundry), not the Ethernaut web3.js console. See
@@ -82,6 +82,6 @@ most people forget to test.
 
 ## Related / Cross-reference
 
-- `Arsenal/WEB/web3-commit-secret-msgsender-gated.md` — another web3 access gate (by `msg.sender` +
+- `Arsenal/WEB/web3-commit-secret-msgsender-gated.md`: another web3 access gate (by `msg.sender` +
   a hash in storage).
-- `Manuals/Web3/3. Contexto para Claude.md` — `cast`/`heimdall` commands and the `instance.json` flow.
+- `Manuals/Web3/3. Contexto para Claude.md`: `cast`/`heimdall` commands and the `instance.json` flow.

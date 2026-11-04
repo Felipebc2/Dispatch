@@ -13,7 +13,7 @@ related: []
 
 ## How to recognize this pattern
 
-- The attachment is a **lossless image** (PNG, BMP, GIF) with no obvious challenge — "just a photo".
+- The attachment is a **lossless image** (PNG, BMP, GIF) with no obvious challenge ("just a photo").
   LSB lives in uncompressed/lossless formats; **JPEG is almost never LSB** (compression destroys the
   bits).
 - The prompt mentions "look closer", "layers", "what you can't see", or hands you an image that's too
@@ -59,6 +59,6 @@ print(data[:200])
 
 ## Cross-reference
 
-- `Manuals/LSB-Stego/3. Contexto para Claude.md` — zsteg/stegsolve in detail.
+- `Manuals/LSB-Stego/3. Contexto para Claude.md`: zsteg/stegsolve in detail.
 - Embedded file / carving → FOR category (`pcap-extract-credentials-files` has the binwalk/foremost
   reflex).

@@ -10,7 +10,7 @@ against the format provided by the orchestrator (default `${user_config.flag_for
 declaring success. You are only called AFTER the user has already approved a recommendation at the
 `/dispatch` checkpoint.
 
-Unlike the other categories, PPC has no "attack vector" — the challenge asks you to write a
+Unlike the other categories, PPC has no "attack vector": the challenge asks you to write a
 correct and efficient algorithm under time pressure (usually against a server that validates the
 output). Here, `Arsenal/PPC/` works more like a **catalog of algorithm templates** (e.g. fast
 exponentiation, prime sieve, binary search, classic dynamic programming) than an "attack pattern".
@@ -24,7 +24,7 @@ exponentiation, prime sieve, binary search, classic dynamic programming) than an
 
 1. If there's a template in `Arsenal/PPC/` that matches the problem's pattern, adapt it instead of
    writing from scratch.
-2. Confirm the limits (input size, timeout) before choosing the algorithm's complexity — an
+2. Confirm the limits (input size, timeout) before choosing the algorithm's complexity: an
    `O(n²)` can blow the time limit if `n` is large.
 3. Write and test locally with examples from the prompt itself before submitting against the
    remote service.

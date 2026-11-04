@@ -4,7 +4,7 @@ category: WEB
 tags: [blockchain, bitcoin, not-evm, electrum, regtest, seed-phrase, mnemonic, wallet-recovery, ssh-tunnel, port-forward, pivot, net, misc, drain-wallet, zero-balance, htb, cyber-apocalypse, recovery]
 tools: []
 manuals: []
-title: "Non-EVM blockchain — Bitcoin/Electrum regtest: SSH pivot + seed phrase → move funds (no Foundry/EVM)"
+title: "Non-EVM blockchain (Bitcoin/Electrum regtest): SSH pivot + seed phrase → move funds (no Foundry/EVM)"
 difficulty: easy
 created: 2026-10-08
 updated: 2026-10-08
@@ -26,14 +26,14 @@ related: [web3-cross-instance-shared-state-economic-gate]
 
 ## Method
 
-Reference case: HTB Cyber Apocalypse 2024 — Recovery. Given: SSH (`satoshi` / `L4mb0Pr0j3ct`), an
+Reference case: HTB Cyber Apocalypse 2024, Recovery. Given: SSH (`satoshi` / `L4mb0Pr0j3ct`), an
 Electrum server at `0.0.0.0:50002:t` (regtest), and a destination address.
 
-1. **SSH pivot** — forward the Electrum server's port to your localhost:
+1. **SSH pivot**: forward the Electrum server's port to your localhost:
    ```bash
    ssh -p <ssh_port> -L 50002:127.0.0.1:50002 satoshi@<host>   # password: L4mb0Pr0j3ct
    ```
-2. **Recover the seed** of the attacker's wallet (comes from the handout/files on the host — BIP39
+2. **Recover the seed** of the attacker's wallet (comes from the handout/files on the host: BIP39
    mnemonic).
 3. **Import it into Electrum** pointing at the tunneled server and move everything to the requested
    address:
@@ -56,7 +56,7 @@ Electrum server at `0.0.0.0:50002:t` (regtest), and a destination address.
 
 "Blockchain" in a CTF isn't always EVM. If the prompt mentions Bitcoin/Electrum/wallet/seed, the game
 is **access + wallet handling** (network pivot, import seed, sign tx), not a contract exploit. First
-reflex: identify the ecosystem (EVM? Bitcoin? TON? Sui?) before choosing the toolchain — each has a
+reflex: identify the ecosystem (EVM? Bitcoin? TON? Sui?) before choosing the toolchain; each has a
 completely different flow.
 
 ## Related / Cross-reference

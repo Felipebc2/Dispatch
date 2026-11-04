@@ -4,7 +4,7 @@ category: PPC
 tags: [ppc, programacao-competitiva, harness, pwntools, remote, multi-round, cronometrado, regex, parse, proof-of-work, loop]
 tools: [pwntools]
 manuals: ["Manuals/pwntools/3. Contexto para Claude.md"]
-title: "PPC — generic harness for a timed, multi-round service"
+title: "PPC: generic harness for a timed, multi-round service"
 difficulty: medium
 created: 2026-10-04
 updated: 2026-10-04
@@ -16,7 +16,7 @@ related: [single-digit-expression-solver]
 - A service (`nc host port`) that sends **N problems in sequence** and demands a fast answer (time/round
   limit). Solving one by hand is trivial; the problem is **automating the loop** and parsing under
   pressure. "Solve 100 of these", "you have 10 seconds per question".
-- Each round's algorithm is simple (arithmetic, string, a small search) — the challenge is throughput.
+- Each round's algorithm is simple (arithmetic, string, a small search). The challenge is throughput.
 
 ## Method
 
@@ -26,7 +26,7 @@ from pwn import *
 context.log_level = "error"                      # don't spam; switch to "debug" if it stalls
 io = remote("host", 1337)
 
-# (if there's a proof-of-work in the banner, solve it first — see custom-tcp-service-scripting)
+# (if there's a proof-of-work in the banner, solve it first, see custom-tcp-service-scripting)
 
 import re
 for _ in range(1000):                            # or while True until the flag arrives
@@ -50,15 +50,15 @@ io.interactive()                                 # grab the final flag
 ## Gotchas
 
 - **Per-round timeout:** keep the parse cheap; avoid rebuilding the connection. If the round demands a
-  response in ms, print/log overhead kills you — silence it (`log_level="error"`).
-- **Off-by-one on recv:** the server may send multi-line instructions before the 1st problem — consume
+  response in ms, print/log overhead kills you. Silence it (`log_level="error"`).
+- **Off-by-one on recv:** the server may send multi-line instructions before the 1st problem. Consume
   with `recvuntil` up to the real marker, don't assume 1 line.
-- Division/quotient: confirm whether it's integer (`//`), float, or modulo — read the round's wording.
+- Division/quotient: confirm whether it's integer (`//`), float, or modulo. Read the round's wording.
 - A proof-of-work in the handshake is common before the problems unlock → solve it first
   (`custom-tcp-service-scripting` has the pattern).
 
 ## Cross-reference
 
-- `single-digit-expression-solver` — a specific instance (expression with a repeated digit / DP).
-- `custom-tcp-service-scripting` (NET) — enumerate the protocol and solve the handshake proof-of-work.
-- `Manuals/pwntools/3. Contexto para Claude.md` — `remote`, `recvuntil`, `sendline`.
+- `single-digit-expression-solver`: a specific instance (expression with a repeated digit / DP).
+- `custom-tcp-service-scripting` (NET): enumerate the protocol and solve the handshake proof-of-work.
+- `Manuals/pwntools/3. Contexto para Claude.md`: `remote`, `recvuntil`, `sendline`.

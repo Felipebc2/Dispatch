@@ -4,7 +4,7 @@ category: REV
 tags: [keygen, serial, vm, bytecode, virtual-machine, z3, smt, simd, hash, big-endian, oracle, license, symbolic-execution]
 tools: []
 manuals: []
-title: "REV — keygen with a bytecode VM (model it in z3, key-schedule as a black box)"
+title: "REV: keygen with a bytecode VM (model it in z3, key-schedule as a black box)"
 difficulty: hard
 created: 2026-10-08
 updated: 2026-10-08
@@ -22,13 +22,13 @@ license.
 ## Method
 
 1. Find the final check (e.g. `esi==0 && edx==CONST && r14>=0`). Separate what's derived ONLY from
-   the license (self-satisfied, e.g. `edx`/`r14`) from what depends on the input — target only the
+   the license (self-satisfied, e.g. `edx`/`r14`) from what depends on the input, and target only the
    CMP equalities.
 2. Decode the VM opcodes: the instruction format (`[op][dst][src][b3][imm]`), the semantics of each
    op, where the input and the constant arrays come in. Dump the **program** and the **arrays** from
    memory with the binary running under gdb (break at the 1st fetch).
 3. **Model the VM in z3** with the input SYMBOLIC and the license constants CONCRETE (read from
-   memory). You don't need to reverse the SIMD key-schedule — it's license→constants, and you read
+   memory). You don't need to reverse the SIMD key-schedule: it's license→constants, and you read
    the result directly. `s.add(reg[b1]==reg[b2])` at each CMP; `solve()` → valid input.
 4. If it's a network challenge-response (N rounds), automate it: receive the license, run the solver,
    send the serial.
@@ -50,4 +50,4 @@ license.
 
 ## Related
 
-- `Arsenal/REV/arx-keygen-invert-license-check.md` — when the keygen is an invertible ARX (no VM).
+- `Arsenal/REV/arx-keygen-invert-license-check.md`: when the keygen is an invertible ARX (no VM).

@@ -4,7 +4,7 @@ category: WEB
 tags: [blockchain, sui, move, not-evm, state-machine, state-transition, reentrancy-equivalent, reclaim, double-claim, reward-farm, hot-potato, ticket, no-drop-ability, get_the_reward, shopping-state, justctf, world-of-ottercraft, ottersec, solve-module, hard]
 tools: [Sui]
 manuals: ["Manuals/Sui/3. Contexto para Claude.md"]
-title: "Move/Sui — a claim reachable from an extra state = re-collect the reward in a loop (+ hot-potato ticket)"
+title: "Move/Sui: a claim reachable from an extra state = re-collect the reward in a loop (+ hot-potato ticket)"
 difficulty: hard
 created: 2026-10-08
 updated: 2026-10-08
@@ -18,17 +18,17 @@ related: [move-sui-validated-index-vs-consumed-element, web3-reentrancy-checks-e
 ## How to recognize this pattern
 
 - A contract with a **state machine** where each function only runs in certain states. Look for a
-  **claim/reward/withdraw function reachable from one "extra" state** than it should be — there you can
+  **claim/reward/withdraw function reachable from one "extra" state** than it should be; there you can
   fire it repeatedly without redoing the work that was supposed to enable it (equivalent to reentrancy:
   re-executing the claim over the same "gain").
-- In **Move** specifically: the purchase system uses a **hot-potato ticket** — `enter_tavern` returns a
+- In **Move** specifically: the purchase system uses a **hot-potato ticket**: `enter_tavern` returns a
   `struct` **with no abilities (no `drop`/`store`/`key`)**, which the compiler FORCES you to consume in
   a specific function (`checkout`). That forces you through `checkout` (which usually has a check like
   `total > 0` → you need to buy something). Understand the ticket flow before attacking.
 
 ## Method
 
-Reference case: justCTF 2024 — World of Ottercraft (Sui/Move, Hard). States: `PREPARE_FOR_TROUBLE,
+Reference case: justCTF 2024, World of Ottercraft (Sui/Move, Hard). States: `PREPARE_FOR_TROUBLE,
 ON_ADVENTURE, RESTING, SHOPPING, FINISHED`. Key transitions:
 ```text
 RESTING        -> enter_tavern -> SHOPPING
@@ -37,7 +37,7 @@ SHOPPING       -> buy_*
 (FINISHED, SHOPPING) -> get_the_reward -> RESTING     <-- get_the_reward also from SHOPPING!
 ```
 The hole: `get_the_reward` accepts **SHOPPING** in addition to `FINISHED`. So after earning 1 legit
-reward, you reenter `get_the_reward` from SHOPPING as many times as you want — re-collecting without
+reward, you reenter `get_the_reward` from SHOPPING as many times as you want, re-collecting without
 re-fighting. The hot-potato ticket forces a cheap `buy` (`buy_shield` = 20) to close the `checkout`
 (`total>0`), but the per-monster reward (≥62) more than covers it.
 
@@ -94,5 +94,5 @@ who consumes it, what check the consumption imposes) before building the chain.
 ## Related / Cross-reference
 
 - `Arsenal/WEB/move-sui-validated-index-vs-consumed-element.md`,
-  `move-sui-source-encoded-puzzle-input.md` — same Sui/Move set (justCTF 2024).
-- `Arsenal/WEB/web3-reentrancy-checks-effects-interactions.md` — the EVM analog (re-executable claim).
+  `move-sui-source-encoded-puzzle-input.md`: same Sui/Move set (justCTF 2024).
+- `Arsenal/WEB/web3-reentrancy-checks-effects-interactions.md`: the EVM analog (re-executable claim).

@@ -4,7 +4,7 @@ category: WEB
 tags: [mtls, client-certificate, tls, two-way-ssl, cert-chain, xor, known-plaintext, pem, tokenizer, gpt2, t5, llm-token-ids, curl-cert]
 tools: []
 manuals: []
-title: "mTLS — client-cert exchange chain (+ XOR known-plaintext on the next package)"
+title: "mTLS: client-cert exchange chain (+ XOR known-plaintext on the next package)"
 difficulty: medium
 created: 2026-10-07
 updated: 2026-10-07
@@ -38,7 +38,7 @@ curl -skv --cert ck.crt --key ck.key https://HOST:1337/ 2>&1 | grep -i "alert\|u
 ### 2. Recover the first package (initial client cert)
 
 The path to the first cert usually comes from another step (a puzzle, a leak, a directory). Download the
-`.pem` — it usually carries **cert + private key** together; use the same file for both curl fields:
+`.pem`. It usually carries **cert + private key** together; use the same file for both curl fields:
 
 ```bash
 curl -sk https://HOST:1337/<path>/firstexchange.pem -o pkg1.pem
@@ -85,10 +85,10 @@ GPT-2: vocab ~50257, low ids common (15496="Hello"). T5/SentencePiece: id 3 = pa
 - `curl --cert`/`--key` can point to the same PEM if it holds both cert+key.
 - `-k` only skips verification of the **server's** cert; the server still validates **your** cert.
 - The port matters (site on 443, mTLS service on 1337). A catch-all on 443 returns the landing page for
-  any path — don't mistake `200` for "the file exists"; check size/content-type.
+  any path. Don't mistake `200` for "the file exists"; check size/content-type.
 - XOR with a fixed key + structured plaintext (PEM/JSON/known header) is always known-plaintext, you
   never need the "hint" about where the key is.
 
 ## Related / Cross-reference
 
-- `Arsenal/CRYPTO/xor-repeating-key.md` — crib-drag / known-plaintext of a repeating-key XOR.
+- `Arsenal/CRYPTO/xor-repeating-key.md`: crib-drag / known-plaintext of a repeating-key XOR.

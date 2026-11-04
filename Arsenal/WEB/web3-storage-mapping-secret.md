@@ -4,7 +4,7 @@ category: WEB
 tags: [web3, evm, solidity, storage, mapping, keccak, slot, eth-call-oracle, commitment, preimage, recover-secret]
 tools: []
 manuals: []
-title: "Web3 — recover a mapping secret (keccak slot) + eth_call as an oracle"
+title: "Web3: recover a mapping secret (keccak slot) + eth_call as an oracle"
 difficulty: medium
 created: 2026-10-08
 updated: 2026-10-08
@@ -15,13 +15,13 @@ related: [web3-setup-issolved-flag-ceremony, web3-access-control-nominate]
 
 The solve function requires an argument that matches a hash of values stored in a **mapping**
 (`require(x == keccak256(v0‖v1))`), where `v0,v1` are read from `storage[keccak(prefix ‖
-msg.sender)]` — and the Setup **pre-populates** that mapping for the player. The "secret" sits in
+msg.sender)]`, and the Setup **pre-populates** that mapping for the player. The "secret" sits in
 public storage the whole time.
 
 ## Method
 
 1. Disassemble the solve function; identify the **mapping slot** = `keccak256(abi.encodePacked(
-   prefix, msg.sender))`. The prefix may be obfuscated as `PUSH5 <const> << <shift>` — decode it
+   prefix, msg.sender))`. The prefix may be obfuscated as `PUSH5 <const> << <shift>`; decode it
    to ASCII (e.g. `0x1d985d5b1d << 0xda` = `"vault"`).
 2. Compute the slot and read the values:
    ```python
@@ -36,8 +36,8 @@ public storage the whole time.
 
 ## Gotchas
 
-- An **obfuscated prefix** (shifted PUSH) is ASCII — decode it before computing the slot.
-- **Commitment getters** (exposed `storage[0]`) are usually a **decoy** — they don't enter the check.
+- An **obfuscated prefix** (shifted PUSH) is ASCII; decode it before computing the slot.
+- **Commitment getters** (exposed `storage[0]`) are usually a **decoy**: they don't enter the check.
 - `proof` is the RAW value (`x.hex()`), NOT `sha256(x.hex())`.
 
 ## Related

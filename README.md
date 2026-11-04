@@ -45,6 +45,13 @@ approval.
 
 ## How it works
 
+Dispatch runs one challenge through a fixed pipeline:
+
+1. **Triage** — the `brainstormer` agent reads the raw challenge (text + any attachments) and infers the likely category and attack vectors.
+2. **Arsenal lookup** — it searches the bundled Arsenal (SQLite FTS5) for a documented method matching that pattern, and cross-references the relevant tool manual.
+3. **Human checkpoint** — it presents the category, the triage summary, the matching Arsenal entry, and a recommended approach, then **stops and waits** for your call (accept / reject / redirect / refine / ask).
+4. **Dispatch** — only after you accept does it hand the challenge to the matching `solver-<category>` agent, which validates any flag it finds against your configured flag format.
+
 <p align="center">
   <img src="assets/how-it-works.png" alt="CTF Dispatch — triage, Arsenal lookup, human checkpoint, dispatch to a solver" width="90%">
 </p>
@@ -52,12 +59,11 @@ approval.
 ## Install
 
 ```
-/plugin marketplace add your-username/ctf-dispatch
+/plugin marketplace add Felipebc2/Dispatch
 /plugin install ctf-dispatch@dispatch
 ```
 
-(Replace `your-username/ctf-dispatch` with this repository once you push it to a git host. You can
-also develop locally with `claude --plugin-dir /path/to/this/repo`.)
+(You can also develop locally with `claude --plugin-dir /path/to/this/repo`.)
 
 ## Flag format
 

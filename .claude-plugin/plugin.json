@@ -6,8 +6,8 @@
   "author": {
     "name": "Felipe Castro"
   },
-  "homepage": "https://github.com/your-username/ctf-dispatch",
-  "repository": "https://github.com/your-username/ctf-dispatch",
+  "homepage": "https://github.com/Felipebc2/Dispatch",
+  "repository": "https://github.com/Felipebc2/Dispatch",
   "license": "MIT",
   "keywords": ["ctf", "security", "pentest", "reversing", "crypto", "dfir", "web-security"],
   "userConfig": {

@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Manifests parse as JSON
+        run: |
+          for f in .claude-plugin/plugin.json .claude-plugin/marketplace.json .codex-plugin/plugin.json; do
+            python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$f" && echo "ok $f"
+          done
+
+      - name: Validate Arsenal entries
+        run: python3 scripts/validate_arsenal.py
+
+      - name: Build the search index (smoke test)
+        run: python3 scripts/arsenal_search.py --reindex --force
+
+      - name: Arsenal/INDEX.md is up to date
+        run: |
+          python3 scripts/arsenal_search.py --emit-index
+          if ! git diff --quiet -- Arsenal/INDEX.md; then
+            echo "Arsenal/INDEX.md is stale. Run: python3 scripts/arsenal_search.py --emit-index"
+            git diff -- Arsenal/INDEX.md
+            exit 1
+          fi
+
+      - name: No em-dashes or en-dashes in Markdown
+        run: |
+          if git grep -nP "[\x{2014}\x{2013}]" -- '*.md'; then
+            echo "Found em/en dashes. Recompose them (colon, comma, parentheses, or two sentences)."
+            exit 1
+          fi
+          echo "No em/en dashes found."

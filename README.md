@@ -60,7 +60,7 @@ its own initiative. You stay in the loop on every challenge.
 - **13 agents**: `brainstormer` (triage) + 12 category solvers: CRYPTO, REV, PWN, FOR, JAIL, OSINT, NET, WEB, PPC, MISC, TRIVIA, LLM.
 - **`/ctf-dispatch:ctf-solve`**: a per-category shortcut that preloads the right playbook and routes into `/dispatch`.
 - **`/ctf-dispatch:setflag`**: set the flag format your CTF uses.
-- **Arsenal**: ~75 problem-pattern → method entries across the 12 categories, searched with a stdlib-only SQLite FTS5 index (`scripts/arsenal_search.py`).
+- **Arsenal**: ~97 problem-pattern → method entries across the 12 categories, searched with a stdlib-only SQLite FTS5 index (`scripts/arsenal_search.py`).
 - **Manuals**: per-tool references (Ghidra, CyberChef, JWT, pwntools, Wireshark, sqlmap, …).
 
 ## Install

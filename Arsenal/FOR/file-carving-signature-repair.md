@@ -7,8 +7,8 @@ manuals: []
 title: "File carving + magic byte repair (corrupted/embedded file)"
 difficulty: easy
 created: 2026-10-04
-updated: 2026-10-04
-related: [memory-dump-volatility, lsb-image-steganography]
+updated: 2026-11-06
+related: [memory-dump-volatility, lsb-image-steganography, elf-hidden-section-foreign-arch-firmware]
 ---
 
 ## How to recognize this pattern

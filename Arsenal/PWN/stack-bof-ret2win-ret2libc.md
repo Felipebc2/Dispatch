@@ -7,8 +7,8 @@ manuals: ["Manuals/Ghidra/3. Contexto para Claude.md", "Manuals/pwntools/3. Cont
 title: "Stack overflow → ret2win / ret2libc with pwntools"
 difficulty: medium
 created: 2026-10-04
-updated: 2026-10-04
-related: []
+updated: 2026-11-06
+related: [hidden-check-off-main-path]
 ---
 
 ## How to recognize this pattern

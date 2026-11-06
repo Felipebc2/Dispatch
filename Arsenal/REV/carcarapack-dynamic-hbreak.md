@@ -7,8 +7,8 @@ manuals: ["Manuals/Ghidra/3. Contexto para Claude.md"]
 title: "CarcaraPack: dynamic fast-path (hook fexecve + hbreak before the anti-debug)"
 difficulty: medium
 created: 2026-10-08
-updated: 2026-10-08
-related: [self-extracting-packer-memfd-unpack]
+updated: 2026-11-06
+related: [self-extracting-packer-memfd-unpack, self-modifying-code-mprotect-xor-decrypt]
 ---
 
 ## How to recognize this pattern
@@ -72,3 +72,5 @@ after the `rdtsc`):
 ## Related
 
 - `Arsenal/REV/self-extracting-packer-memfd-unpack.md`: the full static method + footer/stages.
+- `Arsenal/REV/self-modifying-code-mprotect-xor-decrypt.md`: shares the rule that a normal
+  breakpoint corrupts code that rewrites itself; use hardware breakpoints.

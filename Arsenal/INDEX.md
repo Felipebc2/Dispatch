@@ -249,241 +249,257 @@ flowchart LR
   n7["boot2root-methodology-checklist"]
   n8["bridge-receipt-local-commitment-forge"]
   n9["carcarapack-dynamic-hbreak"]
-  n10["command-injection"]
-  n11["custom-tcp-service-scripting"]
-  n12["custom-weak-hash-bruteforce-collision"]
-  n13["decoy-vs-real-checker-what-actually-runs"]
-  n14["discrete-log-pohlig-hellman-smooth-order"]
-  n15["dotnet-il-static-analysis"]
-  n16["elf-hidden-section-foreign-arch-firmware"]
-  n17["encoding-chain-magic"]
-  n18["fat32-unallocated-cluster-recovery"]
-  n19["file-carving-signature-repair"]
-  n20["flag-check-reverse-transform"]
-  n21["format-string-leak-write"]
-  n22["generic-recon-scanner"]
-  n23["hidden-check-off-main-path"]
-  n24["honeypot-anti-ia-token-injection"]
-  n25["image-geolocation-exif"]
-  n26["java-classloader-defineclass-hidden-class"]
-  n27["large-artifact-gigabyte-triage"]
-  n28["lcg-truncated-output-state-recovery"]
-  n29["llm-indirect-injection-tooluse"]
-  n30["lsb-image-steganography"]
-  n31["malware-config-derived-key-bruteforce"]
-  n32["memory-dump-volatility"]
-  n33["move-sui-source-encoded-puzzle-input"]
-  n34["move-sui-state-machine-reclaim-reward"]
-  n35["move-sui-validated-index-vs-consumed-element"]
-  n36["mtls-client-cert-exchange-chain"]
-  n37["multiround-timed-service-harness"]
-  n38["nmap-port-service-recon"]
-  n39["pcap-extract-credentials-files"]
-  n40["prompt-injection-system-prompt-leak"]
-  n41["pyc-bytecode-decompile"]
-  n42["python-sandbox-escape"]
-  n43["registry-shimcache-appcompatcache"]
-  n44["ret2shellcode-nx-disabled"]
-  n45["rsa-common-attacks"]
-  n46["rsa-franklin-reiter-related-message"]
-  n47["rsa-small-n-factorization"]
-  n48["scapy-packet-crafting"]
-  n49["self-extracting-packer-memfd-unpack"]
-  n50["self-modifying-code-mprotect-xor-decrypt"]
-  n51["shamir-secret-sharing-lagrange-interpolation"]
-  n52["single-digit-expression-solver"]
-  n53["social-media-scraping-playwright"]
-  n54["sqli-union-authbypass"]
-  n55["sqlite-deleted-record-freeblock-carving"]
-  n56["ssrf-internal-microservice-ip-leak"]
-  n57["ssrf-lfi-filter-bypass"]
-  n58["ssti-template-injection"]
-  n59["stack-bof-ret2win-ret2libc"]
-  n60["static-triage-strings-ltrace"]
-  n61["sudo-helper-forgeable-mac-gate"]
-  n62["sudo-nopasswd-writable-input-exec"]
-  n63["tcp-overlapping-segment-conflict"]
-  n64["timestamp-windowed-key-derivation"]
-  n65["toctou-decompression-overflow-validated-structure"]
-  n66["vm-bytecode-keygen-z3"]
-  n67["wasm-module-static-analysis"]
-  n68["web3-access-control-nominate"]
-  n69["web3-bridge-fake-token-pair-spoof-drain"]
-  n70["web3-commit-secret-msgsender-gated"]
-  n71["web3-constructor-typo-exposed-initializer"]
-  n72["web3-cross-instance-shared-state-economic-gate"]
-  n73["web3-ctf-launcher-ticket-token-flag-retrieval"]
-  n74["web3-delegatecall-storage-collision-proxy"]
-  n75["web3-deployed-bytecode-differs-from-source"]
-  n76["web3-mint-on-swap-no-conservation-loop"]
-  n77["web3-per-block-reset-batch-in-one-tx"]
-  n78["web3-receive-fallback-weak-access-control"]
-  n79["web3-reentrancy-checks-effects-interactions"]
-  n80["web3-setup-issolved-flag-ceremony"]
-  n81["web3-signature-voucher-offbyone-nonce-replay"]
-  n82["web3-signed-int-cast-unsigned-underflow"]
-  n83["web3-spot-price-oracle-amm-flashloan-manipulation"]
-  n84["web3-storage-mapping-secret"]
-  n85["web3-token-mint-hook-reentrancy"]
-  n86["web3-tx-origin-owner-visit"]
-  n87["web3-tx-origin-vs-msgsender-auth-bypass"]
-  n88["web3-unprotected-beacon-proxy-upgrade"]
-  n89["web3-weak-onchain-randomness-blockhash"]
-  n90["xor-repeating-key"]
-  n4 --> n52
-  n14 --> n47
-  n28 --> n64
-  n28 --> n12
-  n31 --> n90
-  n31 --> n64
-  n31 --> n0
-  n45 --> n47
-  n45 --> n46
-  n46 --> n45
+  n10["client-side-js-dom-browser-inspection"]
+  n11["command-injection"]
+  n12["custom-tcp-service-scripting"]
+  n13["custom-weak-hash-bruteforce-collision"]
+  n14["decoy-vs-real-checker-what-actually-runs"]
+  n15["discrete-log-pohlig-hellman-smooth-order"]
+  n16["dotnet-il-static-analysis"]
+  n17["elf-hidden-section-foreign-arch-firmware"]
+  n18["encoding-chain-magic"]
+  n19["fat32-unallocated-cluster-recovery"]
+  n20["file-carving-signature-repair"]
+  n21["flag-check-reverse-transform"]
+  n22["format-string-leak-write"]
+  n23["generic-recon-scanner"]
+  n24["hidden-check-off-main-path"]
+  n25["honeypot-anti-ia-token-injection"]
+  n26["image-geolocation-exif"]
+  n27["java-classloader-defineclass-hidden-class"]
+  n28["large-artifact-gigabyte-triage"]
+  n29["lcg-truncated-output-state-recovery"]
+  n30["llm-indirect-injection-tooluse"]
+  n31["lsb-image-steganography"]
+  n32["malware-config-derived-key-bruteforce"]
+  n33["memory-dump-volatility"]
+  n34["move-sui-source-encoded-puzzle-input"]
+  n35["move-sui-state-machine-reclaim-reward"]
+  n36["move-sui-validated-index-vs-consumed-element"]
+  n37["mtls-client-cert-exchange-chain"]
+  n38["multiround-timed-service-harness"]
+  n39["nmap-port-service-recon"]
+  n40["pcap-extract-credentials-files"]
+  n41["prompt-injection-system-prompt-leak"]
+  n42["pyc-bytecode-decompile"]
+  n43["python-sandbox-escape"]
+  n44["registry-shimcache-appcompatcache"]
+  n45["ret2shellcode-nx-disabled"]
+  n46["rsa-common-attacks"]
+  n47["rsa-franklin-reiter-related-message"]
+  n48["rsa-small-n-factorization"]
+  n49["scapy-packet-crafting"]
+  n50["self-extracting-packer-memfd-unpack"]
+  n51["self-modifying-code-mprotect-xor-decrypt"]
+  n52["shamir-secret-sharing-lagrange-interpolation"]
+  n53["single-digit-expression-solver"]
+  n54["social-media-scraping-playwright"]
+  n55["sqli-union-authbypass"]
+  n56["sqlite-deleted-record-freeblock-carving"]
+  n57["ssrf-internal-microservice-ip-leak"]
+  n58["ssrf-lfi-filter-bypass"]
+  n59["ssti-template-injection"]
+  n60["stack-bof-ret2win-ret2libc"]
+  n61["static-triage-strings-ltrace"]
+  n62["sudo-helper-forgeable-mac-gate"]
+  n63["sudo-nopasswd-writable-input-exec"]
+  n64["tcp-overlapping-segment-conflict"]
+  n65["timestamp-windowed-key-derivation"]
+  n66["toctou-decompression-overflow-validated-structure"]
+  n67["vm-bytecode-keygen-z3"]
+  n68["wasm-module-static-analysis"]
+  n69["web3-access-control-nominate"]
+  n70["web3-bridge-fake-token-pair-spoof-drain"]
+  n71["web3-commit-secret-msgsender-gated"]
+  n72["web3-constructor-typo-exposed-initializer"]
+  n73["web3-cross-instance-shared-state-economic-gate"]
+  n74["web3-ctf-launcher-ticket-token-flag-retrieval"]
+  n75["web3-delegatecall-storage-collision-proxy"]
+  n76["web3-deployed-bytecode-differs-from-source"]
+  n77["web3-mint-on-swap-no-conservation-loop"]
+  n78["web3-per-block-reset-batch-in-one-tx"]
+  n79["web3-receive-fallback-weak-access-control"]
+  n80["web3-reentrancy-checks-effects-interactions"]
+  n81["web3-setup-issolved-flag-ceremony"]
+  n82["web3-signature-voucher-offbyone-nonce-replay"]
+  n83["web3-signed-int-cast-unsigned-underflow"]
+  n84["web3-spot-price-oracle-amm-flashloan-manipulation"]
+  n85["web3-storage-mapping-secret"]
+  n86["web3-token-mint-hook-reentrancy"]
+  n87["web3-tx-origin-owner-visit"]
+  n88["web3-tx-origin-vs-msgsender-auth-bypass"]
+  n89["web3-unprotected-beacon-proxy-upgrade"]
+  n90["web3-weak-onchain-randomness-blockhash"]
+  n91["xor-repeating-key"]
+  n4 --> n53
+  n15 --> n48
+  n29 --> n65
+  n29 --> n13
+  n32 --> n91
+  n32 --> n65
+  n32 --> n0
+  n46 --> n48
   n46 --> n47
-  n51 --> n28
-  n90 --> n4
-  n18 --> n27
-  n18 --> n19
-  n19 --> n32
-  n19 --> n30
-  n27 --> n55
-  n27 --> n18
-  n27 --> n43
-  n27 --> n63
-  n27 --> n39
-  n27 --> n19
-  n32 --> n39
-  n43 --> n27
-  n43 --> n32
-  n55 --> n27
-  n55 --> n19
-  n63 --> n39
-  n63 --> n27
-  n5 --> n42
-  n24 --> n40
-  n24 --> n29
-  n29 --> n40
-  n1 --> n17
-  n17 --> n4
-  n11 --> n4
-  n38 --> n11
-  n38 --> n48
-  n48 --> n11
-  n25 --> n53
-  n37 --> n52
-  n52 --> n4
-  n7 --> n38
+  n47 --> n46
+  n47 --> n48
+  n52 --> n29
+  n91 --> n4
+  n19 --> n28
+  n19 --> n20
+  n20 --> n33
+  n20 --> n31
+  n20 --> n17
+  n28 --> n56
+  n28 --> n19
+  n28 --> n44
+  n28 --> n64
+  n28 --> n40
+  n28 --> n20
+  n33 --> n40
+  n44 --> n28
+  n44 --> n33
+  n56 --> n28
+  n56 --> n20
+  n64 --> n40
+  n64 --> n28
+  n5 --> n43
+  n25 --> n41
+  n25 --> n30
+  n30 --> n41
+  n1 --> n18
+  n18 --> n4
+  n12 --> n4
+  n39 --> n12
+  n39 --> n49
+  n49 --> n12
+  n26 --> n54
+  n38 --> n53
+  n53 --> n4
+  n7 --> n39
+  n7 --> n63
   n7 --> n62
-  n7 --> n61
-  n7 --> n10
-  n21 --> n59
-  n44 --> n59
-  n61 --> n7
-  n61 --> n62
-  n61 --> n90
+  n7 --> n11
+  n22 --> n60
+  n45 --> n60
+  n60 --> n24
   n62 --> n7
-  n62 --> n61
-  n62 --> n10
-  n65 --> n8
-  n2 --> n20
-  n2 --> n60
-  n2 --> n13
-  n2 --> n26
-  n3 --> n20
-  n3 --> n60
-  n8 --> n65
-  n9 --> n49
-  n13 --> n23
-  n13 --> n50
-  n13 --> n60
-  n13 --> n20
-  n15 --> n60
-  n15 --> n20
-  n15 --> n26
-  n15 --> n13
-  n16 --> n60
-  n16 --> n49
-  n16 --> n50
-  n16 --> n20
-  n23 --> n50
-  n23 --> n20
-  n23 --> n60
-  n23 --> n13
-  n26 --> n15
-  n26 --> n16
-  n26 --> n2
-  n26 --> n20
-  n41 --> n60
-  n49 --> n60
-  n49 --> n20
-  n50 --> n60
-  n50 --> n20
-  n50 --> n13
-  n50 --> n23
-  n60 --> n20
-  n66 --> n3
-  n66 --> n20
-  n67 --> n60
-  n67 --> n20
-  n67 --> n13
-  n6 --> n72
-  n10 --> n58
-  n10 --> n7
-  n33 --> n35
-  n33 --> n88
-  n34 --> n35
-  n34 --> n79
-  n35 --> n65
-  n35 --> n79
-  n36 --> n90
-  n54 --> n22
-  n56 --> n57
-  n68 --> n80
-  n68 --> n84
-  n69 --> n72
-  n69 --> n82
-  n71 --> n78
-  n71 --> n70
+  n62 --> n63
+  n62 --> n91
+  n63 --> n7
+  n63 --> n62
+  n63 --> n11
+  n66 --> n8
+  n2 --> n21
+  n2 --> n61
+  n2 --> n14
+  n2 --> n27
+  n3 --> n21
+  n3 --> n61
+  n8 --> n66
+  n9 --> n50
+  n9 --> n51
+  n14 --> n24
+  n14 --> n51
+  n14 --> n61
+  n14 --> n21
+  n16 --> n61
+  n16 --> n21
+  n16 --> n27
+  n16 --> n14
+  n17 --> n61
+  n17 --> n50
+  n17 --> n51
+  n17 --> n21
+  n21 --> n51
+  n21 --> n24
+  n21 --> n14
+  n21 --> n2
+  n21 --> n68
+  n21 --> n27
+  n24 --> n51
+  n24 --> n21
+  n24 --> n61
+  n24 --> n14
+  n27 --> n16
+  n27 --> n17
+  n27 --> n2
+  n27 --> n21
+  n42 --> n61
+  n50 --> n61
+  n50 --> n21
+  n51 --> n61
+  n51 --> n21
+  n51 --> n14
+  n51 --> n24
+  n61 --> n21
+  n61 --> n51
+  n61 --> n24
+  n61 --> n14
+  n61 --> n2
+  n61 --> n17
+  n67 --> n3
+  n67 --> n21
+  n68 --> n61
+  n68 --> n21
+  n68 --> n14
+  n6 --> n73
+  n10 --> n68
+  n11 --> n59
+  n11 --> n7
+  n34 --> n36
+  n34 --> n89
+  n35 --> n36
+  n35 --> n80
+  n36 --> n66
+  n36 --> n80
+  n37 --> n91
+  n55 --> n23
+  n57 --> n58
+  n69 --> n81
+  n69 --> n85
+  n70 --> n73
+  n70 --> n83
   n72 --> n79
-  n73 --> n74
-  n73 --> n88
-  n74 --> n79
-  n74 --> n78
-  n75 --> n70
-  n75 --> n71
+  n72 --> n71
+  n73 --> n80
+  n74 --> n75
+  n74 --> n89
+  n75 --> n80
+  n75 --> n79
+  n76 --> n71
   n76 --> n72
-  n76 --> n77
-  n77 --> n89
-  n77 --> n79
-  n78 --> n70
-  n79 --> n78
-  n79 --> n89
-  n79 --> n74
-  n80 --> n86
-  n80 --> n68
-  n80 --> n84
-  n81 --> n73
-  n81 --> n77
-  n81 --> n82
-  n82 --> n89
+  n77 --> n73
+  n77 --> n78
+  n78 --> n90
+  n78 --> n80
+  n79 --> n71
+  n80 --> n79
+  n80 --> n90
+  n80 --> n75
+  n81 --> n87
+  n81 --> n69
+  n81 --> n85
+  n82 --> n74
   n82 --> n78
-  n83 --> n73
-  n83 --> n75
-  n83 --> n76
-  n84 --> n80
-  n84 --> n68
-  n85 --> n79
-  n85 --> n78
-  n85 --> n73
+  n82 --> n83
+  n83 --> n90
+  n83 --> n79
+  n84 --> n74
+  n84 --> n76
+  n84 --> n77
+  n85 --> n81
+  n85 --> n69
   n86 --> n80
-  n86 --> n68
-  n87 --> n78
-  n87 --> n89
-  n87 --> n71
-  n88 --> n74
-  n88 --> n71
-  n88 --> n70
-  n89 --> n78
+  n86 --> n79
+  n86 --> n74
+  n87 --> n81
+  n87 --> n69
+  n88 --> n79
+  n88 --> n90
+  n88 --> n72
+  n89 --> n75
+  n89 --> n72
   n89 --> n71
+  n90 --> n79
+  n90 --> n72
 ```

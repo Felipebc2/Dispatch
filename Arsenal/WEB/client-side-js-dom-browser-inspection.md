@@ -7,8 +7,8 @@ manuals: ["Manuals/chrome-devtools/3. Contexto para Claude.md"]
 title: "Web client-side: flag/logic in the browser (JS/DOM/storage/network) inspected via the chrome-devtools MCP"
 difficulty: easy
 created: 2026-10-07
-updated: 2026-10-07
-related: []
+updated: 2026-11-06
+related: [wasm-module-static-analysis]
 ---
 
 ## How to recognize this pattern

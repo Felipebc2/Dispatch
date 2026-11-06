@@ -7,8 +7,8 @@ manuals: ["Manuals/Ghidra/3. Contexto para Claude.md"]
 title: "Flag check by reversible transform: recover it from the constant"
 difficulty: medium
 created: 2026-10-04
-updated: 2026-10-04
-related: []
+updated: 2026-11-06
+related: [self-modifying-code-mprotect-xor-decrypt, hidden-check-off-main-path, decoy-vs-real-checker-what-actually-runs, apk-jni-native-method-check, wasm-module-static-analysis, java-classloader-defineclass-hidden-class]
 ---
 
 ## How to recognize this pattern

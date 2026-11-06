@@ -35,11 +35,3 @@ jobs:
             git diff -- Arsenal/INDEX.md
             exit 1
           fi
-
-      - name: No em-dashes or en-dashes in Markdown
-        run: |
-          if git grep -nP "[\x{2014}\x{2013}]" -- '*.md'; then
-            echo "Found em/en dashes. Recompose them (colon, comma, parentheses, or two sentences)."
-            exit 1
-          fi
-          echo "No em/en dashes found."

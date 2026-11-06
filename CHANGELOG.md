@@ -4,6 +4,30 @@ All notable changes to CTF Dispatch are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- 22 Arsenal entries (75 to 97), from patterns seen at Centinela Digital I:
+  - **REV**: `elf-hidden-section-foreign-arch-firmware`, `dotnet-il-static-analysis`,
+    `java-classloader-defineclass-hidden-class`, `wasm-module-static-analysis`,
+    `self-modifying-code-mprotect-xor-decrypt`, `hidden-check-off-main-path`,
+    `decoy-vs-real-checker-what-actually-runs`, `apk-jni-native-method-check`.
+  - **CRYPTO**: `rsa-franklin-reiter-related-message`, `lcg-truncated-output-state-recovery`,
+    `shamir-secret-sharing-lagrange-interpolation`, `discrete-log-pohlig-hellman-smooth-order`.
+  - **FOR**: `sqlite-deleted-record-freeblock-carving`, `fat32-unallocated-cluster-recovery`,
+    `registry-shimcache-appcompatcache`, `tcp-overlapping-segment-conflict`,
+    `large-artifact-gigabyte-triage`.
+  - **MISC**: `afsk-bell202-audio-demodulation`, `git-bundle-tagged-vs-tampered-revision`.
+  - **PWN**: `boot2root-methodology-checklist`, `sudo-nopasswd-writable-input-exec`,
+    `sudo-helper-forgeable-mac-gate`.
+- 5 tool Manuals: `ffuf`, `WebAssembly`, `JVM-Android`, `Windows-Registry`, `Audio-Signals`.
+
+### Changed
+- `rsa-common-attacks`: Franklin-Reiter row in the decision table and a link to the new entry.
+- `command-injection`: gotcha on filtering the wrong representation (blocklist on encoded input).
+- `Manuals/Wireshark`: added TCP stream reassembly and overlapping-segment coverage for tshark.
+- CI and contributor docs no longer reject em-dashes or en-dashes in Markdown.
+
 ## [0.2.0] (2026-11-04)
 
 Architecture and polish pass. No breaking changes.

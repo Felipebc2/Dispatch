@@ -7,8 +7,8 @@ manuals: ["Manuals/Ghidra/3. Contexto para Claude.md"]
 title: "REV: static triage (quick wins before decompiling)"
 difficulty: easy
 created: 2026-10-04
-updated: 2026-10-04
-related: [flag-check-reverse-transform]
+updated: 2026-11-06
+related: [flag-check-reverse-transform, self-modifying-code-mprotect-xor-decrypt, hidden-check-off-main-path, decoy-vs-real-checker-what-actually-runs, apk-jni-native-method-check, elf-hidden-section-foreign-arch-firmware]
 ---
 
 ## How to recognize this pattern
@@ -61,3 +61,7 @@ probably computed/transformed (see `flag-check-reverse-transform`).
 - `flag-check-reverse-transform`: when the flag is transformed and checked, not hardcoded.
 - `Manuals/Ghidra/3. Contexto para Claude.md`: assisted decompilation when triage isn't enough.
 - `.pyc`/PyInstaller → `pyc-bytecode-decompile` (not a native binary).
+- Imports in the triage are escalation hints: `mprotect`/`VirtualProtect` point to
+  `self-modifying-code-mprotect-xor-decrypt`; `sigaction`/`AddVectoredExceptionHandler` to
+  `hidden-check-off-main-path`; `RegisterNatives`/`JNI_OnLoad` to `apk-jni-native-method-check`; a
+  custom non-code section to `elf-hidden-section-foreign-arch-firmware`.

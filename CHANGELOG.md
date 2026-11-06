@@ -4,7 +4,7 @@ All notable changes to CTF Dispatch are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.3.0] (2026-11-06)
 
 ### Added
 - 22 Arsenal entries (75 to 97), from patterns seen at Centinela Digital I:
@@ -61,5 +61,6 @@ First public release.
 - Human-checkpoint safety model: no solver runs without explicit user approval.
 - Plugin + marketplace manifests, brand assets (banner, icon, emblem, diagram).
 
+[0.3.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v0.3.0
 [0.2.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v0.2.0
 [0.1.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v0.1.0

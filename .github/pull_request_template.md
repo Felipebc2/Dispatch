@@ -10,5 +10,4 @@
 - [ ] New Arsenal entries follow the frontmatter schema (`Arsenal/README.md`)
 - [ ] `python3 scripts/validate_arsenal.py` passes
 - [ ] `Arsenal/INDEX.md` regenerated (`python3 scripts/arsenal_search.py --emit-index`)
-- [ ] No em-dashes or en-dashes in the Markdown
 - [ ] Commit messages follow Conventional Commits

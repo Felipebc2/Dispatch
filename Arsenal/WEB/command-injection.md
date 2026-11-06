@@ -1,14 +1,14 @@
 ---
 id: command-injection
 category: WEB
-tags: [command-injection, os-command, rce, shell, blind, oob, filter-bypass, ifs, ping, metacaracter]
+tags: [command-injection, os-command, rce, shell, blind, oob, filter-bypass, ifs, ping, metacaracter, wrong-representation, base64-filter]
 tools: []
 manuals: []
 title: "Command injection (OS command → RCE)"
 difficulty: medium
 created: 2026-10-04
-updated: 2026-10-04
-related: [ssti-template-injection]
+updated: 2026-11-06
+related: [ssti-template-injection, boot2root-methodology-checklist]
 ---
 
 ## How to recognize this pattern
@@ -59,6 +59,10 @@ c''at /flag*   c\at /flag*   /bin/c?t /flag*   tac/rev/head/nl
   (`sleep`) and then reading the flag directly into a field that reflects it (or redirect it to a
   served file). See the listener decision in the checklist.
 - `;` may be filtered while `|`/`&&`/`$()`/newline get through; test them all.
+- **Filter on the wrong representation.** If the app blocklists metacharacters on the *encoded*
+  input (for example the base64 `name` field) and only then decodes and runs it, the filter never
+  sees your real payload: the base64 alphabet has none of `;|&`$()`. Encode the injection and it
+  passes untouched. Validate the decoded value, not the wire format.
 - If the app uses `exec`/`system` with an array (no shell), metacharacters are **not** interpreted;
   then it isn't classic command injection; reconsider (argument injection, SSTI, path traversal).
 - Distinguish from **SSTI** (`{{7*7}}`=49) and from **code injection** (language eval); the fix and

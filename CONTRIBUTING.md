@@ -32,9 +32,6 @@ python3 scripts/arsenal_search.py --emit-index   # regenerate Arsenal/INDEX.md (
 python3 scripts/arsenal_search.py "<keywords>" --json   # sanity-check your entry is searchable
 ```
 
-CI also rejects em-dashes and en-dashes in Markdown. Recompose them with a colon, a comma,
-parentheses, or two sentences.
-
 ## Open a pull request
 
 1. Fork, then branch: `git checkout -b arsenal/<slug>`.

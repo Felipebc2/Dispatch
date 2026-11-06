@@ -1,14 +1,14 @@
 ---
 id: rsa-common-attacks
 category: CRYPTO
-tags: [rsa, fermat, common-modulus, low-exponent, cube-root, small-e, wiener, boneh-durfee, small-d, hastad, e-3]
+tags: [rsa, fermat, common-modulus, low-exponent, cube-root, small-e, wiener, boneh-durfee, small-d, hastad, e-3, related-message, franklin-reiter]
 tools: [RsaCtfTool]
 manuals: ["Manuals/RsaCtfTool/3. Contexto para Claude.md"]
 title: "RSA: decision tree for the common attacks (Fermat / common modulus / low-e / Wiener)"
 difficulty: medium
 created: 2026-10-04
-updated: 2026-10-04
-related: [rsa-small-n-factorization]
+updated: 2026-11-06
+related: [rsa-small-n-factorization, rsa-franklin-reiter-related-message]
 ---
 
 ## How to recognize this pattern
@@ -23,6 +23,7 @@ looks off**. The right attack is dictated by the parameters, so read them before
 | small `e` (`e=3`) and `m^e < n` (short msg) | **cube root / low-exponent** | `c = m^e` without wrap → integer root |
 | small `e` (`e=3`), the same `m` encrypted under `k≥e` different keys | **Håstad broadcast** | CRT + e-th root |
 | huge `e` (near `n`) → small `d` | **Wiener / Boneh-Durfee** | continued fractions |
+| same `n` and `e`, two `c` whose plaintexts differ by a known relation (`m2 = m1 + d`) | **Franklin-Reiter** | polynomial GCD; see `rsa-franklin-reiter-related-message` |
 
 ## Method
 
@@ -77,4 +78,5 @@ m, exact = iroot(c, 3)
 ## Cross-reference
 
 - `rsa-small-n-factorization`: try factoring/factordb BEFORE these (cheaper).
+- `rsa-franklin-reiter-related-message`: two ciphertexts of related plaintexts under the same key.
 - `Manuals/RsaCtfTool/3. Contexto para Claude.md`: flags and the signal→attack table.

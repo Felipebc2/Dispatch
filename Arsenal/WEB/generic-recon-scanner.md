@@ -2,12 +2,12 @@
 id: generic-recon-scanner
 category: WEB
 tags: [recon, enumeracao, user-agent, paths-comuns, requests, flag-scan]
-tools: []
-manuals: []
+tools: [ffuf]
+manuals: ["Manuals/ffuf/3. Contexto para Claude.md"]
 title: "Generic initial recon: common paths + User-Agent variation"
 difficulty: easy
 created: 2026-09-03
-updated: 2026-09-03
+updated: 2026-11-06
 related: []
 ---
 
@@ -84,6 +84,9 @@ def extract_image_urls(base_url, html: str):
   Arsenal entries).
 
 ## Related / Cross-reference
+
+For the path/header enumeration itself, see `Manuals/ffuf/3. Contexto para Claude.md` (ffuf puts the
+`FUZZ` keyword in a header or body, not just the path, and filters the soft-404 noise).
 
 If an image downloaded during recon looks like it hides data, move on to `Manuals/LSB-Stego/` or
 `zsteg`/`binwalk` instead of trying to extract it with a text regex.

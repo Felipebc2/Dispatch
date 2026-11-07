@@ -2,7 +2,7 @@
   <img src="assets/logo.svg" width="170" alt="CTF Dispatch">
 </p>
 
-<h1 align="center">CTF Dispatch</h1>
+<h1 align="center">D1sp4tch</h1>
 
 <p align="center">
   <em>One head, many arms. It triages the challenge and dispatches the right specialist.</em>

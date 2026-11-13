@@ -1,0 +1,16 @@
+{
+  "type": "image-reverse",
+  "category": "OSINT",
+  "description": "Reverse image and face search; {q} is a public image URL.",
+  "tools": [
+    {"id": "google-lens", "name": "Google Lens", "url": "https://lens.google.com/", "desc": "Reverse image by URL; strong on products, text and landmarks", "tags": ["reverse-image", "image", "landmark", "product", "ocr"], "access": "web", "cost": "free", "auth": "none", "query": "https://lens.google.com/uploadbyurl?url={q}", "checked": "2026-11-13"},
+    {"id": "yandex-images", "name": "Yandex Images", "url": "https://yandex.com/images/", "desc": "Reverse image; best for faces, buildings and Eastern Europe", "tags": ["reverse-image", "image", "face", "landmark", "geolocation"], "access": "web", "cost": "free", "auth": "none", "query": "https://yandex.com/images/search?rpt=imageview&url={q}", "checked": "2026-11-13"},
+    {"id": "bing-visual", "name": "Bing Visual Search", "url": "https://www.bing.com/images", "desc": "Reverse image with crop-region search", "tags": ["reverse-image", "image", "crop"], "access": "web", "cost": "free", "auth": "none", "query": "https://www.bing.com/images/search?view=detailv2&iss=sbi&q=imgurl:{q}", "checked": "2026-11-13"},
+    {"id": "tineye", "name": "TinEye", "url": "https://tineye.com/", "desc": "Exact-match reverse image sorted by oldest: find the original source", "tags": ["reverse-image", "image", "oldest", "first-seen", "provenance"], "access": "web", "cost": "free", "auth": "none", "query": "https://tineye.com/search?url={q}", "checked": "2026-11-13"},
+    {"id": "baidu-images", "name": "Baidu Images", "url": "https://image.baidu.com/", "desc": "Reverse image with a Chinese index; for China/Asia content", "tags": ["reverse-image", "image", "china", "asia"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "lenso-ai", "name": "lenso.ai", "url": "https://lenso.ai/en", "desc": "AI reverse image: places, duplicates, similar and faces", "tags": ["reverse-image", "image", "face", "place", "ai"], "access": "web", "cost": "freemium", "auth": "none", "checked": "2026-11-13"},
+    {"id": "pimeyes", "name": "PimEyes", "url": "https://pimeyes.com/", "desc": "Face recognition search across the web; results gated behind paywall", "tags": ["face", "face-recognition", "reverse-image", "people"], "access": "web", "cost": "paid", "auth": "account", "checked": "2026-11-13"},
+    {"id": "flickr-map", "name": "Flickr Map", "url": "https://www.flickr.com/map", "desc": "Geotagged Flickr photos on a map; compare a scene with nearby shots", "tags": ["geotag", "geolocation", "photo", "map", "flickr"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "invid", "name": "InVID / WeVerify plugin", "url": "https://www.invid-project.eu/tools-and-services/invid-verification-plugin/", "desc": "Video keyframes, metadata, forensics filters and reverse search in one", "tags": ["video", "verification", "keyframes", "forensics", "fake-detection"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"}
+  ]
+}

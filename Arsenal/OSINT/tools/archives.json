@@ -1,0 +1,18 @@
+{
+  "type": "archives",
+  "category": "OSINT",
+  "description": "Past versions of web pages and historical newspapers.",
+  "tools": [
+    {"id": "wayback-machine", "name": "Wayback Machine", "url": "https://web.archive.org/", "desc": "Snapshots of a URL over time; check deleted pages, old robots.txt", "tags": ["archive", "wayback", "snapshot", "deleted-page", "history"], "access": "web", "cost": "free", "auth": "none", "query": "https://web.archive.org/web/*/{q}*", "checked": "2026-11-13"},
+    {"id": "wayback-cdx", "name": "Wayback CDX API", "url": "https://web.archive.org/cdx/search/cdx", "desc": "Machine-readable list of every archived URL under a domain/prefix", "tags": ["archive", "wayback", "cdx", "url-list", "api", "hidden-paths"], "access": "api", "cost": "free", "auth": "none", "query": "https://web.archive.org/cdx/search/cdx?url={q}/*&output=json&fl=timestamp,original,statuscode&collapse=urlkey&limit=200", "checked": "2026-11-13"},
+    {"id": "waybackpack", "name": "waybackpack", "url": "https://github.com/jsvine/waybackpack", "desc": "CLI: download every archived version of a URL for diffing", "tags": ["archive", "wayback", "download", "diff", "cli"], "access": "cli", "cost": "free", "auth": "none", "query": "waybackpack {q} -d wayback_out --uniques-only", "checked": "2026-11-13"},
+    {"id": "archive-today", "name": "archive.today", "url": "https://archive.ph/", "desc": "Independent archive; often has pages Wayback lacks (social posts)", "tags": ["archive", "snapshot", "deleted-page", "social-media"], "access": "web", "cost": "free", "auth": "none", "query": "https://archive.ph/{q}", "checked": "2026-11-13"},
+    {"id": "cachedview", "name": "CachedView", "url": "https://cachedview.nl/", "desc": "One form to query Google cache, Wayback and archive.today", "tags": ["archive", "cache", "snapshot"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "oldweb-today", "name": "oldweb.today", "url": "http://oldweb.today/", "desc": "Render archived pages inside period browsers", "tags": ["archive", "old-browser", "render", "history"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "uk-web-archive", "name": "UK Web Archive", "url": "https://www.webarchive.org.uk/", "desc": "British Library archive of UK websites", "tags": ["archive", "uk", "snapshot"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "common-crawl", "name": "Common Crawl", "url": "https://commoncrawl.org/", "desc": "Petabyte web crawl with a URL index (index.commoncrawl.org)", "tags": ["archive", "crawl", "url-list", "dataset"], "access": "api", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "trove", "name": "Trove", "url": "https://trove.nla.gov.au/", "desc": "National Library of Australia: newspapers, gazettes, web archive", "tags": ["archive", "newspaper", "australia", "historical"], "access": "web", "cost": "free", "auth": "none", "query": "https://trove.nla.gov.au/search?keyword={q}", "checked": "2026-11-13"},
+    {"id": "chronicling-america", "name": "Chronicling America", "url": "https://chroniclingamerica.loc.gov/", "desc": "Library of Congress: digitized US newspapers 1690-1963, full text", "tags": ["archive", "newspaper", "historical", "us"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "google-news-archive", "name": "Google News Archive", "url": "https://news.google.com/newspapers", "desc": "Scanned historical newspapers browsable by title and date", "tags": ["archive", "newspaper", "historical"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"}
+  ]
+}

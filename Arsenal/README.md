@@ -32,6 +32,7 @@ difficulty: easy|medium|hard
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 related: [another-arsenal-id]                   # optional, []
+toolsets: [osint/username]                      # optional: toolsets this method uses
 ---
 ```
 
@@ -44,6 +45,40 @@ prompts (e.g. `alg-none`, `small-n`, `lsb`, `format-string`), not just the patte
 2. **Method**: step by step with commands/code ready to paste.
 3. **Gotchas**: common traps, signals that it is NOT this vector (saves contest time).
 4. **Related / Cross-reference**: other Arsenal entries or files under `Manuals/`.
+
+## Toolsets (`<CATEGORY>/tools/<type>.json`)
+
+Entries teach the *how*; toolsets list *where*: external services and CLIs, one JSON file per
+kind of tool (e.g. `OSINT/tools/username.json`, `NET/tools/vuln-db.json`). The agent never reads
+these files. It asks the search script, which prints one line per tool:
+
+```bash
+python3 scripts/arsenal_search.py --tools "wifi ssid geolocation" --top 3   # BM25 over all tools
+python3 scripts/arsenal_search.py --toolset osint/email --free              # one toolset
+```
+
+`--free` keeps tools usable with no payment and no account; `--offline` keeps CLI tools only.
+File shape (`type` must equal the filename, `category` the folder):
+
+```json
+{
+  "type": "username",
+  "category": "OSINT",
+  "description": "What this toolset covers, one line",
+  "tools": [
+    {"id": "sherlock", "name": "Sherlock", "url": "https://github.com/sherlock-project/sherlock",
+     "desc": "One line, max 100 chars", "tags": ["username", "account-enumeration"],
+     "access": "cli", "cost": "free", "auth": "none",
+     "query": "sherlock {q}", "checked": "2026-11-13"}
+  ]
+}
+```
+
+- `access`: `web` | `cli` | `api`. `cost`: `free` | `freemium` | `paid`. `auth`: `none` | `account` | `key`.
+- `query` (optional): URL template (web/api) or command template (cli) with a `{q}` placeholder,
+  so the agent makes one targeted request instead of browsing a homepage.
+- `checked`: the date the URL was last confirmed alive. Tool `id`s are unique across all toolsets.
+- Only add tools that work today: dead services cost the agent a wasted request.
 
 ## Reindexing
 

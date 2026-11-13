@@ -7,8 +7,9 @@ manuals: []
 title: "OSINT: geolocate a photo (EXIF + reverse image + visual clues)"
 difficulty: medium
 created: 2026-10-04
-updated: 2026-10-04
-related: [social-media-scraping-playwright]
+updated: 2026-11-13
+related: [social-media-scraping-playwright, transport-tracking-aircraft-ship-aprs]
+toolsets: [osint/image-reverse, osint/geo-maps]
 ---
 
 ## How to recognize this pattern

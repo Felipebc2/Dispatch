@@ -1,0 +1,12 @@
+{
+  "type": "files-buckets",
+  "category": "OSINT",
+  "description": "Find exposed files: open cloud buckets, public drives, FTP indexes, PDF internals.",
+  "tools": [
+    {"id": "grayhatwarfare", "name": "GrayhatWarfare", "url": "https://buckets.grayhatwarfare.com/", "desc": "Search file names inside open S3/Azure/GCP/DO buckets", "tags": ["s3", "bucket", "cloud", "azure", "gcp", "exposed-files"], "access": "web", "cost": "freemium", "auth": "account", "query": "https://buckets.grayhatwarfare.com/files?keywords={q}", "checked": "2026-11-13"},
+    {"id": "dedigger", "name": "DeDigger", "url": "https://www.dedigger.com/", "desc": "Search public Google Drive files by keyword and type", "tags": ["google-drive", "files", "documents", "exposed-files"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "mamont", "name": "Mamont FTP search", "url": "http://www.mmnt.ru/int/", "desc": "Search file names on public FTP servers", "tags": ["ftp", "files", "open-directory"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "napalm-ftp", "name": "NAPALM FTP Indexer", "url": "https://www.searchftps.net/", "desc": "Index of files on public FTP servers with date filters", "tags": ["ftp", "files", "open-directory"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "pdfx", "name": "PDFx", "url": "https://github.com/metachris/pdfx", "desc": "CLI: extract metadata, URLs and references from a PDF, optionally download them", "tags": ["pdf", "metadata", "urls", "references", "documents", "cli"], "access": "cli", "cost": "free", "auth": "none", "query": "pdfx -v {q}", "checked": "2026-11-13"}
+  ]
+}

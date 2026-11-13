@@ -5,6 +5,8 @@ Usage:
     python3 scripts/arsenal_search.py "jwt alg none" --category WEB --json --top 5
     python3 scripts/arsenal_search.py --reindex
     python3 scripts/arsenal_search.py --reindex --force
+    python3 scripts/arsenal_search.py --tools "wifi ssid geolocation" --top 3
+    python3 scripts/arsenal_search.py --toolset osint/username --free
 """
 import argparse
 import json
@@ -113,10 +115,14 @@ def build_index(force: bool = False) -> tuple[int, int, int]:
     return added, updated, removed
 
 
+def _fts_query(query: str) -> str:
+    terms = [t for t in re.findall(r"\w+", query, flags=re.UNICODE) if t]
+    return " OR ".join(f'"{t}"' for t in terms) if terms else '""'
+
+
 def search(query: str, category: str | None, top: int) -> list[dict]:
     conn = sqlite3.connect(DB_PATH)
-    terms = [t for t in re.findall(r"\w+", query, flags=re.UNICODE) if t]
-    fts_query = " OR ".join(f'"{t}"' for t in terms) if terms else '""'
+    fts_query = _fts_query(query)
     sql = (
         "SELECT path, title, category, tags, tools, "
         "snippet(arsenal_fts, 4, '[', ']', ' ... ', 12) AS snip, "
@@ -159,6 +165,7 @@ def catalog() -> list[dict]:
             "title": meta.get("title", p.stem),
             "tags": _as_list(meta.get("tags", [])),
             "related": _as_list(meta.get("related", [])),
+            "toolsets": _as_list(meta.get("toolsets", [])),
             "difficulty": meta.get("difficulty", ""),
             "path": str(p.relative_to(REPO_ROOT)),
         })
@@ -183,6 +190,74 @@ def graph_neighbors(entry_id: str) -> dict | None:
     forward = [by_id.get(r, {"id": r, "title": "(missing)", "category": "", "path": ""}) for r in e["related"]]
     reverse = [o for o in cat if entry_id in o["related"] and o["id"] != entry_id]
     return {"entry": e, "related": forward, "referenced_by": reverse}
+
+
+# --- Toolsets: Arsenal/<CAT>/tools/<type>.json, one record per external tool ---
+# Searched through an in-memory FTS5 table built per call (a few hundred rows, milliseconds), so
+# there is no cache to invalidate. Agents get one line per tool, never the JSON file itself.
+
+def _toolset_files() -> list[Path]:
+    return sorted(ARSENAL_DIR.glob("*/tools/*.json"))
+
+
+def toolset_name(p: Path) -> str:
+    return f"{p.parent.parent.name.lower()}/{p.stem}"
+
+
+def load_tools(category: str | None = None) -> list[dict]:
+    out = []
+    for p in _toolset_files():
+        if category and p.parent.parent.name.upper() != category.upper():
+            continue
+        for t in json.loads(p.read_text(encoding="utf-8")).get("tools", []):
+            out.append({**t, "toolset": toolset_name(p)})
+    return out
+
+
+def _filter_tools(tools: list[dict], free: bool, offline: bool) -> list[dict]:
+    if free:
+        tools = [t for t in tools if t.get("cost") != "paid" and t.get("auth") == "none"]
+    if offline:
+        tools = [t for t in tools if t.get("access") == "cli"]
+    return tools
+
+
+def search_tools(query: str, category: str | None, top: int, free: bool = False,
+                 offline: bool = False) -> list[dict]:
+    tools = _filter_tools(load_tools(category), free, offline)
+    conn = sqlite3.connect(":memory:")
+    conn.execute("CREATE VIRTUAL TABLE t USING fts5(name, tags, description, toolset, "
+                 "tokenize = 'porter unicode61')")
+    conn.executemany(
+        "INSERT INTO t (rowid, name, tags, description, toolset) VALUES (?,?,?,?,?)",
+        [(i, x["name"], " ".join(x.get("tags", [])), x["desc"], x["toolset"]) for i, x in enumerate(tools)],
+    )
+    # bm25 column weights: tags carry the most signal, then the name.
+    rows = conn.execute(
+        "SELECT rowid FROM t WHERE t MATCH ? ORDER BY bm25(t, 2.0, 3.0, 1.0, 1.0) LIMIT ?",
+        (_fts_query(query), top),
+    ).fetchall()
+    conn.close()
+    return [tools[i] for (i,) in rows]
+
+
+def list_toolset(name: str, free: bool = False, offline: bool = False) -> list[dict] | None:
+    """Tools of one toolset ('osint/username' or just 'username'); None if no such toolset."""
+    name = name.lower()
+    names = {toolset_name(p) for p in _toolset_files()}
+    full = name if name in names else next((n for n in sorted(names) if n.split("/", 1)[1] == name), None)
+    if not full:
+        return None
+    return _filter_tools([t for t in load_tools() if t["toolset"] == full], free, offline)
+
+
+def _fmt_tool(t: dict) -> str:
+    auth = "" if t.get("auth") == "none" else f", auth:{t.get('auth')}"
+    return (f"[{t['toolset']}] {t['name']} | {t.get('query') or t['url']} | {t['desc']} "
+            f"({t.get('access')}, {t.get('cost')}{auth})")
+
+
+TOOL_JSON_KEYS = ("id", "name", "toolset", "url", "query", "desc", "access", "cost", "auth")
 
 
 def emit_index() -> str:
@@ -228,15 +303,30 @@ def emit_index() -> str:
             lines.append(f"  {key[a]} --> {key[b]}")
         lines += ["```", ""]
 
+    # Toolsets: counts only, so the index stays small however many tools are added.
+    sets = _toolset_files()
+    n_tools = 0
+    if sets:
+        lines += ["## Toolsets", "",
+                  "External tools for `arsenal_search.py --tools <query>` / `--toolset <name>`.", "",
+                  "| Toolset | Tools | Covers |", "|---|---|---|"]
+        for p in sets:
+            data = json.loads(p.read_text(encoding="utf-8"))
+            n = len(data.get("tools", []))
+            n_tools += n
+            lines.append(f"| [`{toolset_name(p)}`]({p.relative_to(ARSENAL_DIR)}) | {n} | {data.get('description', '')} |")
+        lines.append("")
+
     (ARSENAL_DIR / "INDEX.md").write_text("\n".join(lines), encoding="utf-8")
-    return f"INDEX.md: {len(cat)} entries, {len(edges)} graph edges across {len(linked)} linked entries"
+    return (f"INDEX.md: {len(cat)} entries, {len(edges)} graph edges across {len(linked)} linked entries, "
+            f"{len(sets)} toolsets ({n_tools} tools)")
 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="Search and navigate the Arsenal (FTS5 + catalog)")
     ap.add_argument("query", nargs="?", help="search text")
     ap.add_argument("--category", help="filter by category (e.g. WEB, CRYPTO)")
-    ap.add_argument("--top", type=int, default=5)
+    ap.add_argument("--top", type=int, help="max results (default 5 entries, 8 tools)")
     ap.add_argument("--json", action="store_true", help="JSON output (recommended for agents)")
     ap.add_argument("--reindex", action="store_true", help="reindex and report counts")
     ap.add_argument("--force", action="store_true", help="reindex everything, ignoring the mtime cache")
@@ -245,7 +335,27 @@ def main() -> None:
     ap.add_argument("--tag", help="list entries carrying this tag")
     ap.add_argument("--graph", metavar="ID", help="show an entry's related neighbors and back-references")
     ap.add_argument("--emit-index", action="store_true", help="regenerate Arsenal/INDEX.md and the graph")
+    ap.add_argument("--tools", metavar="QUERY", help="search external tools (Arsenal/*/tools/*.json), one line each")
+    ap.add_argument("--toolset", metavar="NAME", help="list one toolset, e.g. osint/username")
+    ap.add_argument("--free", action="store_true", help="tools: usable right now, no payment and no account")
+    ap.add_argument("--offline", action="store_true", help="tools: CLI only (no internet-facing service)")
     args = ap.parse_args()
+
+    # Toolset modes read the JSON files directly; they never touch the entry index.
+    if args.tools or args.toolset:
+        if args.toolset:
+            rows = list_toolset(args.toolset, args.free, args.offline)
+            if rows is None:
+                ap.error(f"no toolset '{args.toolset}'. Available: "
+                         + ", ".join(toolset_name(p) for p in _toolset_files()))
+            rows = rows[:args.top] if args.top else rows
+        else:
+            rows = search_tools(args.tools, args.category, args.top or 8, args.free, args.offline)
+        if args.json:
+            print(json.dumps([{k: t[k] for k in TOOL_JSON_KEYS if k in t} for t in rows], ensure_ascii=False))
+        else:
+            print("\n".join(_fmt_tool(t) for t in rows) if rows else "No matching tools.")
+        return
 
     # Navigation modes do not touch the FTS index.
     if args.emit_index:
@@ -277,7 +387,7 @@ def main() -> None:
     if not args.query:
         ap.error("query is required unless --reindex, --list, --tag, --graph or --emit-index is used")
 
-    results = search(args.query, args.category, args.top)
+    results = search(args.query, args.category, args.top or 5)
     if args.json:
         print(json.dumps(results, ensure_ascii=False, indent=2))
     else:
@@ -297,6 +407,8 @@ def _fmt_graph(g: dict) -> str:
     out += [f"  {r['id']}  {r.get('title', '')}" for r in g["related"]] or ["  (none)"]
     out.append("referenced by <-")
     out += [f"  {r['id']}  {r['title']}" for r in g["referenced_by"]] or ["  (none)"]
+    if e.get("toolsets"):
+        out.append(f"toolsets: {', '.join(e['toolsets'])}  (list with --toolset <name>)")
     return "\n".join(out)
 
 

@@ -1,9 +1,9 @@
 ---
 id: domain-recon-certificates-dns
 category: OSINT
-tags: [osint, domain, subdomain, crt-sh, certificate-transparency, whois, dns, txt-record, passive-dns, asn, reverse-ip]
-tools: []
-manuals: []
+tags: [osint, domain, subdomain, crt-sh, certificate-transparency, whois, dns, txt-record, passive-dns, asn, reverse-ip, web-check]
+tools: [web-check]
+manuals: ["Manuals/web-check/3. Contexto para Claude.md"]
 title: "OSINT: passive recon of a domain/IP (CT logs, DNS records, WHOIS, history)"
 difficulty: easy
 created: 2026-11-13
@@ -20,6 +20,9 @@ toolsets: [osint/domain-infra, osint/archives]
 - Attribution: "which company/registrar/hosting is behind this site?"
 
 ## Method
+
+Shortcut: a Web Check report (`https://web-check.xyz/check/<domain>`) covers steps 1, 3 and 6 in one
+export. Filter it with `jq` (`Manuals/web-check/3. Contexto para Claude.md`), never read it raw.
 
 1. **DNS records** (local, no third party):
    ```bash

@@ -1,0 +1,10 @@
+{
+  "type": "leaks",
+  "category": "OSINT",
+  "description": "Check whether an email/domain appears in known breaches or leak indexes (lookup only).",
+  "tools": [
+    {"id": "haveibeenpwned", "name": "Have I Been Pwned", "url": "https://haveibeenpwned.com/", "desc": "Which public breaches include an email; breach list per domain", "tags": ["breach", "leak", "email", "pwned", "domain"], "access": "web", "cost": "freemium", "auth": "none", "checked": "2026-11-13"},
+    {"id": "intelx", "name": "Intelligence X", "url": "https://intelx.io/", "desc": "Search leaks, pastes, darknet and historical data by selector", "tags": ["leak", "paste", "darknet", "email", "domain", "selector"], "access": "web", "cost": "freemium", "auth": "account", "query": "https://intelx.io/?s={q}", "checked": "2026-11-13"},
+    {"id": "hudsonrock", "name": "Hudson Rock infostealer lookup", "url": "https://www.hudsonrock.com/threat-intelligence-cybercrime-tools", "desc": "Was an email/domain seen in infostealer logs (counts only)", "tags": ["infostealer", "breach", "email", "domain", "api"], "access": "api", "cost": "free", "auth": "none", "query": "https://cavalier.hudsonrock.com/api/json/v2/osint-tools/search-by-email?email={q}", "checked": "2026-11-13"}
+  ]
+}

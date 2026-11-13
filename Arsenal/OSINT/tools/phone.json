@@ -1,0 +1,11 @@
+{
+  "type": "phone",
+  "category": "OSINT",
+  "description": "Pivot from a phone number to carrier, line type and owner name.",
+  "tools": [
+    {"id": "freecarrierlookup", "name": "Free Carrier Lookup", "url": "http://freecarrierlookup.com/", "desc": "Carrier and line type (mobile/landline/VoIP) of a number, worldwide", "tags": ["phone", "carrier", "mobile", "voip", "line-type"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "truecaller", "name": "Truecaller", "url": "https://www.truecaller.com/", "desc": "Crowdsourced caller ID: name attached to a number", "tags": ["phone", "caller-id", "owner", "full-name"], "access": "web", "cost": "freemium", "auth": "account", "checked": "2026-11-13"},
+    {"id": "spydialer", "name": "Spy Dialer", "url": "https://www.spydialer.com/", "desc": "US reverse phone: name, voicemail greeting, photos", "tags": ["phone", "reverse-phone", "owner", "us", "voicemail"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "infobel", "name": "Infobel", "url": "https://www.infobel.com/", "desc": "International white/yellow pages: reverse phone and business listings", "tags": ["phone", "reverse-phone", "directory", "business", "address"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"}
+  ]
+}

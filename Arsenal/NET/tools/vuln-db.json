@@ -1,0 +1,15 @@
+{
+  "type": "vuln-db",
+  "category": "NET",
+  "description": "Look up CVEs and public exploits for an identified product/version.",
+  "tools": [
+    {"id": "searchsploit", "name": "searchsploit (Exploit-DB)", "url": "https://www.exploit-db.com/searchsploit", "desc": "CLI: offline Exploit-DB copy, search by product and version", "tags": ["exploit", "cve", "exploit-db", "offline", "version", "cli"], "access": "cli", "cost": "free", "auth": "none", "query": "searchsploit {q}", "checked": "2026-11-13"},
+    {"id": "exploit-db", "name": "Exploit-DB", "url": "https://www.exploit-db.com/", "desc": "Public exploits and PoCs with CVE mapping", "tags": ["exploit", "cve", "poc", "version"], "access": "web", "cost": "free", "auth": "none", "query": "https://www.exploit-db.com/search?q={q}", "checked": "2026-11-13"},
+    {"id": "sploitus", "name": "Sploitus", "url": "https://sploitus.com/", "desc": "Aggregated exploit search (Exploit-DB, GitHub PoCs, Packet Storm)", "tags": ["exploit", "cve", "poc", "github", "aggregator"], "access": "web", "cost": "free", "auth": "none", "query": "https://sploitus.com/?query={q}", "checked": "2026-11-13"},
+    {"id": "nvd", "name": "NVD", "url": "https://nvd.nist.gov/", "desc": "NIST CVE database: CVSS, affected versions (CPE), references", "tags": ["cve", "cvss", "cpe", "version", "advisory"], "access": "web", "cost": "free", "auth": "none", "query": "https://nvd.nist.gov/vuln/search/results?query={q}", "checked": "2026-11-13"},
+    {"id": "cvedetails", "name": "CVE Details", "url": "https://www.cvedetails.com/", "desc": "CVEs grouped by vendor/product/version with exploit flags", "tags": ["cve", "vendor", "product", "version"], "access": "web", "cost": "freemium", "auth": "none", "checked": "2026-11-13"},
+    {"id": "vulners", "name": "Vulners", "url": "https://vulners.com/", "desc": "Search engine over CVEs, advisories and exploits", "tags": ["cve", "exploit", "advisory", "aggregator"], "access": "web", "cost": "freemium", "auth": "none", "query": "https://vulners.com/search?query={q}", "checked": "2026-11-13"},
+    {"id": "packetstorm", "name": "Packet Storm", "url": "https://packetstorm.news/", "desc": "Exploits, advisories and tools archive", "tags": ["exploit", "advisory", "poc"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "shodan-cvedb", "name": "Shodan CVEDB", "url": "https://cvedb.shodan.io/", "desc": "Free JSON API: CVE details, CVSS, EPSS, KEV flag by CVE ID", "tags": ["cve", "cvss", "epss", "kev", "api"], "access": "api", "cost": "free", "auth": "none", "query": "https://cvedb.shodan.io/cve/{q}", "checked": "2026-11-13"}
+  ]
+}

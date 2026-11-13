@@ -4,6 +4,24 @@ All notable changes to CTF Dispatch are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- **Toolsets**: `Arsenal/<CAT>/tools/<type>.json`, 166 external tools in 15 files (14 OSINT +
+  `NET/vuln-db`), curated from osint.link and checked alive on 2026-11-13. Each tool has a short
+  description, tags, access/cost/auth flags and, when possible, a `{q}` URL/command template.
+- `arsenal_search.py --tools <query>` (BM25 over tools, one line each) and `--toolset <name>`, with
+  `--free` and `--offline` filters. `--emit-index` adds a toolset table (counts only).
+- Optional `toolsets:` frontmatter field, shown by `--graph` and checked by the validator.
+- 5 OSINT entries (97 to 102): `username-pivot-cross-platform`, `email-pivot-account-discovery`,
+  `domain-recon-certificates-dns`, `wayback-archived-site-recovery`,
+  `transport-tracking-aircraft-ship-aprs`.
+
+### Changed
+- `validate_arsenal.py` validates toolset JSON (schema, enums, unique ids, `{q}` templates).
+- `/dispatch` pulls `--tools` lines for OSINT and shows them at the checkpoint; `solver-osint`
+  picks external tools through the toolsets instead of from memory.
+
 ## [0.3.0] (2026-11-06)
 
 ### Added

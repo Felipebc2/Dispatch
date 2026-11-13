@@ -1,0 +1,15 @@
+{
+  "type": "video",
+  "category": "OSINT",
+  "description": "YouTube/video metadata, upload time, location, transcripts and removed videos.",
+  "tools": [
+    {"id": "yt-dlp", "name": "yt-dlp", "url": "https://github.com/yt-dlp/yt-dlp", "desc": "CLI: video metadata (upload date, channel, tags), subtitles, download", "tags": ["video", "youtube", "metadata", "upload-date", "subtitles", "download", "cli"], "access": "cli", "cost": "free", "auth": "none", "query": "yt-dlp --skip-download --write-info-json --write-auto-subs {q}", "checked": "2026-11-13"},
+    {"id": "mw-metadata", "name": "MW YouTube Metadata", "url": "https://mattw.io/youtube-metadata/", "desc": "Exact upload timestamp, geolocation, tags and thumbnails of a video", "tags": ["video", "youtube", "metadata", "upload-date", "geolocation", "thumbnail"], "access": "web", "cost": "free", "auth": "none", "query": "https://mattw.io/youtube-metadata/?url={q}&submit=true", "checked": "2026-11-13"},
+    {"id": "youtube-geo-search", "name": "YouTube Geo Search Tool", "url": "https://youtube.github.io/geo-search-tool/search.html", "desc": "Find geotagged YouTube videos around a point and time window", "tags": ["video", "youtube", "geolocation", "geotag", "map"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "youtube-data-tools", "name": "YouTube Data Tools", "url": "https://ytdt.digitalmethods.net/", "desc": "Export channel/video/comment data and networks as CSV", "tags": ["video", "youtube", "comments", "channel", "export"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "youtube-lookup", "name": "YouTube Lookup", "url": "https://youtube-lookup.vercel.app/", "desc": "Video/channel ID details including hidden metadata", "tags": ["video", "youtube", "channel-id", "metadata"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "youtubevideofinder", "name": "YouTube video finder", "url": "https://github.com/TheTechRobo/youtubevideofinder", "desc": "Find archived copies of deleted/private YouTube videos by ID", "tags": ["video", "youtube", "deleted", "archive", "lost-media"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "yark", "name": "Yark", "url": "https://github.com/Owez/yark", "desc": "CLI: archive a channel and track title/description edits over time", "tags": ["video", "youtube", "archive", "channel", "changes", "cli"], "access": "cli", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "youtube-thumbnail", "name": "YouTube thumbnail (direct)", "url": "http://www.get-youtube-thumbnail.com/", "desc": "Full-size thumbnail of a video ID, even when the video is gone", "tags": ["video", "youtube", "thumbnail", "image", "deleted"], "access": "web", "cost": "free", "auth": "none", "query": "https://i.ytimg.com/vi/{q}/maxresdefault.jpg", "checked": "2026-11-13"}
+  ]
+}

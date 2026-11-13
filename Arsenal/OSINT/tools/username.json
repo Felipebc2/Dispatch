@@ -1,0 +1,13 @@
+{
+  "type": "username",
+  "category": "OSINT",
+  "description": "Find every account that shares a handle/alias across sites (username pivot).",
+  "tools": [
+    {"id": "sherlock", "name": "Sherlock", "url": "https://github.com/sherlock-project/sherlock", "desc": "CLI: checks a username on 400+ sites and prints the profile URLs that exist", "tags": ["username", "alias", "handle", "account-enumeration", "socmint", "cli"], "access": "cli", "cost": "free", "auth": "none", "query": "sherlock {q}", "checked": "2026-11-13"},
+    {"id": "whatsmyname-web", "name": "WhatsMyName Web", "url": "https://whatsmyname.app/", "desc": "Web UI over the WhatsMyName dataset: username across 600+ sites, client-side JS", "tags": ["username", "alias", "handle", "account-enumeration", "socmint"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "whatsmyname-data", "name": "WhatsMyName dataset", "url": "https://github.com/WebBreacher/WhatsMyName", "desc": "wmn-data.json: per-site URL pattern + existence check, scriptable with curl", "tags": ["username", "alias", "account-enumeration", "dataset", "cli"], "access": "cli", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "namechk", "name": "Namechk", "url": "https://namechk.com/", "desc": "Username availability across social networks and domains", "tags": ["username", "alias", "handle", "domain"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "instantusername", "name": "Instant Username", "url": "https://instantusername.com/", "desc": "Fast username availability check across ~100 platforms", "tags": ["username", "alias", "handle"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "idcrawl", "name": "IDCrawl", "url": "https://www.idcrawl.com/username-search", "desc": "Username and real-name search aggregating social profiles and photos", "tags": ["username", "alias", "people", "full-name", "socmint"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"}
+  ]
+}

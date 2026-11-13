@@ -1,0 +1,18 @@
+{
+  "type": "transport",
+  "category": "OSINT",
+  "description": "Track aircraft, ships, containers, trains, ham-radio stations and parcels.",
+  "tools": [
+    {"id": "flightaware", "name": "FlightAware", "url": "https://www.flightaware.com/", "desc": "Flight history by flight number or tail registration", "tags": ["aircraft", "flight", "flight-number", "registration", "tail-number", "ads-b"], "access": "web", "cost": "freemium", "auth": "none", "query": "https://www.flightaware.com/live/flight/{q}", "checked": "2026-11-13"},
+    {"id": "flightradar24", "name": "Flightradar24", "url": "https://www.flightradar24.com/", "desc": "Live and past flights, aircraft registration history and photos", "tags": ["aircraft", "flight", "registration", "tail-number", "ads-b", "playback"], "access": "web", "cost": "freemium", "auth": "none", "query": "https://www.flightradar24.com/data/aircraft/{q}", "checked": "2026-11-13"},
+    {"id": "planefinder", "name": "Plane Finder", "url": "https://planefinder.net/", "desc": "Live flight tracking with playback", "tags": ["aircraft", "flight", "ads-b", "playback"], "access": "web", "cost": "freemium", "auth": "none", "checked": "2026-11-13"},
+    {"id": "radarbox", "name": "AirNav RadarBox", "url": "https://www.radarbox.com/", "desc": "Flight tracking and aircraft data by registration", "tags": ["aircraft", "flight", "registration", "ads-b"], "access": "web", "cost": "freemium", "auth": "none", "checked": "2026-11-13"},
+    {"id": "marinetraffic", "name": "MarineTraffic", "url": "https://www.marinetraffic.com/", "desc": "Ship positions and port calls by name, IMO or MMSI", "tags": ["ship", "vessel", "ais", "imo", "mmsi", "maritime", "port"], "access": "web", "cost": "freemium", "auth": "none", "checked": "2026-11-13"},
+    {"id": "vesselfinder", "name": "VesselFinder", "url": "https://www.vesselfinder.com/", "desc": "Ship AIS positions, particulars and photos by name/IMO/MMSI", "tags": ["ship", "vessel", "ais", "imo", "mmsi", "maritime"], "access": "web", "cost": "freemium", "auth": "none", "query": "https://www.vesselfinder.com/vessels?name={q}", "checked": "2026-11-13"},
+    {"id": "cruisemapper", "name": "CruiseMapper", "url": "https://www.cruisemapper.com/", "desc": "Cruise ship positions, itineraries and deck plans", "tags": ["ship", "cruise", "itinerary", "maritime"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "bic-code", "name": "BIC container codes", "url": "https://www.bic-code.org/bic-codes/", "desc": "Owner of a shipping container from its 4-letter prefix (e.g. MSCU)", "tags": ["container", "bic-code", "owner-prefix", "shipping", "maritime"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"},
+    {"id": "aprs-fi", "name": "aprs.fi", "url": "https://aprs.fi/", "desc": "Ham radio APRS positions and history by callsign; also AIS ships", "tags": ["aprs", "ham-radio", "callsign", "amateur-radio", "position", "ais"], "access": "web", "cost": "free", "auth": "none", "query": "https://aprs.fi/info/a/{q}", "checked": "2026-11-13"},
+    {"id": "17track", "name": "17TRACK", "url": "https://www.17track.net/en", "desc": "Parcel tracking across 2000+ carriers from a tracking number", "tags": ["parcel", "package", "tracking-number", "shipping", "postal"], "access": "web", "cost": "free", "auth": "none", "query": "https://t.17track.net/en#nums={q}", "checked": "2026-11-13"},
+    {"id": "traintimes", "name": "TrainTimes", "url": "https://traintimes.org.uk/", "desc": "UK rail live maps and timetables", "tags": ["train", "railway", "uk", "timetable"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-13"}
+  ]
+}

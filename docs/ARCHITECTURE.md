@@ -36,6 +36,8 @@ The model never loads the whole Arsenal. It:
 3. Optionally navigates with the catalog, which returns ids and titles only, never bodies:
    - `--list` / `--tag <t>`: browse by tag.
    - `--graph <id>`: an entry's `related` neighbors and back-references.
+4. For external tools, asks `--tools <query>` or `--toolset <name>` and gets one line per tool
+   (name, `{q}` template, short description) from `Arsenal/<CAT>/tools/*.json`, never the files.
 
 Because navigation and search return lightweight records, the context cost is flat whether the
 Arsenal holds 75 entries or 1500. Adding writeups does not grow what any single run loads.

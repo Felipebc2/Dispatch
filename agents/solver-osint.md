@@ -30,9 +30,14 @@ it doesn't, work only with what's already available locally.
    information from (a specific social network, type of public record, metadata tool).
 2. Extract all local metadata first (`exiftool` on an image, `whois`/`dig` on a domain) before
    going out to search externally.
-3. If authorized to use the internet, search in a targeted way using the clues already raised in
-   triage, not generic searches.
-4. Validate any found flag against the format provided by the orchestrator (default
+3. Pick external tools from the toolsets, never from memory and never by reading the JSON files:
+   `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arsenal_search.py --tools "<clue type>" --top 8` (or
+   `--toolset <name>` for a toolset the entry cites in its `toolsets:` field). Each line gives a
+   ready `{q}` URL/command template: substitute the clue and make one targeted request. Add
+   `--offline` when there is no internet, `--free` to skip tools that need an account or payment.
+4. If authorized to use the internet, run those targeted requests with the clues already raised
+   in triage, not generic searches.
+5. Validate any found flag against the format provided by the orchestrator (default
    `${user_config.flag_format}`) before declaring success.
-5. If the Arsenal didn't cover this search strategy, suggest creating a new entry in
+6. If the Arsenal didn't cover this search strategy, suggest creating a new entry in
    `Arsenal/OSINT/`.

@@ -27,6 +27,12 @@ jobs:
       - name: Build the search index (smoke test)
         run: python3 scripts/arsenal_search.py --reindex --force
 
+      - name: Toolset search (smoke test)
+        run: |
+          python3 scripts/arsenal_search.py --tools "wifi ssid" --top 1 | grep -q "WiGLE"
+          python3 scripts/arsenal_search.py --toolset osint/username --json \
+            | python3 -c "import json,sys; assert json.load(sys.stdin)"
+
       - name: Arsenal/INDEX.md is up to date
         run: |
           python3 scripts/arsenal_search.py --emit-index

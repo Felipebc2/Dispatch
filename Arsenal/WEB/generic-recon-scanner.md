@@ -1,14 +1,15 @@
 ---
 id: generic-recon-scanner
 category: WEB
-tags: [recon, enumeracao, user-agent, paths-comuns, requests, flag-scan]
-tools: [ffuf]
-manuals: ["Manuals/ffuf/3. Contexto para Claude.md"]
+tags: [recon, enumeracao, user-agent, paths-comuns, requests, flag-scan, web-check, web-recon, robots-txt, sitemap]
+tools: [ffuf, web-check]
+manuals: ["Manuals/ffuf/3. Contexto para Claude.md", "Manuals/web-check/3. Contexto para Claude.md"]
 title: "Generic initial recon: common paths + User-Agent variation"
 difficulty: easy
 created: 2026-09-03
-updated: 2026-11-06
+updated: 2026-11-13
 related: []
+toolsets: [osint/domain-infra]
 ---
 
 ## How to recognize this pattern
@@ -20,6 +21,12 @@ related: []
   specific (SQLi, JWT, etc.); it's reconnaissance, not exploitation.
 
 ## Method
+
+**Step 0, public target only: Web Check report.** If the user has a `web-check-results.json` (or can
+open `https://web-check.xyz/check/<target>` and export one), start there: robots, sitemap, linked
+pages, headers, cookies, DNS/TXT and certificate hostnames in one file. Never read it raw (700+ KB);
+filter with `jq` as in `Manuals/web-check/3. Contexto para Claude.md`, then confirm leads with `curl`.
+Private/VPN targets: skip to the commands below.
 
 **Prefer `gobuster`/`ffuf` for pure path enumeration**: they're faster and more battle-tested than an
 ad-hoc Python script. This entry covers the complementary case: when the behavior changes by **header**

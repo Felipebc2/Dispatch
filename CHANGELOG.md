@@ -4,14 +4,14 @@ All notable changes to CTF Dispatch are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.4.0] (2026-11-13)
 
 ### Added
 - **Toolsets**: `Arsenal/<CAT>/tools/<type>.json`, 167 external tools in 15 files (14 OSINT +
   `NET/vuln-db`), curated from osint.link and checked alive on 2026-11-13. Each tool has a short
   description, tags, access/cost/auth flags and, when possible, a `{q}` URL/command template.
 - `arsenal_search.py --tools <query>` (BM25 over tools, one line each) and `--toolset <name>`, with
-  `--free` and `--offline` filters. `--emit-index` adds a toolset table (counts only).
+  `--free`, `--offline` and `--top` filters. `--emit-index` adds a toolset table (counts only).
 - Optional `toolsets:` frontmatter field, shown by `--graph` and checked by the validator.
 - 5 OSINT entries (97 to 102): `username-pivot-cross-platform`, `email-pivot-account-discovery`,
   `domain-recon-certificates-dns`, `wayback-archived-site-recovery`,
@@ -26,6 +26,7 @@ All notable changes to CTF Dispatch are documented here. The format follows
 - `validate_arsenal.py` validates toolset JSON (schema, enums, unique ids, `{q}` templates).
 - `/dispatch` pulls `--tools` lines for OSINT and shows them at the checkpoint; `solver-osint`
   picks external tools through the toolsets instead of from memory.
+- CI: smoke test for `--tools` / `--toolset`.
 
 ## [0.3.0] (2026-11-06)
 
@@ -84,6 +85,7 @@ First public release.
 - Human-checkpoint safety model: no solver runs without explicit user approval.
 - Plugin + marketplace manifests, brand assets (banner, icon, emblem, diagram).
 
+[0.4.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v0.4.0
 [0.3.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v0.3.0
 [0.2.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v0.2.0
 [0.1.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v0.1.0

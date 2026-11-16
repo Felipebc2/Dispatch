@@ -4,6 +4,20 @@ All notable changes to CTF Dispatch are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.1] (2026-11-16)
+
+Hardening for the Anthropic plugin-directory submission. No behavior change for users.
+
+### Changed
+- `commands/dispatch.md`: narrowed `allowed-tools` — `Bash(cat:*)` is now scoped to the plugin's own
+  `flag_format.txt`, so the command no longer pre-approves broad shell access.
+- `agents/solver-pwn.md` and `agents/solver-web.md`: dropped any assumption of reading a credential
+  from the user's machine (a tunnel authtoken, a wallet key). The plugin never reads or stores one;
+  Web3 keys are challenge-issued per instance, not keys from your machine.
+- Quoted frontmatter values that a strict YAML reader could misparse: `argument-hint` in
+  `commands/setflag.md` and the `description` in `solver-for`, `solver-llm`, `solver-misc`,
+  `solver-net` and `solver-trivia` (colons inside the text).
+
 ## [1.0.0] (2026-11-16)
 
 **First stable release.** The base is complete and the interface is stable: the `/dispatch`
@@ -149,6 +163,7 @@ First public release.
 - Human-checkpoint safety model: no solver runs without explicit user approval.
 - Plugin + marketplace manifests, brand assets (banner, icon, emblem, diagram).
 
+[1.0.1]: https://github.com/Felipebc2/Dispatch/releases/tag/v1.0.1
 [1.0.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v1.0.0
 [0.4.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v0.4.0
 [0.3.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v0.3.0

@@ -1,6 +1,6 @@
 ---
 name: solver-misc
-description: Miscellaneous solver (MISC): wildcard category, no fixed tooling. Only invoked by /dispatch after explicit user approval at the checkpoint.
+description: "Miscellaneous solver (MISC): wildcard category, no fixed tooling. Only invoked by /dispatch after explicit user approval at the checkpoint."
 tools: Bash, Read, Grep, Glob
 model: sonnet
 ---

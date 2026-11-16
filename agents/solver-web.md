@@ -54,8 +54,9 @@ Foundry is NOT on the PATH of a non-login shell → use the full path or
 `export PATH="$PATH:$HOME/.config/.foundry/bin"` at the start.
 
 ```bash
-cat instance.json                                               # rpc, privkey, Setup addr
+cat instance.json                                               # challenge-issued throwaway wallet: rpc, player key, Setup addr
 CAST=~/.config/.foundry/bin/cast
+PK=<player key from instance.json>                              # provided by the CTF per instance; never a key from your machine
 $CAST call <SETUP> "isSolved()(bool)" --rpc-url "$RPC"          # goal = make it true
 $CAST storage <addr> <slot> --rpc-url "$RPC"                    # "private" is NOT an on-chain secret
 heimdall decompile <addr> --rpc-url "$RPC"                      # approximate Solidity without source

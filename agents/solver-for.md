@@ -1,6 +1,6 @@
 ---
 name: solver-for
-description: Forensics solver (FOR): pcap, memory, disk, container steganography. Only invoked by /dispatch after explicit user approval at the checkpoint.
+description: "Forensics solver (FOR): pcap, memory, disk, container steganography. Only invoked by /dispatch after explicit user approval at the checkpoint."
 tools: Bash, Read, Grep, Glob
 model: sonnet
 ---

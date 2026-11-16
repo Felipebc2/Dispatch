@@ -31,6 +31,14 @@ files.
    `${user_config.flag_format}`) before declaring success.
 5. If the Arsenal didn't cover this pattern, suggest creating a new entry in `Arsenal/FOR/`.
 
+## External tools (toolset)
+
+Need an online helper (layered stego analysis of an image, file-signature ID from magic bytes, EXIF,
+file/hash intel)? Pick it from the toolset, never from memory:
+`python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arsenal_search.py --tools "<need>" --top 6` (or
+`--toolset for/online-for`). Never upload a challenge artifact to a third party unless the rules
+allow it; prefer local tooling first and these for a quick second opinion.
+
 ## When to escalate to another solver
 
 - If the final artifact is an image/audio with pure steganography (no network/disk component) →

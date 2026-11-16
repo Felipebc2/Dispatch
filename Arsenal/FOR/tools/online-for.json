@@ -1,0 +1,12 @@
+{
+  "type": "online-for",
+  "category": "FOR",
+  "description": "Online forensics/stego helpers: layered stego analysis, file-signature ID, EXIF, file intel.",
+  "tools": [
+    {"id": "aperisolve", "name": "Aperi'Solve", "url": "https://www.aperisolve.com/", "desc": "Upload an image and run zsteg/steghide/binwalk/exiftool/bit-planes in one pass", "tags": ["stego", "image", "zsteg", "binwalk", "exif"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "stegonline", "name": "StegOnline", "url": "https://georgeom.net/StegOnline/", "desc": "In-browser bit-plane/LSB explorer and channel extractor for PNG/BMP images", "tags": ["stego", "lsb", "bit-plane", "image", "png"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "file-sigs", "name": "File Signatures (Kessler)", "url": "https://www.garykessler.net/library/file_sigs.html", "desc": "Magic-byte table to identify or fix a file type from its header/trailer bytes", "tags": ["magic-bytes", "file-type", "header", "signature", "carving"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "jimpl", "name": "Jimpl", "url": "https://jimpl.com/", "desc": "Read all EXIF/metadata of a photo in the browser (GPS, camera, timestamps)", "tags": ["exif", "metadata", "gps", "image", "timestamp"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "virustotal-for", "name": "VirusTotal", "url": "https://www.virustotal.com/", "desc": "Hash/file/URL intel: detections, embedded strings, relations for a malware artifact", "tags": ["malware", "hash", "intel", "sandbox", "detection"], "access": "web", "cost": "freemium", "auth": "account", "query": "https://www.virustotal.com/gui/search/{q}", "checked": "2026-11-16"}
+  ]
+}

@@ -17,9 +17,8 @@ compiled in C/C++.
 ## Input you receive
 - Triage report from `brainstormer`
 - Arsenal search result(s) (`Arsenal/PWN/*.md`), if any
-- Cross-referenced manual(s): today only `Manuals/Ghidra/` exists; `Manuals/Pwntools/` does
-  **not yet exist** in this repo. Flag this to the user if an exact command reference is missing
-  instead of inventing syntax.
+- Cross-referenced manual(s): `Manuals/Ghidra/` and `Manuals/pwntools/`. If an exact command
+  reference is missing from both, flag it to the user instead of inventing syntax.
 - Any additional direction the user gave at the checkpoint
 
 The Ghidra and pwndbg MCP servers are optional and user-configured.
@@ -40,7 +39,7 @@ The Ghidra and pwndbg MCP servers are optional and user-configured.
 5. Validate any found flag against the format provided by the orchestrator (default
    `${user_config.flag_format}`) before declaring success.
 6. If the Arsenal didn't cover this binary pattern, suggest creating a new entry in `Arsenal/PWN/`
-   (and, if it makes sense, propose to the user creating `Manuals/Pwntools/` after the competition).
+   (and, if `Manuals/pwntools/` is missing a command you needed, propose extending it after the competition).
 
 ## Reverse shell over the internet (when the exploit needs a callback)
 
@@ -54,6 +53,13 @@ ngrok tcp 4444           # grab the public host:port (e.g. 0.tcp.ngrok.io:17890)
 
 In the exploit payload, point the reverse shell at the public address ngrok returns, not at
 localhost. WARN the user before firing (remote-service rule above).
+
+## External tools (toolset)
+
+Need an online service (identify the exact libc from leaked offsets, look up a GTFOBins breakout,
+grab ready shellcode)? Pick it from the toolset, never from memory:
+`python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arsenal_search.py --tools "<need>" --top 6` (or
+`--toolset pwn/online-pwn`). Each line is a ready URL/command template — substitute and request.
 
 ## When to escalate to another solver
 

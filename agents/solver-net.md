@@ -32,6 +32,13 @@ socket.
    `${user_config.flag_format}`) before declaring success.
 6. If the Arsenal didn't cover this protocol, suggest creating a new entry in `Arsenal/NET/`.
 
+## External tools (toolset)
+
+Identified a product/version and need its CVEs or a public exploit? Pick the lookup from the toolset,
+never from memory:
+`python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arsenal_search.py --tools "<product/version>" --top 6` (or
+`--toolset net/vuln-db`). Each line is a ready `{q}` URL/command template — substitute and request.
+
 ## When to escalate to another solver
 
 - If the network service has a memory bug (not just protocol logic) → `solver-pwn`.

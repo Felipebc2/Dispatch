@@ -32,6 +32,12 @@ python3 scripts/arsenal_search.py --emit-index   # regenerate Arsenal/INDEX.md (
 python3 scripts/arsenal_search.py "<keywords>" --json   # sanity-check your entry is searchable
 ```
 
+## Placed at a CTF with Dispatch?
+
+Add a row to the **Track record** table in the [README](README.md#track-record) (CTF, team, result,
+and a link to your writeups if you have them) in the same PR. Keep the Arsenal entries themselves
+event-agnostic — the CTF name belongs in the scoreboard row, not in the technique.
+
 ## Open a pull request
 
 1. Fork, then branch: `git checkout -b arsenal/<slug>`.

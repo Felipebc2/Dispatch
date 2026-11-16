@@ -1,0 +1,13 @@
+{
+  "type": "online-web",
+  "category": "WEB",
+  "description": "Online web helpers: CT-log subdomains, payload/methodology refs, OOB listeners, revshells.",
+  "tools": [
+    {"id": "crtsh", "name": "crt.sh", "url": "https://crt.sh/", "desc": "Subdomain discovery from Certificate Transparency logs for a target domain", "tags": ["subdomain", "certificate", "ct-log", "recon", "domain"], "access": "web", "cost": "free", "auth": "none", "query": "https://crt.sh/?q={q}", "checked": "2026-11-16"},
+    {"id": "hacktricks", "name": "HackTricks", "url": "https://book.hacktricks.xyz/", "desc": "Methodology reference per bug class and service; what to try next on a stuck web box", "tags": ["methodology", "reference", "checklist", "web", "privesc"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "payloadsallthethings", "name": "PayloadsAllTheThings", "url": "https://github.com/swisskyrepo/PayloadsAllTheThings", "desc": "Curated payloads and bypasses per vuln (XSS, SQLi, SSTI, upload, traversal)", "tags": ["payload", "xss", "sqli", "ssti", "bypass"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "revshells", "name": "revshells.com", "url": "https://www.revshells.com/", "desc": "Generate a reverse/bind shell one-liner for a chosen shell, IP and port", "tags": ["reverse-shell", "payload", "listener", "rce", "generator"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "webhook-site", "name": "Webhook.site", "url": "https://webhook.site/", "desc": "Throwaway URL that logs any HTTP request: OOB/blind-XSS/SSRF beacon and exfil sink", "tags": ["oob", "blind-xss", "ssrf", "exfiltration", "listener"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "interactsh", "name": "interactsh", "url": "https://app.interactsh.com/", "desc": "OOB interaction server: catch DNS/HTTP/SMTP callbacks to prove blind injection", "tags": ["oob", "dns", "ssrf", "blind", "interaction"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"}
+  ]
+}

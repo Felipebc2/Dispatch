@@ -40,6 +40,14 @@ serial/keygen. The Ghidra MCP server is optional and user-configured (local scop
 7. If nothing in Manuals/Ghidra/ covers the situation, say so clearly and suggest registering the
    solution as a new entry in `Arsenal/REV/`.
 
+## External tools (toolset)
+
+Need an online service (compare decompilers on a binary, match source↔asm, assemble/disassemble a
+few bytes)? Pick it from the toolset, never from memory:
+`python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arsenal_search.py --tools "<need>" --top 6` (or
+`--toolset rev/online-rev`). Each line is a ready URL/command — these complement, never replace, the
+local Ghidra flow in `Manuals/Ghidra/`.
+
 ## When to escalate to another solver
 
 - If the goal is not just to understand but to **exploit** (overflow, format string) → `solver-pwn`

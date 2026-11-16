@@ -87,6 +87,14 @@ curl -s <url>/robots.txt <url>/.git/HEAD            # common leaks
 sqlmap -u "<url>?id=1" --batch --dbs                # automated SQLi, only if the vector is confirmed
 ```
 
+## External tools (toolset)
+
+Need an online helper (CT-log subdomains, a payload/methodology reference, an OOB/blind-XSS listener,
+a reverse-shell one-liner)? Pick it from the toolset, never from memory:
+`python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arsenal_search.py --tools "<need>" --top 6` (or
+`--toolset web/online-web`). Only exfiltrate to a listener you control. Each line is a ready URL —
+substitute and request.
+
 ## When to escalate to another solver
 
 - If the "web" actually hides a custom binary/service to reverse → `solver-rev`.

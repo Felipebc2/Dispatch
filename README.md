@@ -13,6 +13,7 @@
   <img src="https://img.shields.io/github/v/release/Felipebc2/Dispatch?style=flat-square&color=E5484D&label=release" alt="Release">
   <img src="https://img.shields.io/badge/Claude%20Code-plugin-E5484D?style=flat-square" alt="Claude Code plugin">
   <img src="https://img.shields.io/badge/categories-12-E5484D?style=flat-square" alt="12 categories">
+  <img src="https://img.shields.io/badge/podiums-2%20in%203%20CTFs-E5484D?style=flat-square" alt="2 podiums in 3 CTFs">
   <img src="https://img.shields.io/badge/license-MIT-E5484D?style=flat-square" alt="MIT license">
 </p>
 
@@ -33,6 +34,20 @@ that should take it: crypto, pwn, web, reversing, forensics, and eight more.
 
 It is an octopus: one head that thinks, many arms that act. And it has one rule it never breaks:
 **it stops and asks you before any arm moves.**
+
+## Track record
+
+Dispatch is not a demo. Every release is harvested from a real CTF the team played **with** it, and
+each technique in the Arsenal is one that earned points on a live scoreboard. The record so far,
+newest first:
+
+| CTF | Team | Result |
+|-----|------|--------|
+| [8th Hackathon IDP — III CTF](https://github.com/Felipebc2/CTF-8th-IDP) | NOP | 🥈 **2nd** overall · 🥈 2nd KotH |
+| [Centinela Digital I](https://github.com/Felipebc2/Centinel1-CTF) | BRA_0XIDP | 🥉 **3rd** overall · 🥇 1st in Brazil (125 teams, 14 countries) |
+| [Ekoparty 2026](https://github.com/Felipebc2/Ekoparty2026-CTF) | nop | 4th |
+
+**2 podiums in 3 CTFs played with Dispatch.** Placed with it too? [Add your row](#won-a-podium-with-dispatch).
 
 ## How it works
 
@@ -60,7 +75,7 @@ its own initiative. You stay in the loop on every challenge.
 - **13 agents**: `brainstormer` (triage) + 12 category solvers: CRYPTO, REV, PWN, FOR, JAIL, OSINT, NET, WEB, PPC, MISC, TRIVIA, LLM.
 - **`/ctf-dispatch:ctf-solve`**: a per-category shortcut that preloads the right playbook and routes into `/dispatch`.
 - **`/ctf-dispatch:setflag`**: set the flag format your CTF uses.
-- **Arsenal**: ~121 problem-pattern → method entries across the 12 categories, searched with a stdlib-only SQLite FTS5 index (`scripts/arsenal_search.py`), plus 15 toolsets (167 external tools, mostly OSINT) searchable with `--tools`.
+- **Arsenal**: ~121 problem-pattern → method entries across the 12 categories, searched with a stdlib-only SQLite FTS5 index (`scripts/arsenal_search.py`), plus 20 toolsets (194 external tools across 7 categories) searchable with `--tools`.
 - **Manuals**: per-tool references (Ghidra, CyberChef, JWT, pwntools, Wireshark, sqlmap, …).
 
 ## Install
@@ -122,6 +137,20 @@ on the next `arsenal_search.py` call, with no manual reindex needed.
 
 Got a pattern that isn't covered? PRs welcome: fork, add your entry (and a tool manual if it needs
 one), and open a pull request.
+
+### Won a podium with Dispatch?
+
+Dispatch earns its track record from the people who run it. If it helped you place at a CTF, open a
+PR that:
+
+1. Adds a row to the [Track record](#track-record) table (CTF, team, result) — with a link to your
+   writeups if you have them.
+2. Ideally brings the generic Arsenal entries the event taught you (keep them **event-agnostic** —
+   see [CONTRIBUTING.md](CONTRIBUTING.md); the CTF name lives in the scoreboard row, not in the
+   technique).
+
+That is the whole loop: real placements, backed by the techniques that produced them, flowing back
+in so the next team starts ahead.
 
 ## FAQ
 

@@ -1,13 +1,16 @@
 {
   "name": "ctf-dispatch",
   "displayName": "CTF Dispatch",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Triage-first CTF solving: a dispatcher that classifies a challenge, retrieves a matching method from a bundled Arsenal, and stops at a human checkpoint before any category solver runs.",
   "author": {
     "name": "Felipe Castro"
   },
   "homepage": "https://github.com/Felipebc2/Dispatch",
   "repository": "https://github.com/Felipebc2/Dispatch",
+  "documentationUrl": "https://github.com/Felipebc2/Dispatch#readme",
+  "supportUrl": "https://github.com/Felipebc2/Dispatch/issues",
+  "privacyPolicyUrl": "https://github.com/Felipebc2/Dispatch#security--privacy",
   "license": "MIT",
   "keywords": ["ctf", "security", "pentest", "reversing", "crypto", "dfir", "web-security"],
   "userConfig": {

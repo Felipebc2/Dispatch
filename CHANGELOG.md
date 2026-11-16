@@ -4,6 +4,15 @@ All notable changes to CTF Dispatch are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.3] (2026-11-16)
+
+Directory listing polish.
+
+### Added
+- `plugin.json`: `documentationUrl`, `supportUrl` and `privacyPolicyUrl` so the directory listing
+  shows Documentation, Support and Privacy-policy links (the privacy link points to the README's
+  Security & privacy section).
+
 ## [1.0.2] (2026-11-16)
 
 Further hardening for the plugin-directory submission. No behavior change for users.
@@ -174,6 +183,7 @@ First public release.
 - Human-checkpoint safety model: no solver runs without explicit user approval.
 - Plugin + marketplace manifests, brand assets (banner, icon, emblem, diagram).
 
+[1.0.3]: https://github.com/Felipebc2/Dispatch/releases/tag/v1.0.3
 [1.0.2]: https://github.com/Felipebc2/Dispatch/releases/tag/v1.0.2
 [1.0.1]: https://github.com/Felipebc2/Dispatch/releases/tag/v1.0.1
 [1.0.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v1.0.0

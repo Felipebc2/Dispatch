@@ -172,6 +172,25 @@ back to Bash tooling when not.
 Only against targets you are authorized to attack: a CTF, a lab, or a competition you are playing.
 Don't point it at anything else.
 
+## Security & privacy
+
+CTF Dispatch is a defensive/educational tool for **authorized targets only** (CTFs, labs,
+competitions you are playing). By design:
+
+- **No autonomous actions.** Every solver stops at a human checkpoint; nothing runs, connects, or
+  fires until you approve it.
+- **No credential handling.** The plugin never reads, stores, or transmits your credentials, tokens,
+  API keys, or secrets. The Arsenal and Manuals reference **public, keyless** services (e.g.
+  `crackstation.net`, `factordb.com`) and standard local tools; any `$salt` / `$pass` / `$http_cookie`
+  you see in the docs are tool notation (hashcat) or a **server-side variable** in a technique
+  description, not values read from your machine. Web3 private keys shown are **challenge-issued
+  throwaway keys** from the challenge's own `instance.json`, never a key from your environment.
+- **What it runs locally.** A stdlib-only Python search over the bundled Arsenal
+  (`scripts/arsenal_search.py`), and — only after your approval — the one category solver you
+  accepted. It makes no network calls on its own initiative.
+- **Reverse-shell and listener examples** (`nc`, tunnels) are documentation for authorized
+  exploitation. The plugin never opens one by itself and never forwards a credential to it.
+
 ## Credits
 
 - [Web Check](https://github.com/lissy93/web-check) by [Alicia Sykes](https://github.com/lissy93)

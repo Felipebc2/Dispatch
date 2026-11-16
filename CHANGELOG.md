@@ -4,6 +4,44 @@ All notable changes to CTF Dispatch are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [0.5.0] (2026-11-16)
+
+Harvest from an on-site 24h jeopardy + KotH CTF: 19 Arsenal entries (102 to 121) for patterns
+not previously covered, generalized into reusable techniques.
+
+### Added
+- **WEB (7)**: `stored-xss-admin-bot-cookie-exfil` (the first XSS entry: blind/stored XSS fired by a
+  HeadlessChrome admin bot + non-HttpOnly cookie theft), `flask-weak-secret-session-forge`
+  (`flask-unsign` + authz split/IDOR on `uid`), `archive-extract-symlink-traversal` (TarSlip/ZipSlip:
+  `extractall` follows a symlink member), `unrestricted-upload-extension-rce` (attacker-named `.php`
+  + OCR/content-injection write, octal-escape webshell), `client-side-enforced-control-bypass`
+  (client-only PoW/throttle → script it), `restricted-python-allow-module-escape` (Zope/Plone TALES
+  sandbox escape via the `allow_module` import graph), `nginx-map-cookie-magic-value` (cookie-routed
+  static responses + the no-blind-wordlist rule for magic-value challenges).
+- **CRYPTO (2)**: `aes-ecb-cut-and-paste-block-forge` (transplant a status/role block to forge a
+  structured token — distinct from byte-at-a-time), `predictable-seeded-prng-replay` (reproduce a
+  timestamp-seeded `System.Random`/Mersenne draw offline and win the live window).
+- **NET (2)**: `dns-record-chain-exfil` (data in TXT/MX, enumerate every record type and follow the
+  chain), `voip-rtp-dtmf-extraction` (undissected RTP/G.711 in a pcap → DTMF → zip/doc password).
+- **FOR (1)**: `office-maldoc-vba-static-extraction` (`olevba`, decode `Chr()` flags without running
+  the macro).
+- **PWN (2)**: `setuid-path-hijack-relative-command` (GTFOBins-style PATH hijack of a setuid helper),
+  `rop-ordered-call-chain-stack-alignment` (forced-order call chain + the `movaps`/alignment remote crash).
+- **REV (2)**: `mobile-embedded-key-signed-api-replay` (iOS/Android client signs requests with an
+  embedded key → replay the protocol, skip the UI), `hardware-attested-sensor-physical-solve` (reverse
+  the server-enforced physical rule when samples are hardware-attested and cannot be forged).
+- **JAIL (1)**: `read-file-without-coreutils` (pure Bash builtins: `$(<file)`, `mapfile`, `read`).
+- **MISC (1)**: `code-exec-exfil-one-way-channel` (output only over a screen/livestream: render text
+  and QR, auto-paging xterm, test both flag forms per run).
+- **PPC (1)**: `custom-isa-assembly-koth-optimization` (TIS-100-style KotH: local simulator, cycle/
+  instruction Pareto, duplicate-scoring rule).
+
+### Changed
+- `Manuals/Wireshark/3. Contexto para Claude.md`: VoIP/RTP section (force the RTP dissector,
+  `-z rtp,streams`, µ-law → PCM), a filters-table row and cross-links to Audio-Signals and the new
+  NET entry.
+- `README.md`: Arsenal count ~102 → ~121.
+
 ## [0.4.0] (2026-11-13)
 
 ### Added

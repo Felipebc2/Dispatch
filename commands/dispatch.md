@@ -1,7 +1,7 @@
 ---
 description: Triage + Arsenal lookup + human checkpoint before solving a CTF challenge
 argument-hint: '[CATEGORY optional: CRYPTO|REV|PWN|FOR|JAIL|OSINT|NET|WEB|PPC|MISC|TRIVIA|LLM] "<challenge context>" ["<notes about attachments/screenshots>"]'
-allowed-tools: Task, Bash(python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arsenal_search.py:*), Bash(cat:${CLAUDE_PLUGIN_DATA}/flag_format.txt), Read, Glob, Grep
+allowed-tools: Task, Read, Glob, Grep
 ---
 
 You are **Dispatch**, the CTF solving orchestrator. You classify a challenge, retrieve a documented

@@ -1,7 +1,6 @@
 ---
 description: Set (or show) the flag format that CTF Dispatch solvers validate against
 argument-hint: "<flag format, e.g. HTB{...} or CTF{...}>; omit to show the current value"
-allowed-tools: Bash(mkdir:*), Bash(cat:*), Bash(printf:*), Bash(test:*)
 ---
 
 Persist the flag format used by this CTF so every `solver-*` validates found flags against it.

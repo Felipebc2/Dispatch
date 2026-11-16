@@ -1,6 +1,6 @@
 ---
 name: solver-net
-description: Networking solver (NET): protocol analysis/exploitation, port scan, custom service over socket. Only invoked by /dispatch after explicit user approval at the checkpoint.
+description: "Networking solver (NET): protocol analysis/exploitation, port scan, custom service over socket. Only invoked by /dispatch after explicit user approval at the checkpoint."
 tools: Bash, Read, Grep, Glob
 model: sonnet
 ---

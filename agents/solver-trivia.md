@@ -1,6 +1,6 @@
 ---
 name: solver-trivia
-description: Trivia solver: knowledge questions about security/hacking/CTF. Only invoked by /dispatch after explicit user approval at the checkpoint.
+description: "Trivia solver: knowledge questions about security/hacking/CTF. Only invoked by /dispatch after explicit user approval at the checkpoint."
 tools: Read, Grep, Glob, WebSearch
 model: sonnet
 ---

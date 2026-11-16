@@ -43,15 +43,17 @@ The Ghidra and pwndbg MCP servers are optional and user-configured.
 
 ## Reverse shell over the internet (when the exploit needs a callback)
 
-If the remote exploit needs a reverse shell and the target can't reach your local machine, use
-ngrok to expose a TCP listener (assumes ngrok is installed with an authtoken configured):
+If the remote exploit needs a reverse shell and the target can't reach your local machine, expose a
+TCP listener through a tunnel you control (a VPS, Cloudflare Tunnel, ngrok — whatever you already
+have set up). The plugin never reads, stores, or asks for any tunnel credential; that stays entirely
+in your own environment.
 
 ```bash
 nc -lvnp 4444 &          # local listener
-ngrok tcp 4444           # grab the public host:port (e.g. 0.tcp.ngrok.io:17890)
+# then expose :4444 with your own tunnel and grab the public host:port
 ```
 
-In the exploit payload, point the reverse shell at the public address ngrok returns, not at
+In the exploit payload, point the reverse shell at the public address your tunnel returns, not at
 localhost. WARN the user before firing (remote-service rule above).
 
 ## External tools (toolset)

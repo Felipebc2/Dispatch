@@ -1,6 +1,6 @@
 ---
 name: solver-llm
-description: LLM Injection solver: prompt injection against an LLM-based target system. Only invoked by /dispatch after explicit user approval at the checkpoint.
+description: "LLM Injection solver: prompt injection against an LLM-based target system. Only invoked by /dispatch after explicit user approval at the checkpoint."
 tools: Bash, Read, Grep, Glob
 model: sonnet
 ---

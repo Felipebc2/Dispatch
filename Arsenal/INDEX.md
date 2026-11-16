@@ -640,6 +640,8 @@ External tools for `arsenal_search.py --tools <query>` / `--toolset <name>`.
 
 | Toolset | Tools | Covers |
 |---|---|---|
+| [`crypto/online-crypto`](CRYPTO/tools/online-crypto.json) | 9 | Online/CLI crypto helpers: factor integers, identify and break classical ciphers, run Sage. |
+| [`for/online-for`](FOR/tools/online-for.json) | 5 | Online forensics/stego helpers: layered stego analysis, file-signature ID, EXIF, file intel. |
 | [`net/vuln-db`](NET/tools/vuln-db.json) | 8 | Look up CVEs and public exploits for an identified product/version. |
 | [`osint/archives`](OSINT/tools/archives.json) | 11 | Past versions of web pages and historical newspapers. |
 | [`osint/domain-infra`](OSINT/tools/domain-infra.json) | 29 | Technical footprinting of a domain or IP: certificates, DNS, WHOIS, ASN, exposed services, default creds. |
@@ -655,3 +657,6 @@ External tools for `arsenal_search.py --tools <query>` / `--toolset <name>`.
 | [`osint/transport`](OSINT/tools/transport.json) | 11 | Track aircraft, ships, containers, trains, ham-radio stations and parcels. |
 | [`osint/username`](OSINT/tools/username.json) | 6 | Find every account that shares a handle/alias across sites (username pivot). |
 | [`osint/video`](OSINT/tools/video.json) | 8 | YouTube/video metadata, upload time, location, transcripts and removed videos. |
+| [`pwn/online-pwn`](PWN/tools/online-pwn.json) | 4 | Online pwn helpers: identify libc from leaked offsets, look up GTFOBins, grab shellcode. |
+| [`rev/online-rev`](REV/tools/online-rev.json) | 3 | Online reversing helpers: compare decompilers, match source to asm, assemble/disassemble. |
+| [`web/online-web`](WEB/tools/online-web.json) | 6 | Online web helpers: CT-log subdomains, payload/methodology refs, OOB listeners, revshells. |

@@ -1,0 +1,10 @@
+{
+  "type": "online-rev",
+  "category": "REV",
+  "description": "Online reversing helpers: compare decompilers, match source to asm, assemble/disassemble.",
+  "tools": [
+    {"id": "dogbolt", "name": "Decompiler Explorer (dogbolt)", "url": "https://dogbolt.org/", "desc": "Upload a binary, run Ghidra/Hex-Rays/angr/BinaryNinja/RetDec at once and diff the output", "tags": ["decompiler", "ghidra", "angr", "binary", "compare"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "godbolt", "name": "Compiler Explorer (godbolt)", "url": "https://godbolt.org/", "desc": "Compile C/C++/Rust/Go to asm live: match a source construct to the instructions it emits", "tags": ["compiler", "assembly", "source", "match", "optimization"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "defuse-disasm", "name": "defuse.ca asm/disasm", "url": "https://defuse.ca/online-x86-assembler.htm", "desc": "Assemble or disassemble x86/x64 bytes in the browser, fast sanity check on a few bytes", "tags": ["x86", "disassemble", "assemble", "opcode", "shellcode"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"}
+  ]
+}

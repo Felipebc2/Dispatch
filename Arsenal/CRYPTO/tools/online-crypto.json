@@ -1,0 +1,16 @@
+{
+  "type": "online-crypto",
+  "category": "CRYPTO",
+  "description": "Online/CLI crypto helpers: factor integers, identify and break classical ciphers, run Sage.",
+  "tools": [
+    {"id": "factordb", "name": "FactorDB", "url": "https://factordb.com/", "desc": "Look up a known factorization of an integer (RSA modulus n) before trying to factor it", "tags": ["rsa", "factorization", "integer", "modulus", "lookup"], "access": "web", "cost": "free", "auth": "none", "query": "https://factordb.com/index.php?query={q}", "checked": "2026-11-16"},
+    {"id": "alpertron-ecm", "name": "Alpertron ECM", "url": "https://www.alpertron.com.ar/ECM.HTM", "desc": "In-browser integer factorization (ECM + SIQS) with step-by-step, good for mid-size n", "tags": ["rsa", "factorization", "ecm", "siqs", "integer"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "yafu", "name": "YAFU", "url": "https://github.com/bbuhrow/yafu", "desc": "CLI: automated factoring (trial, Pollard, ECM, SIQS/NFS) picking the best method per size", "tags": ["rsa", "factorization", "ecm", "siqs", "nfs", "cli"], "access": "cli", "cost": "free", "auth": "none", "query": "yafu \"factor({q})\"", "checked": "2026-11-16"},
+    {"id": "rsactftool", "name": "RsaCtfTool", "url": "https://github.com/RsaCtfTool/RsaCtfTool", "desc": "CLI: throws every known RSA attack (Wiener, Hastad, common-factor, Fermat) at a key", "tags": ["rsa", "attack", "wiener", "hastad", "cli"], "access": "cli", "cost": "free", "auth": "none", "query": "python3 RsaCtfTool.py {q}", "checked": "2026-11-16"},
+    {"id": "dcode", "name": "dCode", "url": "https://www.dcode.fr/en", "desc": "Cipher identifier + solvers for classical ciphers, encodings and math puzzles", "tags": ["classical", "cipher-identifier", "substitution", "encoding", "solver"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "quipqiup", "name": "quipqiup", "url": "https://quipqiup.com/", "desc": "Fast automated solver for monoalphabetic substitution ciphers / cryptograms", "tags": ["substitution", "cryptogram", "monoalphabetic", "solver"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "cyberchef", "name": "CyberChef", "url": "https://gchq.github.io/CyberChef/", "desc": "Browser workbench: chain encodings, XOR, classical ciphers, hashes as a recipe", "tags": ["encoding", "xor", "base", "hash", "recipe"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "sagecell", "name": "SageMath Cell", "url": "https://sagecell.sagemath.org/", "desc": "Run Sage in the browser: discrete log, elliptic curves, lattices (LLL), modular math", "tags": ["sage", "discrete-log", "elliptic-curve", "lattice", "lll"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "wolframalpha-crypto", "name": "WolframAlpha", "url": "https://www.wolframalpha.com/", "desc": "Compute engine for ad-hoc number theory: modular inverse, CRT, factoring, equations", "tags": ["number-theory", "modular", "crt", "solver", "math"], "access": "web", "cost": "freemium", "auth": "none", "query": "https://www.wolframalpha.com/input?i={q}", "checked": "2026-11-16"}
+  ]
+}

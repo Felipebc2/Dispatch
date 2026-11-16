@@ -61,8 +61,9 @@ python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arsenal_search.py "<query derived from the
   (search the whole Arsenal) before giving up.
 - For each relevant result, if it cites a `tool` (the `tools` frontmatter field), also read
   `${CLAUDE_PLUGIN_ROOT}/Manuals/<Tool>/3. Contexto para Claude.md` for execution detail.
-- If the category is OSINT (or a result entry lists `toolsets:` in its frontmatter), also pull the
-  matching external tools, one line each, without opening any JSON file:
+- If a toolset exists for the detected category (today OSINT, NET, CRYPTO, REV, PWN, WEB, FOR — or a
+  result entry lists `toolsets:` in its frontmatter), also pull the matching external tools, one line
+  each, without opening any JSON file:
   `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arsenal_search.py --tools "<query>" --category <DETECTED_CATEGORY> --top 8`
 - This is retrieval: do not infer a method that is in no Arsenal result and cited in no Manual. If
   nothing matches, say so explicitly in the recommendation (step 4) instead of inventing one.

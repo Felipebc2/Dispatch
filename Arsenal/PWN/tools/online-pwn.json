@@ -1,0 +1,11 @@
+{
+  "type": "online-pwn",
+  "category": "PWN",
+  "description": "Online pwn helpers: identify libc from leaked offsets, look up GTFOBins, grab shellcode.",
+  "tools": [
+    {"id": "libc-database", "name": "libc-database (blukat)", "url": "https://libc.blukat.me/", "desc": "Identify the exact libc from one or more leaked symbol offsets, then get other offsets", "tags": ["libc", "ret2libc", "offset", "leak", "symbol"], "access": "web", "cost": "free", "auth": "none", "query": "https://libc.blukat.me/?q={q}", "checked": "2026-11-16"},
+    {"id": "libc-rip", "name": "libc.rip", "url": "https://libc.rip/", "desc": "libc identification API/UI from leaked offsets; dumps all symbol addresses for the match", "tags": ["libc", "ret2libc", "offset", "leak", "api"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
+    {"id": "gtfobins", "name": "GTFOBins", "url": "https://gtfobins.github.io/", "desc": "How a given Unix binary can break out, read files or escalate (setuid/sudo/PATH abuse)", "tags": ["privesc", "setuid", "sudo", "breakout", "unix"], "access": "web", "cost": "free", "auth": "none", "query": "https://gtfobins.github.io/gtfobins/{q}/", "checked": "2026-11-16"},
+    {"id": "shell-storm-shellcode", "name": "shell-storm shellcodes", "url": "https://shell-storm.org/shellcode/", "desc": "Archive of ready shellcodes by arch/OS when you need bytes instead of writing them", "tags": ["shellcode", "archive", "arch", "bytes", "exploit"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"}
+  ]
+}

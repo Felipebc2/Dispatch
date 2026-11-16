@@ -4,6 +4,32 @@ All notable changes to CTF Dispatch are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.0] (2026-11-16)
+
+**First stable release.** The base is complete and the interface is stable: the `/dispatch`
+orchestrator with its mandatory human checkpoint, 13 agents, ~121 Arsenal entries and 20 toolsets
+(194 external tools) across the 12 categories, the Manuals, and a validated track record. From here
+the Arsenal grows release by release without breaking what exists. This release also brings:
+
+### Added
+- **Toolsets for 5 more categories** (27 external tools; 194 total across 20 toolsets):
+  - `crypto/online-crypto`: FactorDB, Alpertron ECM, YAFU, RsaCtfTool, dCode, quipqiup, CyberChef,
+    SageMath Cell, WolframAlpha.
+  - `rev/online-rev`: Decompiler Explorer (dogbolt), Compiler Explorer (godbolt), defuse.ca asm/disasm.
+  - `pwn/online-pwn`: libc-database (blukat), libc.rip, GTFOBins, shell-storm shellcodes.
+  - `web/online-web`: crt.sh, HackTricks, PayloadsAllTheThings, revshells, Webhook.site, interactsh.
+  - `for/online-for`: Aperi'Solve, StegOnline, file signatures (Kessler), Jimpl, VirusTotal.
+- **README Track record**: a scoreboard of the CTFs played with Dispatch (2 podiums in 3 CTFs: 🥈 2nd
+  8th IDP, 🥉 3rd Centinela Digital I, 4th Ekoparty 2026) and a "Won a podium with Dispatch?"
+  contribution flow; mirrored in `CONTRIBUTING.md`. New `podiums` badge.
+
+### Changed
+- Every category solver that now has a toolset (CRYPTO, REV, PWN, WEB, FOR, NET) pulls external
+  tools via `--tools`/`--toolset` instead of from memory, matching `solver-osint`. REV/PWN tools stay
+  the local Manuals (Ghidra, pwntools); the toolsets only add genuine web services.
+- `/dispatch` checkpoint pulls the `--tools` lines for any category that has a toolset, not just OSINT.
+- `README.md`: toolset count 15 → 20 (167 → 194 tools).
+
 ## [0.5.0] (2026-11-16)
 
 Harvest from an on-site 24h jeopardy + KotH CTF: 19 Arsenal entries (102 to 121) for patterns
@@ -123,6 +149,7 @@ First public release.
 - Human-checkpoint safety model: no solver runs without explicit user approval.
 - Plugin + marketplace manifests, brand assets (banner, icon, emblem, diagram).
 
+[1.0.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v1.0.0
 [0.4.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v0.4.0
 [0.3.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v0.3.0
 [0.2.0]: https://github.com/Felipebc2/Dispatch/releases/tag/v0.2.0

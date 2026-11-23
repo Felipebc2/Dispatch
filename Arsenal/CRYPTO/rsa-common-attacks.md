@@ -7,7 +7,7 @@ manuals: ["Manuals/RsaCtfTool/3. Contexto para Claude.md"]
 title: "RSA: decision tree for the common attacks (Fermat / common modulus / low-e / Wiener)"
 difficulty: medium
 created: 2026-10-04
-updated: 2026-11-06
+updated: 2026-11-23
 related: [rsa-small-n-factorization, rsa-franklin-reiter-related-message]
 ---
 
@@ -64,6 +64,25 @@ print(long_to_bytes(m))
 from gmpy2 import iroot
 m, exact = iroot(c, 3)
 ```
+
+**Håstad broadcast (same `m`, `e=3`, three moduli, no padding):**
+CRT recombines `c_i = m³ mod n_i` into `m³ mod (n1·n2·n3)`; since `m³` is smaller than that product, an
+integer cube root recovers `m`.
+```python
+import re
+from functools import reduce
+from gmpy2 import mpz, iroot
+
+d = open("broadcast.txt").read()
+n = [mpz(x) for x in re.findall(r"n\d*\s*=\s*(\d+)", d)]
+c = [mpz(x) for x in re.findall(r"c\d*\s*=\s*(\d+)", d)]
+
+N = reduce(lambda a, b: a * b, n)
+x = sum(ci * (N // ni) * pow(N // ni, -1, ni) for ci, ni in zip(c, n)) % N
+m, _ = iroot(x, 3)                              # exponent = e (3 here)
+print(int(m).to_bytes((int(m).bit_length() + 7) // 8, "big"))
+```
+Needs **at least `e`** ciphertexts (3 for `e=3`); with fewer, `m³` still wraps and the root fails.
 
 ## Gotchas
 

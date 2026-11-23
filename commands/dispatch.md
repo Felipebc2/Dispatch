@@ -65,6 +65,8 @@ python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arsenal_search.py "<query derived from the
   result entry lists `toolsets:` in its frontmatter), also pull the matching external tools, one line
   each, without opening any JSON file:
   `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arsenal_search.py --tools "<query>" --category <DETECTED_CATEGORY> --top 8`
+  and, for each `toolsets:` name a result lists (it may live in another category, e.g. stego under
+  CRYPTO uses `for/online-for`): `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arsenal_search.py --toolset <name>`
 - This is retrieval: do not infer a method that is in no Arsenal result and cited in no Manual. If
   nothing matches, say so explicitly in the recommendation (step 4) instead of inventing one.
 

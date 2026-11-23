@@ -1,14 +1,14 @@
 ---
 id: pcap-extract-credentials-files
 category: FOR
-tags: [forensics, pcap, pcapng, wireshark, tshark, http, ftp, export-objects, credentials, follow-stream]
+tags: [forensics, pcap, pcapng, wireshark, tshark, http, ftp, export-objects, credentials, follow-stream, tcpflow, chaosreader, ngrep, bruteshark, ntlm, netntlmv2, kerberos, hashcat]
 tools: [Wireshark]
 manuals: ["Manuals/Wireshark/3. Contexto para Claude.md"]
 title: "PCAP: extract credentials and files from captured traffic"
 difficulty: easy
 created: 2026-10-04
-updated: 2026-10-04
-related: []
+updated: 2026-11-17
+related: [usb-hid-keyboard-mouse-pcap, large-artifact-gigabyte-triage, tcp-overlapping-segment-conflict]
 ---
 
 ## How to recognize this pattern
@@ -40,9 +40,19 @@ tshark -r chall.pcap -Y 'ftp.request.command=="USER" || ftp.request.command=="PA
   to save transferred files.
 - CLI equivalent:
 ```bash
-tshark -r chall.pcap --export-objects http,./out/   # extract all HTTP objects
+tshark -r chall.pcap --export-objects http,./out/   # all HTTP objects (also smb, ftp-data, tftp, imf)
+tcpflow -r chall.pcap -o flows/                     # one file per TCP direction: hundreds of streams at once
+grep -rl 'flag{' flows/                              # then grep/file/binwalk across every stream
 ```
-Then run `file`/`binwalk`/`strings` on the extracted files.
+`chaosreader chall.pcap` builds an `index.html` indexing every session (HTTP files, telnet/FTP
+replays) when you want a clickable overview instead of per-stream greps. Then run
+`file`/`binwalk`/`strings` on the extracted files.
+
+### 4. Auth material from SMB/HTTP/Kerberos handshakes
+When the capture carries a challenge-response login rather than a cleartext one, `BruteSharkCli -i
+chall.pcap` pulls the handshake fields out in the format `hashcat`/`john` expect, so the challenge
+reduces to a dictionary run. The usual CTF modes are NetNTLMv2 (`hashcat -m 5600`) and Kerberos
+AS-REP/TGS (`-m 18200`/`13100`).
 
 ## Gotchas
 

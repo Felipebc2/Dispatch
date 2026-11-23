@@ -75,7 +75,7 @@ its own initiative. You stay in the loop on every challenge.
 - **13 agents**: `brainstormer` (triage) + 12 category solvers: CRYPTO, REV, PWN, FOR, JAIL, OSINT, NET, WEB, PPC, MISC, TRIVIA, LLM.
 - **`/ctf-dispatch:ctf-solve`**: a per-category shortcut that preloads the right playbook and routes into `/dispatch`.
 - **`/ctf-dispatch:setflag`**: set the flag format your CTF uses.
-- **Arsenal**: ~121 problem-pattern → method entries across the 12 categories, searched with a stdlib-only SQLite FTS5 index (`scripts/arsenal_search.py`), plus 20 toolsets (194 external tools across 7 categories) searchable with `--tools`.
+- **Arsenal**: ~123 problem-pattern → method entries across the 12 categories, searched with a stdlib-only SQLite FTS5 index (`scripts/arsenal_search.py`), plus 20 toolsets (198 external tools across 7 categories) searchable with `--tools`.
 - **Manuals**: per-tool references (Ghidra, CyberChef, JWT, pwntools, Wireshark, sqlmap, …).
 
 ## Install
@@ -195,6 +195,10 @@ competitions you are playing). By design:
 
 - [Web Check](https://github.com/lissy93/web-check) by [Alicia Sykes](https://github.com/lissy93)
   (MIT): the all-in-one website recon report referenced in `Manuals/web-check/`.
+- [hashes](https://github.com/spaze/hashes) by [Michal Špaček](https://github.com/spaze)
+  (MIT): the magic-hash (`0e...`) preimage tables referenced in `Arsenal/WEB/php-type-juggling-magic-hash.md`.
+- [Aperi'Solve](https://github.com/Zeecka/AperiSolve) by [Zeecka](https://github.com/Zeecka)
+  (MIT): the all-in-one image stego analyzer listed in `Arsenal/FOR/tools/online-for.json`.
 
 ## License
 

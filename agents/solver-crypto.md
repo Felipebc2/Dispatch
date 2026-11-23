@@ -61,7 +61,7 @@ print(factorint(n))
 Need an online service (factor an `n`, identify or break a classical cipher, run Sage/number
 theory)? Pick it from the toolset, never from memory:
 `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arsenal_search.py --tools "<need>" --top 6` (or
-`--toolset crypto/online-crypto`). Each line is a ready `{q}` URL/command template — substitute the
+`--toolset crypto/online-crypto`; for STEGO, `--toolset for/online-for`: Aperi'Solve, StegOnline). Each line is a ready `{q}` URL/command template — substitute the
 value and make one targeted request. Add `--free` to skip anything needing an account.
 
 ## When to escalate to another solver

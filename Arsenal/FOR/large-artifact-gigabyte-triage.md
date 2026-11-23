@@ -1,13 +1,13 @@
 ---
 id: large-artifact-gigabyte-triage
 category: FOR
-tags: [forensics, large-file, gigabyte, 1gb, mmap, streaming, binary-search, needle-search, struct-pack, grep-binary, utf-16le, strings-el, read-only, filler, decoy, outlier, pcap-walker, tshark-fields, dd-skip]
+tags: [forensics, large-file, gigabyte, 1gb, mmap, streaming, binary-search, needle-search, struct-pack, grep-binary, utf-16le, strings-el, read-only, filler, decoy, outlier, pcap-walker, tshark-fields, dd-skip, zeek, zeek-cut]
 tools: [Wireshark]
 manuals: ["Manuals/Wireshark/3. Contexto para Claude.md"]
 title: "Gigabyte-scale artifacts: mmap, packed-needle search, streaming walkers and outlier hunting"
 difficulty: medium
 created: 2026-11-06
-updated: 2026-11-06
+updated: 2026-11-17
 related: [sqlite-deleted-record-freeblock-carving, fat32-unallocated-cluster-recovery, registry-shimcache-appcompatcache, tcp-overlapping-segment-conflict, pcap-extract-credentials-files, file-carving-signature-repair]
 ---
 
@@ -57,6 +57,9 @@ while i + 16 <= len(m):
     i += 16 + incl                              # parse Ethernet/IP/TCP from pkt here
 ```
 - SQLite: `sqlite3 'file:f?mode=ro&immutable=1'` for SQL, `mmap` for page slack.
+- Huge pcap: `zeek -r f.pcap` once writes `conn.log`, `http.log`, `dns.log`, `files.log` as TSV, so
+  a billion packets become a few greppable logs (`zeek-cut` to pick columns); far cheaper than a
+  Wireshark pass. See `pcap-extract-credentials-files` for the per-stream extraction.
 - Sorted data (timestamped logs, fixed-size records): binary search on the offset. Seek to the
   middle, resync to the next record boundary (newline, magic, fixed stride), compare the key, recurse.
 

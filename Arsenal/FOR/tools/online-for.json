@@ -1,12 +1,15 @@
 {
   "type": "online-for",
   "category": "FOR",
-  "description": "Online forensics/stego helpers: layered stego analysis, file-signature ID, EXIF, file intel.",
+  "description": "Online forensics/stego helpers: layered stego analysis, file-signature ID, EXIF, file intel, PCAP analysis.",
   "tools": [
     {"id": "aperisolve", "name": "Aperi'Solve", "url": "https://www.aperisolve.com/", "desc": "Upload an image and run zsteg/steghide/binwalk/exiftool/bit-planes in one pass", "tags": ["stego", "image", "zsteg", "binwalk", "exif"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
     {"id": "stegonline", "name": "StegOnline", "url": "https://georgeom.net/StegOnline/", "desc": "In-browser bit-plane/LSB explorer and channel extractor for PNG/BMP images", "tags": ["stego", "lsb", "bit-plane", "image", "png"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
     {"id": "file-sigs", "name": "File Signatures (Kessler)", "url": "https://www.garykessler.net/library/file_sigs.html", "desc": "Magic-byte table to identify or fix a file type from its header/trailer bytes", "tags": ["magic-bytes", "file-type", "header", "signature", "carving"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
     {"id": "jimpl", "name": "Jimpl", "url": "https://jimpl.com/", "desc": "Read all EXIF/metadata of a photo in the browser (GPS, camera, timestamps)", "tags": ["exif", "metadata", "gps", "image", "timestamp"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-16"},
-    {"id": "virustotal-for", "name": "VirusTotal", "url": "https://www.virustotal.com/", "desc": "Hash/file/URL intel: detections, embedded strings, relations for a malware artifact", "tags": ["malware", "hash", "intel", "sandbox", "detection"], "access": "web", "cost": "freemium", "auth": "account", "query": "https://www.virustotal.com/gui/search/{q}", "checked": "2026-11-16"}
+    {"id": "virustotal-for", "name": "VirusTotal", "url": "https://www.virustotal.com/", "desc": "Hash/file/URL intel: detections, embedded strings, relations for a malware artifact", "tags": ["malware", "hash", "intel", "sandbox", "detection"], "access": "web", "cost": "freemium", "auth": "account", "query": "https://www.virustotal.com/gui/search/{q}", "checked": "2026-11-16"},
+    {"id": "apackets", "name": "A-Packets", "url": "https://apackets.com/", "desc": "PCAP report: hosts, protocols, HTTP/DNS, credentials, files. Free uploads are PUBLIC", "tags": ["pcap", "network", "traffic", "http", "dns", "credentials", "wireshark"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-17"},
+    {"id": "networkminer", "name": "NetworkMiner", "url": "https://www.netresec.com/?page=NetworkMiner", "desc": "Desktop: offline PCAP parser that lists hosts and extracts files, images, credentials and sessions", "tags": ["pcap", "network", "traffic", "carving", "credentials", "offline"], "access": "cli", "cost": "freemium", "auth": "none", "checked": "2026-11-17"},
+    {"id": "wireshark-dfref", "name": "Wireshark Display Filter Reference", "url": "https://www.wireshark.org/docs/dfref/", "desc": "Every protocol field name for tshark -Y / Wireshark display filters", "tags": ["pcap", "tshark", "wireshark", "filter", "protocol", "network"], "access": "web", "cost": "free", "auth": "none", "checked": "2026-11-17"}
   ]
 }
